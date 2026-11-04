@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- Dev-only QA harness: renders a site page at a fixed virtual width, scaled to fit.
+     Usage: /__qa.html?u=/about/&w=1440&y=0   (copied into _site by `npm run qa`; never deployed) -->
+<html><head><meta charset="utf-8"><title>QA</title>
+<style>html,body{margin:0;overflow:hidden;background:#ccc}iframe{border:0;transform-origin:0 0;background:#fff;display:block}</style></head>
+<body><iframe id="f"></iframe>
+<script>
+  const q = new URLSearchParams(location.search);
+  const f = document.getElementById("f");
+  window.shot = async (url, y = 0, W = 1440) => {
+    if (f.dataset.url !== url || f.dataset.w != W) {
+      f.dataset.url = url; f.dataset.w = W;
+      f.style.width = W + "px";
+      f.src = url + (url.includes("?") ? "&" : "?") + "r=" + Date.now();
+      await new Promise((r) => (f.onload = r));
+      const d = f.contentDocument;
+      d.querySelectorAll('link[rel=stylesheet][href^="/assets"]').forEach((l) => (l.href = l.href.split("?")[0] + "?r=" + Date.now()));
+      const st = d.createElement("style");
+      st.textContent = ".reveal{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto!important}";
+      d.head.appendChild(st);
+      d.querySelectorAll("img[loading=lazy]").forEach((i) => (i.loading = "eager"));
+      await new Promise((r) => setTimeout(r, 900));
+    }
+    const s = innerWidth / W;
+    f.style.transform = `scale(${s})`;
+    f.style.height = Math.round(innerHeight / s) + "px";
+    f.contentWindow.scrollTo(0, y);
+    await new Promise((r) => setTimeout(r, 600));
+    await Promise.all([...f.contentDocument.images].map((i) => i.complete ? null : new Promise((r) => { i.onload = i.onerror = r; setTimeout(r, 3000); })));
+    await new Promise((r) => setTimeout(r, 400));
+    return [f.contentWindow.scrollY, f.contentDocument.documentElement.scrollHeight];
+  };
+  if (q.get("u")) shot(q.get("u"), +q.get("y") || 0, +q.get("w") || 1440);
+</script></body></html>

@@ -1,0 +1,13 @@
+{#- Numbered pagination for paginated landing pages -#}
+{% from "partials/icons.njk" import icon %}
+{%- if pagination.pages.length > 1 %}
+<nav class="pager" aria-label="Pages">
+  {%- if pagination.href.previous %}<a class="pager__step" href="{{ pagination.href.previous }}" rel="prev">{{ icon("arrow-left", "icon--sm") }}<span>Newer</span></a>{% endif %}
+  <ol>
+    {%- for h in pagination.hrefs %}
+    <li><a href="{{ h }}"{% if h == page.url %} aria-current="page"{% endif %} aria-label="Page {{ loop.index }}">{{ loop.index }}</a></li>
+    {%- endfor %}
+  </ol>
+  {%- if pagination.href.next %}<a class="pager__step" href="{{ pagination.href.next }}" rel="next"><span>Older</span>{{ icon("arrow-right", "icon--sm") }}</a>{% endif %}
+</nav>
+{%- endif %}

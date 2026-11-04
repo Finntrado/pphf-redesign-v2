@@ -1,0 +1,260 @@
+---
+layout: layouts/base.njk
+ogType: article
+---
+{#- ===================================================================================
+    MEDIA ITEM — the one template behind every individual Media / Opportunities page.
+
+    Kinds: news · press · event · gallery · rfp · vacancy  (add more by giving an item a new `kind`)
+    Data:  `item` — a normalised newsroom item (see src/_data/newsroom.js):
+           kind, kindLabel, section {label, href}, url, title, description, excerpt, date, modified,
+           image {stem,w,h,sizes,alt}, html, facts [{label, value|date, href?, mono?}], docs [{title, href}],
+           topics, photos (gallery), status/deadline/ref/contact (rfp), location/positions (vacancy),
+           related [items], prev/next {title, url}
+
+    To use it for a hand-written page, give the page front matter:
+        layout: layouts/media-item.njk
+        item: { kind: news, title: ..., date: 2026-01-01, section: {label: "Blogs & News", href: "/blogs-and-news/"} }
+    and write the body below the front matter (it is used when item.html is empty).
+=================================================================================== -#}
+{% from "partials/icons.njk" import icon %}
+{% from "partials/thread.njk" import thread %}
+{% from "partials/media-card.njk" import mediaCard, noticeRow %}
+{%- set it = item %}
+{%- set absUrl = site.url + it.url %}
+{%- set isArticle = it.kind in ["news", "press", "event"] %}
+{%- set body = it.html or content %}
+
+<article{% if it.status == "open" and it.deadline %} data-closes="{{ it.deadline }}"{% endif %} class="mitem mitem--{{ it.kind }}{% if not it.image or it.kind == 'gallery' %} mitem--noimage{% endif %}">
+  <header class="mitem__head">
+    {{ thread("head", "phead__thread") }}
+    <div class="wrap">
+      <nav aria-label="Breadcrumb">
+        <ol class="crumbs">
+          <li><a href="/">Home</a></li>
+          <li><a href="{{ '/partnership/' if it.kind in ['rfp', 'vacancy'] else '/media/' }}">{{ "Get Involved" if it.kind in ["rfp", "vacancy"] else "Media" }}</a></li>
+          <li><a href="{{ it.section.href }}">{{ it.section.label }}</a></li>
+          <li aria-current="page">{{ it.title | truncate(48, true, "…") }}</li>
+        </ol>
+      </nav>
+      <div class="mitem__titlebar">
+        <p class="mitem__kicker">
+          <a class="mitem__section" href="{{ it.section.href }}">{{ it.kindLabel }}</a>
+          {%- if it.kind in ["rfp", "vacancy"] %}<span class="status status--{{ it.status }}">{{ it.statusLabel }}</span>{% endif %}
+          {%- for t in it.topics %}<span class="mitem__topic">{{ t }}</span>{% endfor %}
+        </p>
+        <h1>{{ it.title }}</h1>
+        {%- if it.kind == "gallery" %}<p class="mitem__dek">{{ it.description }}</p>{% endif %}
+        <div class="mitem__metabar">
+          <p class="mitem__meta">
+            {%- if isArticle %}
+            <span>{{ icon("calendar", "icon--sm") }}<time datetime="{{ it.date | isoDate }}">{{ it.date | date }}</time></span>
+            <span>{{ icon("clock", "icon--sm") }}{{ it.readMinutes }} min read</span>
+            <span>By {{ site.shortName }} Team</span>
+            {%- elif it.kind == "rfp" %}
+            {%- if it.ref %}<span class="mono">{{ it.ref }}</span>{% endif %}
+            {%- if it.date %}<span>{{ icon("calendar", "icon--sm") }}Published <time datetime="{{ it.date | isoDate }}">{{ it.date | date }}</time></span>{% endif %}
+            {%- if it.deadline %}<span>{{ icon("clock", "icon--sm") }}Deadline <time datetime="{{ it.deadline }}">{{ it.deadline | date }}</time></span>{% endif %}
+            {%- elif it.kind == "vacancy" %}
+            <span>{{ icon("pin", "icon--sm") }}{{ it.location }}</span>
+            <span>{{ icon("briefcase", "icon--sm") }}{{ it.employment }}</span>
+            {%- if it.positions %}<span>{{ it.positions }} position{{ "s" if it.positions != "1" }}</span>{% endif %}
+            {%- if it.deadline %}<span>{{ icon("clock", "icon--sm") }}{{ "Apply by" if it.status == "open" else "Closed" }} <time datetime="{{ it.deadline }}">{{ it.deadline | date }}</time></span>{% endif %}
+            {%- elif it.kind == "gallery" %}
+            <span>{{ icon("image", "icon--sm") }}{{ it.photos.length }} photographs</span>
+            {%- if it.date %}<span>{{ icon("calendar", "icon--sm") }}<time datetime="{{ it.date | isoDate }}">{{ it.date | date("month") }}</time></span>{% endif %}
+            {%- endif %}
+          </p>
+          {%- set shareText = it.title | urlencode %}
+          {%- set shareUrl = absUrl | urlencode %}
+          <ul class="share" aria-label="Share this page">
+            <li><a href="https://www.linkedin.com/sharing/share-offsite/?url={{ shareUrl }}" target="_blank" rel="noopener" aria-label="Share on LinkedIn">{{ icon("linkedin") }}</a></li>
+            <li><a href="https://twitter.com/intent/tweet?url={{ shareUrl }}&amp;text={{ shareText }}" target="_blank" rel="noopener" aria-label="Share on X">{{ icon("x") }}</a></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ shareUrl }}" target="_blank" rel="noopener" aria-label="Share on Facebook">{{ icon("facebook") }}</a></li>
+            <li><a href="https://wa.me/?text={{ shareText }}%20{{ shareUrl }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">{{ icon("whatsapp") }}</a></li>
+            <li><button type="button" data-copy="{{ absUrl }}" aria-label="Copy link">{{ icon("link") }}<span class="share__done" role="status"></span></button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {%- if it.image and it.kind != "gallery" %}
+  <figure class="mitem__hero wrap">
+    {% mediaImg it.image, "(max-width: 1240px) calc(100vw - 32px), 1240px", "", true %}
+    {%- if it.image.alt and it.image.alt != it.title %}<figcaption>{{ it.image.alt }}</figcaption>{% endif %}
+  </figure>
+  {%- endif %}
+
+  {%- if it.kind == "gallery" %}
+  {#- ---------- Album: photo grid + lightbox ---------- #}
+  <section class="sec sec--sm">
+    <div class="wrap">
+      <ul class="album" data-lightbox>
+        {%- for ph in it.photos %}
+        <li class="album__item{% if loop.index0 % 7 == 0 %} album__item--wide{% endif %}">
+          <a href="{{ ph | mediaSrc(1280) }}" data-lightbox-item data-caption="{{ ph.alt }}">
+            {% mediaImg ph, "(max-width: 680px) 50vw, (max-width: 1000px) 33vw, 25vw", "", loop.index <= 4 %}
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+  <dialog class="lightbox" aria-label="Photo viewer" data-lightbox-dialog>
+    <figure><img alt="" width="1280" height="853"><figcaption></figcaption></figure>
+    <button type="button" class="lightbox__btn lightbox__prev" data-lb-prev aria-label="Previous photo">{{ icon("arrow-left") }}</button>
+    <button type="button" class="lightbox__btn lightbox__next" data-lb-next aria-label="Next photo">{{ icon("arrow-right") }}</button>
+    <button type="button" class="lightbox__btn lightbox__close" data-dialog-close aria-label="Close">{{ icon("close") }}</button>
+  </dialog>
+  {%- else %}
+  {#- ---------- Body + at-a-glance aside ---------- #}
+  <div class="wrap mitem__layout">
+    <div class="mitem__body">
+      {%- if it.kind == "rfp" %}
+      <div class="notice-banner notice-banner--{{ it.status }}">
+        {%- if it.status == "open" %}
+        <strong>Open for submissions.</strong> {% if it.deadline %}Proposals are due by <time datetime="{{ it.deadline }}">{{ it.deadline | date }}</time>.{% endif %} Read the full notice and download the documents before applying.
+        {%- elif it.status == "closed" %}
+        <strong>This notice has closed.</strong> {% if it.deadline %}Submissions closed on <time datetime="{{ it.deadline }}">{{ it.deadline | date }}</time>.{% endif %} It stays here for transparency. See <a href="/request-for-proposal/">current notices</a>.
+        {%- else %}
+        <strong>Archived notice.</strong> Kept for reference. See <a href="/request-for-proposal/">current notices</a> for live opportunities.
+        {%- endif %}
+      </div>
+      {%- endif %}
+      {%- if it.kind == "vacancy" %}
+      {%- if it.status == "open" %}
+      <div class="notice-banner notice-banner--open">
+        <strong>Open — how to apply:</strong> {% if it.deadline %}send your application by <time datetime="{{ it.deadline }}">{{ it.deadline | date }}</time>. {% endif %}Email your CV (Word or PDF, up to 500 KB) and a short statement of purpose (up to 500 words) to <a href="mailto:{{ it.applyEmail }}?subject={{ ('Application: ' + it.title + ' — ' + it.location) | urlencode }}">{{ it.applyEmail }}</a> with the role and location in the subject line.
+      </div>
+      {%- else %}
+      <div class="notice-banner notice-banner--closed">
+        <strong>This position is closed.</strong> {% if it.deadline %}Applications closed on <time datetime="{{ it.deadline }}">{{ it.deadline | date }}</time>.{% else %}The posting gives no closing date and is no longer accepting applications.{% endif %} The description stays here for reference — see <a href="/vacancies/">current openings</a>.
+      </div>
+      {%- endif %}
+      {%- endif %}
+
+      <div class="prose mitem__prose">
+        {%- if body | trim %}{{ body | safe }}{% else %}<p>{{ it.description }}</p>{% endif %}
+      </div>
+
+      {%- if it.youtube and it.youtube.length %}
+      <div class="mitem__videos">
+        {%- for id in it.youtube %}
+        <button class="video" type="button" data-yt="{{ id }}" aria-label="Play video" style="background-image:url(https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg)"><span class="video__play">{{ icon("play") }}</span></button>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+
+      <p class="mitem__source">
+        {%- if isArticle %}Published by {{ site.name }} on <time datetime="{{ it.date | isoDate }}">{{ it.date | date }}</time>{% if it.modified and (it.modified | isoDate) != (it.date | isoDate) %} · Updated <time datetime="{{ it.modified | isoDate }}">{{ it.modified | date }}</time>{% endif %}.
+        {%- elif it.kind == "rfp" %}Issued by {{ site.name }}. Queries: <a href="mailto:{{ it.contact }}">{{ it.contact }}</a>.
+        {%- else %}{{ site.name }} is an equal-opportunity employer.{% endif %}
+      </p>
+    </div>
+
+    <aside class="mitem__aside" aria-label="At a glance">
+      <div class="mglance">
+        <p class="mglance__title">At a glance</p>
+        <dl class="mglance__facts">
+          {%- for f in it.facts %}
+          <div>
+            <dt>{{ f.label }}</dt>
+            <dd{% if f.mono %} class="mono"{% endif %}>
+              {%- if f.date %}<time datetime="{{ f.date | isoDate }}">{{ f.date | date("month" if f.month else "long") }}</time>
+              {%- elif f.href %}<a href="{{ f.href }}">{{ f.value }}</a>
+              {%- else %}{{ f.value }}{% endif %}
+            </dd>
+          </div>
+          {%- endfor %}
+        </dl>
+        {%- if it.docs and it.docs.length %}
+        <p class="mglance__title mglance__title--sub">Documents</p>
+        <ul class="mglance__docs">
+          {%- for d in it.docs %}
+          <li><a href="{{ d.href }}" target="_blank" rel="noopener">{{ icon("file", "icon--sm") }}<span>{{ d.title | truncate(60, true, "…") }}</span>{{ icon("download", "icon--sm") }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+        <div class="mglance__cta">
+          {%- if it.kind == "vacancy" and it.status == "open" %}
+          <a class="btn btn--give btn--block" href="mailto:{{ it.applyEmail }}?subject={{ ('Application: ' + it.title + ' — ' + it.location) | urlencode }}">Apply by email {{ icon("arrow-right") }}</a>
+          <a class="btn btn--line btn--block" href="/vacancies/">All vacancies</a>
+          {%- elif it.kind == "vacancy" %}
+          <a class="btn btn--block" href="/vacancies/">See open positions {{ icon("arrow-right") }}</a>
+          {%- elif it.kind == "rfp" %}
+          {%- if it.docs and it.docs.length %}<a class="btn btn--give btn--block" href="{{ it.docs[0].href }}" target="_blank" rel="noopener">Download notice {{ icon("download") }}</a>{% endif %}
+          <a class="btn btn--line btn--block" href="mailto:{{ it.contact }}?subject={{ ('Query: ' + (it.ref or it.title)) | urlencode }}">Email a query</a>
+          {%- else %}
+          <a class="btn btn--block" href="{{ it.section.href }}">More {{ it.section.label }} {{ icon("arrow-right") }}</a>
+          <a class="btn btn--line btn--block" href="/partnership/">Partner with us</a>
+          {%- endif %}
+        </div>
+      </div>
+    </aside>
+  </div>
+  {%- endif %}
+
+  {%- if it.prev or it.next %}
+  <nav class="wrap mitem__pager" aria-label="More {{ it.section.label }}">
+    {%- if it.next %}<a class="pager-card pager-card--prev" href="{{ it.next.url }}" rel="prev"><span>{{ icon("arrow-left", "icon--sm") }} Newer</span><b>{{ it.next.title }}</b></a>{% else %}<span></span>{% endif %}
+    {%- if it.prev %}<a class="pager-card pager-card--next" href="{{ it.prev.url }}" rel="next"><span>Older {{ icon("arrow-right", "icon--sm") }}</span><b>{{ it.prev.title }}</b></a>{% endif %}
+  </nav>
+  {%- endif %}
+</article>
+
+{%- if it.related and it.related.length %}
+<section class="sec sheet sheet--paper2 mitem__related" aria-labelledby="related-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><h2 id="related-h">{{ "Other notices" if it.kind == "rfp" else ("Other openings" if it.kind == "vacancy" else ("More albums" if it.kind == "gallery" else "Keep reading")) }}</h2></div>
+      <a class="go" href="{{ it.section.href }}">All {{ it.section.label }} {{ icon("arrow-right") }}</a>
+    </div>
+    {%- if it.kind in ["rfp", "vacancy"] %}
+    <div class="notices">{% for r in it.related %}{{ noticeRow(r) }}{% endfor %}</div>
+    {%- else %}
+    <div class="pgrid pgrid--3 mgrid">{% for r in it.related %}{{ mediaCard(r) }}{% endfor %}</div>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if it.kind == "vacancy" %}
+{% set closerTitle = "Didn’t find the right role?" %}{% set closerText = "We are always glad to hear from people who share our mission. Send your CV and a short note to " + site.contact.email + " and we will keep it on file for future openings." %}
+{%- elif it.kind == "rfp" %}
+{% set closerTitle = "Work with PPHF as a vendor or consultant" %}{% set closerText = "We publish every procurement openly. Bookmark this page, or write to procurement@pphfglobal.org to be notified when new notices relevant to your work are issued." %}
+{%- endif %}
+{% include "partials/closer.njk" %}
+
+{#- ---------- Structured data ---------- #}
+{%- set crumbsLd = [
+  { "@type": "ListItem", "position": 1, "name": "Home", "item": site.url + "/" },
+  { "@type": "ListItem", "position": 2, "name": it.section.label, "item": site.url + it.section.href },
+  { "@type": "ListItem", "position": 3, "name": it.title, "item": absUrl }
+] %}
+{%- set imgUrl = (site.url + (it.image | mediaSrc(1280))) if it.image else (site.url + ("strategy-2030-pphf.webp" | img)) %}
+{%- if isArticle %}
+{%- set main = {
+  "@type": "NewsArticle" if it.kind == "press" else "BlogPosting",
+  "@id": absUrl + "#article", "mainEntityOfPage": absUrl, "url": absUrl,
+  "headline": it.title | truncate(110, true, "…"), "description": it.description,
+  "image": [imgUrl], "datePublished": it.date | isoDateTime, "dateModified": (it.modified or it.date) | isoDateTime,
+  "author": { "@type": "Organization", "@id": site.url + "/#org", "name": site.name, "url": site.url + "/" },
+  "publisher": { "@id": site.url + "/#org" }, "articleSection": it.section.label,
+  "keywords": it.topics | join(", "), "inLanguage": "en-IN"
+} %}
+{%- elif it.kind == "gallery" %}
+{%- set photosLd = it.photos | galleryLd(site.url) %}
+{%- set main = { "@type": "ImageGallery", "@id": absUrl + "#gallery", "name": it.title, "description": it.description, "url": absUrl, "publisher": { "@id": site.url + "/#org" }, "associatedMedia": photosLd } %}
+{%- elif it.kind == "vacancy" and it.datePosted %}
+{%- set main = {
+  "@type": "JobPosting", "title": it.title, "description": body, "datePosted": it.datePosted, "validThrough": it.validThrough,
+  "employmentType": "CONTRACTOR" if it.employment == "Consultant" else "FULL_TIME",
+  "hiringOrganization": { "@type": "Organization", "name": site.name, "sameAs": site.url + "/", "logo": site.url + ("cropped-pphf-registered-logo.png" | img) },
+  "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": it.location, "addressCountry": "IN" } },
+  "directApply": false
+} %}
+{%- else %}
+{%- set main = { "@type": "WebPage", "@id": absUrl, "url": absUrl, "name": it.title, "description": it.description, "isPartOf": { "@id": site.url + "/#website" }, "publisher": { "@id": site.url + "/#org" } } %}
+{%- endif %}
+<script type="application/ld+json">{{ { "@context": "https://schema.org", "@graph": [main, { "@type": "BreadcrumbList", "itemListElement": crumbsLd }] } | json | safe }}</script>

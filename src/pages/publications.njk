@@ -1,0 +1,33 @@
+---
+layout: layouts/media-landing.njk
+title: Publications
+permalink: /publications/
+crumbs:
+  - { label: Media, href: /media/ }
+seoTitle: "Publications — Policy Papers, Studies & Briefs | PPHF"
+description: "Policy and position papers, assessments, studies, project overviews and meeting briefs published by People to People Health Foundation (PPHF)."
+lead: "Position papers, assessments, project overviews and meeting briefs — the evidence behind our programmes."
+eleventyComputed:
+  stats:
+    - { n: "{{ publications.length }}", label: "Publications" }
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec">
+  <div class="wrap">
+    {%- set types = [["all", "All"], ["policy", "Policy & position papers"], ["research", "Assessments & studies"], ["projects", "Project overviews"], ["briefs", "Meeting briefs"]] %}
+    <div class="chips" role="group" aria-label="Filter publications" data-filter-chips hidden>
+      {%- for t in types %}<button type="button" class="chip" data-filter="{{ t[0] }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ t[1] }}</button>{% endfor %}
+    </div>
+    <p class="visually-hidden" aria-live="polite" data-filter-count></p>
+    <div class="covers" data-filter-grid>
+      {%- for p in publications %}
+      <a class="cover reveal" href="{{ p.href | wp }}" target="_blank" rel="noopener" data-type="{{ p.title | pubType }}">
+        <span class="cover__img">{%- set cv = p.cover | cover %}<img src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="(max-width: 680px) 44vw, 240px"{% endif %} width="{{ cv.w }}" height="{{ cv.h }}" alt="" loading="lazy" decoding="async"></span>
+        <span class="cover__t">{{ p.title }}</span>
+        <span class="cover__a">Download {{ icon("download", "icon--sm") }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+

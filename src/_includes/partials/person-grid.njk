@@ -1,0 +1,33 @@
+{#- People grid with bio dialogs. Vars: people (array), gid (unique id prefix) -#}
+{% from "partials/icons.njk" import icon %}
+<div class="people">
+  {%- for p in people %}
+  {%- set did = gid + "-" + loop.index %}
+  {%- set pt = p.photo | portrait %}
+  <article class="person reveal">
+    <div class="person__photo{% if pt %} portrait-stage{% endif %}">
+      {%- if pt %}<img src="{{ pt }}" alt="{{ p.name }}" loading="lazy" width="800" height="800">
+      {%- elif p.photo %}<img src="{{ p.photo | img }}" alt="{{ p.name }}" loading="lazy" width="400" height="400">
+      {%- else %}<span class="person__initials" aria-hidden="true">{{ p.name | replace("Dr. ", "") | replace("Dr ", "") | first }}</span>{% endif %}
+    </div>
+    <h3 class="person__name">{{ p.name }}</h3>
+    <p class="person__role">{{ p.role }}</p>
+    {%- if p.bio and p.bio.length %}
+    <button class="person__more" type="button" data-dialog="{{ did }}">Read bio {{ icon("arrow-right", "icon--sm") }}<span class="visually-hidden"> of {{ p.name }}</span></button>
+    {%- endif %}
+  </article>
+  {%- if p.bio and p.bio.length %}
+  <dialog class="modal" id="{{ did }}" aria-labelledby="{{ did }}-t">
+    <button class="modal__close" type="button" data-dialog-close>{{ icon("close") }}<span class="visually-hidden">Close</span></button>
+    <div class="modal__inner">
+      <div class="modal__photo">{% if pt %}<div class="portrait-stage"><img src="{{ pt }}" alt="" loading="lazy"></div>{% elif p.photo %}<img src="{{ p.photo | img }}" alt="" loading="lazy">{% endif %}</div>
+      <div>
+        <h2 id="{{ did }}-t">{{ p.name }}</h2>
+        <p class="modal__role">{{ p.role }}</p>
+        <div class="modal__bio">{% for para in p.bio %}<p>{{ para }}</p>{% endfor %}</div>
+      </div>
+    </div>
+  </dialog>
+  {%- endif %}
+  {%- endfor %}
+</div>

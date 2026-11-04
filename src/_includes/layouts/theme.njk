@@ -1,0 +1,78 @@
+---
+layout: layouts/base.njk
+---
+{% from "partials/icons.njk" import icon %}
+{%- set crumbs = [{ label: "Our Work", href: "/our-work/" }] %}
+{%- set label = "Thematic area" %}
+{%- set lead = summary %}
+{%- set headImage = image %}
+{%- set headImageAlt = title %}
+{% include "partials/phead.njk" %}
+
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div class="prose">{{ content | safe }}</div>
+    <aside class="card card--thread theme-give">
+      <p class="label label--plain">Support this work</p>
+      <p class="h3">Give to {{ title }}</p>
+      <p class="muted">Choose this cause when you give, and your gift goes to it.</p>
+      <div class="btn-row"><a class="btn btn--give" href="/donate/?for={{ donateKey }}">{{ icon("heart", "icon--sm") }} Donate</a><a class="btn btn--line" href="/partnership/">Partner</a></div>
+    </aside>
+  </div>
+</section>
+
+{%- if framework %}
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">{{ framework.eyebrow or "Our approach" }}</p><h2>{{ framework.title }}</h2>{% if framework.intro %}<p>{{ framework.intro }}</p>{% endif %}</div>
+    <ol class="frame" role="list">
+      {%- for col in framework.columns %}
+      <li class="frame__col reveal" style="--d: {{ (loop.index0 % 4) * 0.06 }}s">
+        <span class="plan__n">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span>
+        <h3>{{ col.title }}</h3>
+        {% if col.subtitle %}<p class="frame__sub">{{ col.subtitle }}</p>{% endif %}
+        {% if col.text %}<p>{{ col.text }}</p>{% endif %}
+        {%- if col.items %}<ul class="clist" role="list" data-clamp="130">{% for it in col.items %}<li>{{ it }}</li>{% endfor %}</ul>{% endif %}
+      </li>
+      {%- endfor %}
+    </ol>
+    {% if framework.note %}<div class="prose frame__note">{{ framework.note | md | safe }}</div>{% endif %}
+    {% if framework.image %}<img class="rounded frame__img" src="{{ framework.image | img }}" alt="{{ framework.imageAlt or '' }}" loading="lazy">{% endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- set norm = r/[^a-z]/g %}
+{%- set quoteIsNew = quote and (quote | lower | replace(norm, "")) != (summary | lower | replace(norm, "")) %}
+{%- if image2 %}
+<section class="sec">
+  <div class="wrap grid-2 grid-2--center">
+    <figure class="print" style="--tilt: -2deg">{% photo image2, title, "(max-width: 900px) 92vw, 520px" %}<figcaption>{{ title }}</figcaption></figure>
+    {%- if quoteIsNew %}<blockquote class="pull"><p>{{ quote }}</p></blockquote>
+    {%- elif keyAreas %}<div><p class="label">How we work</p><h2>{{ keyAreasTitle or "All our programs integrate innovative, evidence-based interventions in three key areas" }}</h2>{% if keyAreasIntro %}<p class="lead" style="margin-top:16px">{{ keyAreasIntro }}</p>{% endif %}</div>{% endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if keyAreas %}
+<section class="sec">
+  <div class="wrap">
+    {%- if not image2 or quoteIsNew %}<div class="sec-head"><p class="label">How we work</p><h2>{{ keyAreasTitle or "All our programs integrate innovative, evidence-based interventions in three key areas" }}</h2>{% if keyAreasIntro %}<p>{{ keyAreasIntro }}</p>{% endif %}</div>{% endif %}
+    {%- if keyAreas[0].text %}
+    <dl class="defs defs--wide">{% for a in keyAreas %}<div class="reveal"><dt>{{ a.title }}</dt><dd><div data-clamp="150">{{ a.text }}</div></dd></div>{% endfor %}</dl>
+    {%- else %}
+    <ul class="pills pills--big" role="list">{% for a in keyAreas %}<li>{{ a.title }}</li>{% endfor %}</ul>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if extra %}<section class="sec sec--sm"><div class="wrap"><div class="prose">{{ extra | md | safe }}</div></div></section>{% endif %}
+
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><p class="label">Keep exploring</p><h2>Other areas of our <em>work</em></h2></div><a class="go" href="/our-work/">All thematic areas {{ icon("arrow-right") }}</a></div>
+    <ol class="tindex" role="list">{% for t in collections.themes | without(page.url) %}<li><a class="tindex__row" href="{{ t.url }}"><span class="tindex__n">{{ "0" + t.data.order }}</span><span class="tindex__thumb">{% photo t.data.image, "", "96px" %}</span><span class="tindex__title">{{ t.data.title }}</span><span class="tindex__go">{{ icon("arrow-right") }}</span></a></li>{% endfor %}</ol>
+  </div>
+</section>
+{% include "partials/closer.njk" %}

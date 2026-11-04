@@ -1,0 +1,8 @@
+---
+layout: layouts/base.njk
+---
+{#- Landing page for a Media / Opportunities section: shared header + section switcher, then the page body.
+    Page data: title, heading, lead, eyebrow, mediaGroup, stats, crumbs, headCovers, ctaTitle, ctaText, noCta -#}
+{% include "partials/media-head.njk" %}
+{{ content | safe }}
+{%- if not noCta %}{% include "partials/closer.njk" %}{% endif %}

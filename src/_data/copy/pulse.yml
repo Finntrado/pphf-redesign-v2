@@ -1,0 +1,63 @@
+# Copy for /pphf-pulse-fund/ (moved out of the template so a redesign never touches the words).
+title: PPHF Pulse Fund
+heading: PPHF PULSE Fund
+lead: Partnering with Local organisations for Screening and Early care
+byline: Call for Applications and Application Form
+crumbs:
+- label: Get Involved
+pdf: /wp-content/uploads/PPHF_PULSE_Fund_Call.pdf
+applyForm: https://docs.google.com/document/d/1jSz7cVa8hC61iIpKR3YepVi-WIRZ_M95/edit?usp=sharing&ouid=110724676412156697710&rtpof=true&sd=true
+call:
+- title: What we offer
+  text: a 12-month grant, a dedicated PPHF mentor, training for staff and frontline workers, and organisational development
+    support.
+- title: What we seek
+  text: local organisations that will screen adults aged 30+ for hypertension, diabetes and common cancers through 100 community
+    screening camps of 80–100 people each, ensure people complete referral and stay in treatment, and work hand in hand with
+    the public health system.
+- title: Who can apply
+  text: non-profits registered in India for at least three years with 12A and 80G registration, audited accounts for three
+    years and a track record in community health. Organisations working in rural, tribal and urban-poor communities are especially
+    encouraged.
+- title: How to apply
+  text: download the two-page application from pphfglobal.org, complete it and email it with the listed attachments to connect@pphfglobal.org
+    with the subject line "PULSE Fund 2026 – [Organisation name]". Do not include a budget at this stage; PPHF will invite
+    shortlisted organisations to submit a detailed budget.
+pillars:
+- title: Screening and continuity of care.
+  text: 'Each agency runs community-based screening of adults aged 30+ for hypertension, diabetes and oral, breast and cervical
+    cancer, aligned with the national NCD programme. It tracks every positive case through referral, diagnosis, treatment
+    initiation and follow-up. Each agency holds 100 screening camps over 12 months, screening 80–100 adults per camp: about
+    8,000–10,000 people per agency and up to 40,000–50,000 across five agencies.'
+- title: Mentoring.
+  text: PPHF provides each agency with a dedicated mentor, programme tools, training modules and communication materials,
+    along with monthly review calls, field visits and a quarterly cohort learning session. Mentoring covers programme quality,
+    data use and government engagement.
+- title: Capacity building.
+  text: Agencies receive training for their staff plus organisational development in governance, finance, M&E, safeguarding
+    and resource mobilisation.
+eligibility:
+- Registered in India as a trust, society or Section 8 company for at least three years, with operations in the proposed district
+- Valid 12A and 80G registration and PAN.
+- Audited financial statements for the last three years; annual expenditure between ₹10 lakh and ₹50 lakh
+- Demonstrated community health work; prior NCD experience preferred, not required
+- Not blacklisted by any government body or donor; no PPHF Board, PAC or staff member on its governing body.
+stages:
+- Eligibility screening
+- Technical scoring
+- Shortlist 10–12
+- Budget, presentation + due diligence
+- Committee approval
+lede: PPHF will mark its tenth Foundation Day on 15 November 2026 by announcing up to five local implementing agencies as the first grantees of a dedicated NCD fund. Each agency receives a 12-month grant plus PPHF mentoring to screen adults for common NCDs, link them to care and build lasting organisational capability.
+dates:
+- { when: "2 October 2026", what: "The call opens", iso: "2026-10-02" }
+- { when: "16 October 2026, 23:59 IST", what: "Deadline", iso: "2026-10-16" }
+- { when: "15 November 2026", what: "Up to five PULSE Partners announced, PPHF's Foundation Day", iso: "2026-11-15" }
+deadline: "2026-10-16"
+callTitle: PPHF PULSE Fund 2026 — Call for Applications
+callIntro: To mark ten years of catalysing change, People to People Health Foundation (PPHF) invites applications from Indian non-profit organisations to become one of up to five PPHF PULSE Partners.
+pillarsTitle: Three support pillars
+pillarsIntro: The first cohort funds up to five agencies for 12 months (December 2026 – November 2027), backed by PPHF technical support for each agency.
+budgetNote: Applicants do not submit a budget with the application. PPHF will invite the 10–12 shortlisted agencies to submit a detailed 12-month budget, so that effort is spent only where an award is realistic.
+queries: For any queries regarding the application process, please contact
+fine: PPHF reserves the right to accept or reject any application, to modify or cancel the call or any award, and to make fewer than five awards, without assigning reasons. Full terms are available with the application form.

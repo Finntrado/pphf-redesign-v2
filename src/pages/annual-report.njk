@@ -1,0 +1,32 @@
+---js
+{
+  layout: "layouts/page.njk",
+  pagination: {
+    data: "reports.annual",
+    size: 1,
+    alias: "report",
+    before: (data) => data.filter((r) => r.flipbook),
+  },
+  permalink: (data) => `/${data.report.slug}/`,
+  eleventyComputed: {
+    title: (data) => `PPHF ${data.report.title}`,
+    heading: (data) => data.report.title,
+  },
+  eyebrow: "Annual Report",
+  navSection: "Media",
+  crumbs: [
+    { label: "Media" },
+    { label: "Reports", href: "/reports/" },
+    { label: "Annual Reports", href: "/annual-reports/" },
+  ],
+}
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="embed embed--flipbook reveal">
+      <iframe src="{{ report.flipbook }}" title="{{ report.title }} — interactive flipbook" loading="lazy" allowfullscreen></iframe>
+    </div>
+    <p class="embed-note">Having trouble viewing? <a href="{{ report.flipbook }}" target="_blank" rel="noopener">Open the flipbook in a new tab {{ icon("arrow-up-right", "icon--sm") }}</a> · <a href="/annual-reports/">All annual reports</a></p>
+  </div>
+</section>

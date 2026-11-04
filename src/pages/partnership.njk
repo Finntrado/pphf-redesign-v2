@@ -1,0 +1,37 @@
+---
+layout: layouts/page.njk
+permalink: /partnership/
+copyKey: partnership
+navSection: Get Involved
+headActions: [{ label: "Write to us", href: "mailto:connect@pphfglobal.org?subject=Partnership%20enquiry", give: true }, { label: "Our partners", href: "#partners" }]
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div class="prose"><p class="lead">{{ c.body }}</p></div>
+    <aside class="card card--night">
+      <h2 class="h3">{{ c.contactTitle }}</h2>
+      <p>{{ c.contactText }}</p>
+      <p style="margin-top:10px">Write to us at <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></p>
+      <div class="btn-row"><a class="btn btn--give" href="mailto:{{ site.contact.email }}?subject=Partnership%20enquiry">Write to us {{ icon("mail", "icon--sm") }}</a></div>
+    </aside>
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Ways in</p><h2>{{ c.models.title }}</h2></div>
+    <ol class="plan" role="list">{% for m in c.models.items %}<li><span class="plan__n">{{ "0" + loop.index }}</span><h3>{{ m.title }}</h3><p>{{ m.text }}</p></li>{% endfor %}</ol>
+  </div>
+</section>
+<section class="sec" id="partners">
+  <div class="wrap">
+    <div class="sec-head sec-head--center"><p class="label">In good company</p><h2>{{ c.partnersTitle }}</h2><p>{{ home.partnersIntro }}</p></div>
+    <ul class="logos" role="list">{% for p in partners %}<li><img src="{{ p.src | img }}" alt="{{ p.name }}" loading="lazy" decoding="async"></li>{% endfor %}</ul>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">More ways to help</p><h2>{{ c.involveTitle }}</h2></div>
+    <ul class="rlist" role="list">{% for i in c.involve %}<li><a class="rlist__a" href="{{ i.href }}"><span class="rlist__t">{{ i.title }}</span><span class="rlist__d">{{ i.text }}</span>{{ icon("arrow-right") }}</a></li>{% endfor %}</ul>
+  </div>
+</section>

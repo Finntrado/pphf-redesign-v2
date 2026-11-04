@@ -1,0 +1,27 @@
+---
+layout: layouts/page.njk
+permalink: /signature-programs-2/
+copyKey: signature
+navSection: Our Work
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="brochure-viewer" data-brochure>
+      <ol class="brochure" tabindex="0" aria-label="PPHF Signature Programs brochure, {{ c.pages.length }} pages">
+        {%- for pg in c.pages %}
+        <li><img src="{{ pg.file | img }}" alt="{{ pg.title }} (brochure page {{ loop.index }} of {{ c.pages.length }})" loading="{{ 'eager' if loop.index <= 2 else 'lazy' }}" width="1600" height="900"><span class="brochure__num">{{ loop.index }} / {{ c.pages.length }}</span></li>
+        {%- endfor %}
+      </ol>
+      <div class="brochure-bar">
+        <p class="brochure-bar__caption"><span class="brochure-bar__count" data-brochure-count aria-live="polite"></span><span class="brochure-bar__title" data-brochure-title></span></p>
+        <div class="brochure-bar__btns">
+          <button class="brochure-btn brochure-btn--prev" type="button" data-brochure-prev>{{ icon("arrow-right") }}<span class="visually-hidden">Previous page</span></button>
+          <button class="brochure-btn" type="button" data-brochure-next>{{ icon("arrow-right") }}<span class="visually-hidden">Next page</span></button>
+        </div>
+      </div>
+      <ol class="brochure-thumbs">{% for pg in c.pages %}<li><button type="button" data-brochure-go aria-label="Go to page {{ loop.index }}: {{ pg.title }}"><img src="/assets/img/thumbs/{{ pg.file }}" alt="" loading="lazy" width="320" height="180"></button></li>{% endfor %}</ol>
+      <ol class="brochure-index">{% for pg in c.pages %}<li><button type="button" data-brochure-go-index="{{ loop.index0 }}"><span class="brochure-index__n">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span><span>{{ pg.title }}</span></button></li>{% endfor %}</ol>
+    </div>
+  </div>
+</section>

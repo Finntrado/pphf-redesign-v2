@@ -1,0 +1,33 @@
+---
+layout: layouts/page.njk
+permalink: /contact/
+copyKey: contact
+noCloser: true
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap contact">
+    <div class="contact__info">
+      <dl class="facts facts--big">
+        <div><dt>Address</dt><dd>{{ site.contact.address }}</dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:{{ site.contact.phoneHref }}">{{ site.contact.phone }}</a><br><a href="tel:{{ site.contact.mobileHref }}">{{ site.contact.mobile }}</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></dd></div>
+        <div><dt>Regional offices</dt><dd>{{ site.contact.regionalOffices | join(", ") }}</dd></div>
+      </dl>
+      <div class="embed embed--map"><iframe src="{{ site.contact.mapEmbed }}" title="Map: {{ site.contact.address }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+    <form class="gform" data-contact-form data-mailto="{{ site.contact.email }}"{% if site.forms.contactEndpoint %} data-endpoint="{{ site.forms.contactEndpoint }}" action="{{ site.forms.contactEndpoint }}" method="post"{% else %} action="mailto:{{ site.contact.email }}" method="post" enctype="text/plain"{% endif %}>
+      <h2 class="h3">{{ c.formTitle }}</h2>
+      <div class="form-grid">
+        <div class="field"><label for="cf-name">Your name</label><input id="cf-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="cf-email">Your email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="cf-phone">Phone number</label><input id="cf-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="cf-role">I am…</label><select id="cf-role" name="role">{% for r in c.roles %}<option>{{ r }}</option>{% endfor %}</select></div>
+        <div class="field full"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject"></div>
+        <div class="field full"><label for="cf-message">Message</label><textarea id="cf-message" name="message" required></textarea></div>
+      </div>
+      <p class="form-status" data-form-status role="status" hidden></p>
+      <button class="btn btn--give btn--lg" type="submit">Send message {{ icon("arrow-right", "icon--go") }}</button>
+    </form>
+  </div>
+</section>

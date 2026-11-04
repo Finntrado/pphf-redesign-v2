@@ -1,0 +1,101 @@
+---
+layout: layouts/base.njk
+permalink: /flood-relief-appeal-2026/
+copyKey: appeal
+navSection: Get Involved
+bodyClass: page-appeal
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/thread.njk" import thread %}
+<section class="ahero sheet night">
+  <div class="wrap ahero__grid">
+    <div>
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li>Get Involved</li><li aria-current="page">Flood Relief Appeal 2026</li></ol></nav>
+      <p class="label"><span class="ribbon__dot" aria-hidden="true"></span>{{ c.label }}</p>
+      <h1>{{ c.heading }}</h1>
+      <p class="lead">{{ c.lead }}</p>
+      <div class="btn-row">
+        <a class="btn btn--give btn--lg" href="/donate/?for=flood">{{ icon("heart") }} Give to flood relief</a>
+        <a class="btn btn--line btn--lg" href="#help">How you can help</a>
+      </div>
+    </div>
+    <figure class="ahero__photo">
+      {% photo "flood-photo-1.webp", "Aerial view of flooded homes and a bridge in Bihar", "(max-width: 900px) 92vw, 520px", "", "eager", true %}
+      <figcaption class="note">Bihar, 2026</figcaption>
+    </figure>
+  </div>
+  <dl class="wrap ahero__figs">
+    {%- for f in c.figures %}<div class="reveal" style="--d: {{ loop.index0 * 0.07 }}s"><dt>{{ f.label }}</dt><dd>{{ f.n }}</dd></div>{% endfor %}
+  </dl>
+</section>
+
+<section class="sec">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div class="prose">
+      <h2>{{ c.crisis.title }}</h2>
+      {%- for p in c.crisis.paras %}<p>{{ p | safe }}</p>{% endfor %}
+    </div>
+    <figure class="print" style="--tilt: 2deg">
+      {% photo "flood-photo-3.webp", "A flood-affected community in Bihar", "(max-width: 900px) 92vw, 420px" %}
+      <figcaption>Families are cut off from food, safe water and care.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Our plan</p><h2>{{ c.responseTitle }}</h2></div>
+    <ol class="plan" role="list">
+      {%- for r in c.response %}<li class="reveal" style="--d: {{ (loop.index0 % 3) * 0.08 }}s"><span class="plan__n">{{ "0" + loop.index }}</span><p>{{ r }}</p></li>{% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="help">
+  <div class="wrap help">
+    <figure class="help__media">{% photo "flood-photo-2.webp", "Floodwaters across a settlement", "(max-width: 900px) 92vw, 520px" %}</figure>
+    <div>
+      <p class="label">{{ c.help.title }}</p>
+      <h2>Families urgently <em>need</em>:</h2>
+      <ul class="needs" role="list">
+        {%- for n in c.help.needs %}<li><strong>{{ n.title }}</strong><span>{{ n.text }}</span></li>{% endfor %}
+      </ul>
+      <p>{{ c.help.text }}</p>
+      <p class="help__together">{{ c.help.together }}</p>
+      <div class="btn-row">
+        <a class="btn btn--give btn--lg" href="/donate/?for=flood">{{ icon("heart") }} Give to flood relief</a>
+        <a class="btn btn--line" href="mailto:{{ c.help.email }}?subject=Bihar%20Flood%20Relief%20Appeal%202026">{{ icon("mail", "icon--sm") }} {{ c.help.email }}</a>
+        <a class="btn btn--line" href="tel:{{ c.help.mobileHref }}">{{ icon("phone", "icon--sm") }} {{ c.help.mobile }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sheet sheet--rose">
+  <div class="wrap grid-2 grid-2--center">
+    <div>
+      <p class="label">{{ c.past.title }}</p>
+      <h2>Relief that <em>reaches</em> the last house.</h2>
+      <p class="lead">{{ c.past.text }}</p>
+      <p><a class="go" href="{{ c.past.href }}">See the 2025 flood response {{ icon("arrow-right") }}</a></p>
+    </div>
+    <blockquote class="pull"><p>“{{ c.past.quote }}”</p><footer class="note">{{ c.past.quoteBy }}</footer></blockquote>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap grid-2">
+    <div>
+      <h2 class="h3">{{ c.about.title }}</h2>
+      <p class="lead">{{ c.about.text }}</p>
+      <ul class="pills" role="list" style="margin-top:20px">{% for t in c.about.areas %}<li>{{ t }}</li>{% endfor %}</ul>
+    </div>
+    <address class="card">
+      <h2 class="h3">Contact us</h2>
+      <p><strong>People to People Health Foundation</strong><br>{{ c.about.address }}</p>
+      <p style="margin-top:12px">Phone: <a href="tel:{{ site.contact.phoneHref }}">{{ site.contact.phone }}</a><br>Mobile: <a href="tel:{{ c.help.mobileHref }}">{{ c.help.mobile }}</a><br>E-mail: <a href="mailto:{{ c.help.email }}">{{ c.help.email }}</a><br>Web: <a href="/">www.pphfglobal.org</a></p>
+    </address>
+  </div>
+</section>
+{% set closerTitle = "Every hour <em>counts</em>." %}{% set closerText = "Your gift today helps bring relief kits and health camps to flood-affected families in Bihar." %}
+{% include "partials/closer.njk" %}

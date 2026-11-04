@@ -1,0 +1,46 @@
+---
+layout: layouts/page.njk
+permalink: /pphf-pulse-fund/
+copyKey: pulse
+navSection: Get Involved
+---
+{% from "partials/icons.njk" import icon %}
+{%- set closed = c.deadline < ("" | todayIN) %}
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--wide-left grid-2--center">
+    <div>
+      {% if closed %}<p><span class="status status--closed">Applications closed</span></p>{% else %}<p><span class="status status--open">Open for applications</span></p>{% endif %}
+      <p class="lead" style="margin-top:16px">{{ c.lede }}</p>
+      <ol class="dates" role="list">{% for d in c.dates %}<li class="{{ 'is-past' if d.iso < ('' | todayIN) }}"><strong>{{ d.when }}</strong><span>{{ d.what }}</span></li>{% endfor %}</ol>
+      <div class="btn-row" style="margin-top:28px">
+        {% if not closed %}<a class="btn btn--give btn--lg" href="{{ c.applyForm }}" target="_blank" rel="noopener">Link for Application {{ icon("arrow-up-right", "icon--sm") }}</a>{% endif %}
+        <a class="btn btn--line btn--lg" href="{{ c.pdf | wp }}" target="_blank" rel="noopener">Download the call (PDF) {{ icon("download", "icon--sm") }}</a>
+      </div>
+    </div>
+    <a class="print print--doc" style="--tilt: 2.5deg; --ar: 910 / 1287" href="{{ c.pdf | wp }}" target="_blank" rel="noopener" aria-label="Open the PPHF PULSE Fund call (PDF)"><img src="{{ 'pphf-pulse-fund-cover.webp' | img }}" alt="First page of the PPHF PULSE Fund call for applications" width="910" height="1287"></a>
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">The call</p><h2>{{ c.callTitle }}</h2><p>{{ c.callIntro }}</p></div>
+    <dl class="defs">{% for x in c.call %}<div class="reveal"><dt>{{ x.title }}</dt><dd>{{ x.text }}</dd></div>{% endfor %}</dl>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">What partners get</p><h2>{{ c.pillarsTitle }}</h2><p>{{ c.pillarsIntro }}</p></div>
+    <ol class="plan" role="list">{% for p in c.pillars %}<li class="reveal"><span class="plan__n">{{ "0" + loop.index }}</span><h3>{{ p.title | replace(".", "") }}</h3><p>{{ p.text }}</p></li>{% endfor %}</ol>
+  </div>
+</section>
+<section class="sec sheet night">
+  <div class="wrap grid-2">
+    <div><h2>Eligibility</h2><ul class="clist" role="list" style="margin-top:22px">{% for e in c.eligibility %}<li>{{ e }}</li>{% endfor %}</ul></div>
+    <div><h2>Selection process</h2><ol class="nlist" style="margin-top:22px">{% for s in c.stages %}<li>{{ s }}</li>{% endfor %}</ol><p class="muted" style="margin-top:18px">{{ c.budgetNote }}</p></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap wrap--narrow center">
+    <p>{{ c.queries }} <a href="mailto:connect@pphfglobal.org?subject=PULSE%20Fund%202026">connect@pphfglobal.org</a></p>
+    <p class="muted" style="margin-top:14px;font-size:var(--fs-xs)">{{ c.fine }}</p>
+  </div>
+</section>

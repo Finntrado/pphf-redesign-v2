@@ -1,0 +1,35 @@
+---
+layout: layouts/page.njk
+permalink: /our-work/
+copyKey: ourwork
+navSection: Our Work
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="themes">
+      {%- for t in collections.themes %}
+      <a class="theme reveal" href="{{ t.url }}" style="--d: {{ (loop.index0 % 2) * 0.08 }}s">
+        <span class="theme__img">{% photo t.data.image, "", "(max-width: 760px) 92vw, 520px" %}</span>
+        <span class="theme__n">{{ "0" + loop.index }}</span>
+        <span class="theme__t">{{ t.data.title }}</span>
+        <span class="theme__s">{{ t.data.summary }}</span>
+        <span class="go">Explore {{ icon("arrow-right") }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Programmes</p><h2>{{ c.programmesTitle }}</h2></div>
+    <ul class="rlist" role="list">
+      <li><a class="rlist__a" href="/signature-programs-2/"><span class="rlist__t">Signature Programs</span><span class="rlist__d">{{ c.signatureText }}</span>{{ icon("arrow-right") }}</a></li>
+      <li><a class="rlist__a" href="/ongoing-projects/"><span class="rlist__t">Ongoing Projects</span><span class="rlist__d">{{ collections.projectsOngoing.length }} projects currently underway.</span>{{ icon("arrow-right") }}</a></li>
+      <li><a class="rlist__a" href="/past-projects/"><span class="rlist__t">Past Projects</span><span class="rlist__d">{{ collections.projectsPast.length }} completed projects.</span>{{ icon("arrow-right") }}</a></li>
+      <li><a class="rlist__a" href="/outreach/"><span class="rlist__t">Outreach</span><span class="rlist__d">Our footprint across India.</span>{{ icon("arrow-right") }}</a></li>
+      <li><a class="rlist__a" href="/aastha/"><span class="rlist__t">AASTHA</span><span class="rlist__d">Asia–Africa Supply Chain Transform Health Alliance.</span>{{ icon("arrow-right") }}</a></li>
+      <li><a class="rlist__a" href="/partnership/deesha/"><span class="rlist__t">DEESHA</span><span class="rlist__d">Action group for Type 1 Diabetes in India.</span>{{ icon("arrow-right") }}</a></li>
+    </ul>
+  </div>
+</section>

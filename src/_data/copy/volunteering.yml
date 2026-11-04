@@ -1,0 +1,45 @@
+# Copy for /corporate-volunteering/ (moved out of the template so a redesign never touches the words).
+title: PPHF - Corporate Volunteering Program
+crumbTitle: Corporate Volunteering
+heading: Corporate Volunteering Program
+lead: We are inviting corporate volunteers to support the ongoing programs based on their interest areas.
+headImage: ircon-1-e1684319511654.webp
+headImageAlt: A community session at a PPHF programme site
+crumbs:
+- label: Get Involved
+opportunities:
+- title: Program Support (Working with communities)
+  tone: green
+  items:
+  - Support community mobilization and outreach interventions through workshops, sessions, yoga, etc
+  - Celebrate special days and/or festivals with communities
+  - Provide photography and/or videography support
+  - Support in curating impact stories and project reports
+- title: 'Business Development and Marketing: Marketing communications and public relations, Market research, and partner
+    outreach'
+  tone: orange
+  items:
+  - Assist in funding and business development activities - identifying and developing funding opportunities
+  - Assist in building new program partnerships
+  - Assist in the development of communication materials.
+  - Provide support to social media efforts and public relations activities.
+  - Increase outreach of the organization to stakeholders.
+- title: 'ICT: Information and communications technology (social media, Website, etc.)'
+  tone: navy
+  items:
+  - Review the already developed website design and update
+  - Regularly monitor and post on blogs, events, activities, documents, and other content on social media sites
+  - Promote PPHF through social media sites
+  - Optimize website and social media platforms
+  - Organize the content of the website into a more user-friendly site structure and re-write some of the content to be more
+    search engine friendly
+- title: Market Research
+  tone: magenta
+  items:
+  - Assist in designing market research in collaboration with medical and academic institutions on public health themes of
+    the organization
+  - Collect and compile qualitative and quantitative information and prepare policy briefs
+  - Analyze complex public health policies, programs, and statistical standards
+label: Opportunity
+oppTitle: Opportunities
+note: Volunteers will be recognized for their efforts and contribution to the social development sector. To know more about the volunteering opportunities, please reach out at

@@ -1,0 +1,38 @@
+{
+  "name": "People to People Health Foundation",
+  "shortName": "PPHF",
+  "url": "https://pphfglobal.org",
+  "wpBase": "https://pphfglobal.org",
+  "tagline": "Catalysing change for wellbeing",
+  "description": "People to People Health Foundation (PPHF) is a not-for-profit (Section 8) public health organisation transforming lives for improved health and well-being through locally driven solutions.",
+  "registration": "People to People Health Foundation is a Section 8 company (Non-Profit) founded in the year 2016, with the Ministry of Corporate Affairs (MCA), GOI, under the Companies Act 2013",
+  "contact": {
+    "address": "Second Floor, E-45, Lajpat Nagar-III, New Delhi-110 024",
+    "phone": "+91 11 4243 2793",
+    "phoneHref": "+911142432793",
+    "mobile": "+91 9871950708",
+    "mobileHref": "+919871950708",
+    "email": "connect@pphfglobal.org",
+    "mapEmbed": "https://maps.google.com/maps?q=E-45%2C%20Lajpat%20Nagar-III%2C%20New%20Delhi-110%20024&t=m&z=15&output=embed&iwloc=near",
+    "regionalOffices": ["Bengaluru", "Bhubaneshwar", "Kolkata"]
+  },
+  "socials": [
+    { "name": "Facebook", "href": "https://www.facebook.com/PPHFGlobal", "icon": "facebook" },
+    { "name": "LinkedIn", "href": "https://in.linkedin.com/company/people-to-people-health-foundation-pphf", "icon": "linkedin" },
+    { "name": "X (Twitter)", "href": "https://x.com/PPHF_Global", "icon": "x" },
+    { "name": "YouTube", "href": "https://www.youtube.com/channel/UCFmuq4EiVAY6X10Z76qcBmw", "icon": "youtube" },
+    { "name": "Instagram", "href": "https://www.instagram.com/pphf_global", "icon": "instagram" }
+  ],
+  "certifications": [
+    { "name": "ISO 9001:2015 Certified", "image": "screenshot-2023-10-03-at-4-47-08-pm.webp", "href": "/wp-content/uploads/2022/12/FINAL-PEOPLE-TO-PEOPLE-HEALTH-FOUNDATION-9001-QVA-1.pdf" },
+    { "name": "QVA Certification", "image": "screenshot-2023-10-03-at-4-46-58-pm.webp", "href": "/wp-content/uploads/2022/12/FINAL-PEOPLE-TO-PEOPLE-HEALTH-FOUNDATION-9001-QVA-1.pdf" },
+    { "name": "GAAFS Global Accreditation Assessment Forum Series", "image": "screenshot-2023-10-03-at-4-47-15-pm.webp", "href": "/wp-content/uploads/2022/12/FINAL-PEOPLE-TO-PEOPLE-HEALTH-FOUNDATION-9001-QVA-1.pdf" },
+    { "name": "Fitch Solutions NGO Grading — IRR NGO 3", "image": "fitech-solution.webp", "href": "/wp-content/uploads/NGO-Grading-Report_People-to-People-Health-Foundation_7th-June-2024.pdf" }
+  ],
+  "onePager": "/wp-content/uploads/PPHF-Global-One-pager.pdf",
+  "strategy2030": "/wp-content/uploads/PPHF-Strategy-2030.pdf",
+  "forms": {
+    "contactEndpoint": ""
+  },
+  "logo": "pphf-logo-336.webp"
+}

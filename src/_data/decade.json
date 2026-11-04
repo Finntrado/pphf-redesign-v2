@@ -1,0 +1,42 @@
+{
+  "intro": "For ten years, we've worked alongside communities, governments and partners to strengthen health systems, expand access to care, and build healthier futures. Now, we are building what comes next.",
+  "ceo": [
+    "Ten years ago, we started with one belief: that lasting change in health begins inside communities, not outside them.",
+    "Everything we've built since — every milestone, every life reached — belongs as much to them as to us: frontline health workers, government partners, researchers, donors, and the countless people who chose to stand with this work.",
+    "We mark this decade with gratitude. As we enter the next, we do so with renewed resolve. Public health is changing rapidly, and so must we — with deeper partnerships, stronger systems, bolder innovation, and one unwavering commitment: ensuring that every person has the opportunity to live a healthier and more dignified life.",
+    "Thank you for walking this journey with us. The best of PPHF is still ahead."
+  ],
+  "timeline": [
+    { "year": "2016", "title": "PPHF Founded", "text": "A locally driven public health and well-being platform, anchoring equitable access to better health through solutions designed and led by communities themselves." },
+    { "year": "2016–17", "title": "Community Mobilization", "text": "Frontline health workers trained on diabetes and hypertension through the Positive Deviance approach, building peer support, psychosocial care and treatment adherence." },
+    { "year": "2017–18", "title": "NCD Model Demonstration", "text": "A comprehensive prevention-to-care model proved the concept of embedding behaviour change, screening, health-worker training and patient peer groups within public health systems." },
+    { "year": "2018–19", "title": "Policy Translation", "text": "NCD field learning became an implementation toolbox, policy briefs and technical convenings, moving PPHF from programme delivery to evidence-to-policy influence." },
+    { "year": "2019–20", "title": "Rebranding as PPHF", "text": "People to People Health Foundation sharpened its institutional identity around a clear promise: \"Catalyzing change for wellbeing.\"" },
+    { "year": "2020–21", "title": "COVID-19 & \"Together for Rare\"", "text": "Emergency response sharpened agility in supporting health facilities and vulnerable groups, while the rare-disease platform convened governments, policymakers and partners." },
+    { "year": "2021–22", "title": "Digital Transformation", "text": "Post-pandemic digital adoption became integral to improving health-service delivery and reducing access barriers for last-mile communities." },
+    { "year": "2022–23", "title": "Multi-State Expansion", "text": "A comprehensive primary healthcare platform reached over 9 lakh people across NCDs, women/adolescent/child health, nutrition, environmental health and emergency response." },
+    { "year": "2023–24", "title": "AI-Enabled Health Systems", "text": "Innovative AI-based digital technologies deployed within healthcare infrastructure to improve accessibility." },
+    { "year": "2024–25", "title": "Strategy 2030 Launch", "text": "Five thematic priorities set to reach 30M lives impacted and 5M people annually, driven by Technology, Teamwork & Trust." }
+  ],
+  "milestones": [
+    { "title": "Strengthening Systems", "text": "Building stronger public health infrastructure and frontline capacity.", "image": "health-system-strengthening-1.webp" },
+    { "title": "Shaping Policy", "text": "Turning evidence into national and state-level action.", "image": "influencing-policy-1.webp" },
+    { "title": "Driving Innovation", "text": "Digital health, AI-enabled tools and locally relevant solutions.", "image": "driving-innovation-1.webp" },
+    { "title": "Expanding Reach", "text": "Growing into new states and underserved communities.", "image": "expanding-reach-1.webp" },
+    { "title": "Building Partnerships", "text": "Bringing together government, academia, communities and industry.", "image": "building-partnership-1.webp" },
+    { "title": "National Recognition", "text": "Independent recognition of quality, credibility and impact.", "image": "national-recognition-1.webp" }
+  ],
+  "focus": [
+    { "title": "Non-Communicable Diseases", "text": "We apply a continuum-of-care approach to prevent and manage NCDs — including obesity, diabetes, hypertension, cancers and cardiovascular disease.", "image": "non-communicable-diseases-1.webp", "href": "/non-communicable-diseases/" },
+    { "title": "Nutrition", "text": "We work to improve nutrition outcomes across every life stage, from infancy to old age.", "image": "nutrition-1.webp", "href": "/nutrition/" },
+    { "title": "Women, Adolescent, and Child Health", "text": "We deliver community-based solutions that connect adolescent girls, mothers and children to essential health care.", "image": "maternal-child-adolescent-health-1.webp", "href": "/women-adolescent-and-child-health/" },
+    { "title": "Integrated Development for Health and Wellbeing", "text": "PPHF drives transformative social impact by providing innovative, evidence-based and sustainable development solutions for health and wellbeing of people.", "image": "integrated-development-1.webp", "href": "/integrated-development-for-health-and-wellbeing/" },
+    { "title": "Infectious Diseases", "text": "We strengthen community and health-system readiness to prevent, detect and respond to infectious disease outbreaks.", "image": "infectious-diseases-1.webp", "href": "/infectious-diseases/" },
+    { "title": "Environmental Health", "text": "Environmental health is an essential part of our public health approach. We focus on three areas, including WASH — Water, Sanitation, and Hygiene.", "image": "envirinment.webp", "href": "/environmental-health/" }
+  ],
+  "next": [
+    "PPHF@10 is more than a celebration of what we've achieved. It is the beginning of our next chapter — one that builds on ten years of learning to create even greater impact through innovation, partnerships, evidence and stronger health systems.",
+    "Catalysing Change 2036 is PPHF's commitment to reach millions more Indians with better health — by expanding into new geographies, deepening digital health integration, sharpening focus on equity for underserved communities, and forging new partnerships.",
+    "It builds on a decade of evidence-led work to define a more connected, technology-enabled and equity-driven path for India's health and well-being through 2036."
+  ]
+}

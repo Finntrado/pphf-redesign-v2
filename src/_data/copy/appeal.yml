@@ -1,0 +1,65 @@
+# Copy for /flood-relief-appeal-2026/ (moved out of the template so a redesign never touches the words).
+title: Flood Relief Appeal 2026
+description: Bihar Flood Relief Appeal by People to People Health Foundation (PPHF). Flood-affected families urgently need
+  relief and essential health services.
+ogImage: flood-photo-1.webp
+response:
+- Targeting flood-affected districts of Bihar, with a focus on hardest-hit areas.
+- Coordinating with district administrations, local organizations, and medical professionals to deliver emergency health camps,
+  food and nutrition kits, and hygiene and survival kits, including sanitary supplies and medical consultations and medicines
+  to provide urgent care.
+- Supporting government efforts to control post-flood disease outbreaks.
+- Providing rehabilitation and livelihood support for displaced families.
+- Continuing extended health services through periodic medical camps.
+- Setting up platforms for psychosocial counselling and community preparedness for future disasters.
+label: Urgent appeal · Bihar floods 2026
+heading: Bihar Flood Relief Appeal by People to People Health Foundation (PPHF)
+lead: Flood-affected families urgently need relief and essential health services.
+crisis:
+  title: 'The 2026 Bihar floods: a growing humanitarian crisis'
+  paras:
+  - >-
+    Severe monsoon flooding has affected communities across Bihar, disrupting homes, livelihoods, agriculture, education,
+    healthcare, water and sanitation services. Floodwaters have affected approximately <strong>48.70 lakh people across
+    15 districts</strong>, with <strong>575 Gram Panchayats across 88 blocks</strong> impacted. While floodwaters are beginning
+    to recede in parts of the state, severe riverbank erosion and potential structural failures continue to pose risks to
+    affected communities. Standing crops across approximately 1 lakh hectares have been affected, impacting around
+    <strong>35.89 lakh people across 491 Gram Panchayats</strong>.
+  - Families are facing disruptions to essential services, loss of livelihoods, damaged homes and limited access to food,
+    safe water, healthcare and basic household supplies.
+  - PPHF is closely monitoring the situation and coordinating with local partners to mobilize urgent support for the most affected.
+figures:
+- { n: "48.70 lakh", label: "people affected across 15 districts" }
+- { n: "575", label: "Gram Panchayats across 88 blocks impacted" }
+- { n: "~1 lakh ha", label: "of standing crops affected" }
+- { n: "35.89 lakh", label: "people affected by crop loss, across 491 Gram Panchayats" }
+responseTitle: PPHF's proposed response
+help:
+  title: How you can help
+  intro: 'The affected families urgently need:'
+  needs:
+  - { title: Humanitarian Aid Kits, text: Including essential supplies for daily living. }
+  - { title: Support for Health Camps, text: Contributing to ongoing medical relief efforts. }
+  text: >-
+    PPHF urgently appeals for your support to help these families in their time of need. With your partnership, we can bring
+    essential relief and healthcare to families in need. Every contribution can help provide lifesaving assistance and support
+    recovery for the most vulnerable.
+  together: Together, we can protect lives, restore dignity and help rebuild hope across Bihar.
+  contactName: Appeal desk
+  email: usiddiqui@pphfglobal.org
+  mobile: "+91 8377881415"
+  mobileHref: "+918377881415"
+about:
+  title: About PPHF
+  text: >-
+    We are a global health non-profit working to transform lives for improved health and wellbeing through locally driven
+    solutions. We have worked in more than 27 states and UTs of India, building the skills of healthcare providers and
+    strengthening management capacity for sustainable solutions to public health challenges.
+  areas: [Health System Strengthening, Non-Communicable Diseases, "Women, Adolescent and Child Health", Nutrition, Infectious Diseases, Environmental Health, Integrated Development Program, Emergency Health and Disaster Response]
+  address: E-45, Second Floor, Lajpat Nagar – III, New Delhi 110024
+past:
+  title: We have done this before
+  text: In 2025, PPHF responded to the floods, cloudbursts and landslides in Uttarakhand and Himachal Pradesh.
+  href: /uttarakhand-and-himachal-pradesh-flood-response-2025/
+  quote: We are deeply grateful for the timely support during this difficult situation (aftermath of floods). Despite the challenging conditions, the team reached our village and distributed essential relief kits to every household.
+  quoteBy: Ms. Jhakra Devi, Karliguard (Dehradun, Uttarakhand)

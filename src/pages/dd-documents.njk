@@ -1,0 +1,20 @@
+---
+layout: layouts/page.njk
+permalink: /dd-documents/
+copyKey: dd
+navSection: About
+lead: Registration, tax and CSR documents for donors, partners and due-diligence teams, all downloadable.
+---
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div>{% set docs = c.docs %}{% include "partials/doc-list.njk" %}</div>
+    <aside>
+      <p class="label">Certifications</p>
+      <ul class="certs" role="list">
+        {%- for x in site.certifications %}
+        <li><a href="{{ x.href | wp }}" target="_blank" rel="noopener"><img src="{{ x.image | img }}" alt="" loading="lazy" decoding="async"><span>{{ x.name }}</span></a></li>
+        {%- endfor %}
+      </ul>
+    </aside>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+{#- Page head. Page data: title, heading, lead, label (eyebrow), byline, crumbs [{label, href}], crumbTitle,
+    headImage, headImageAlt, headCaption, headFit ("doc" | "portrait"), headActions [{label, href, give}] -#}
+{% from "partials/thread.njk" import thread %}
+{% from "partials/icons.njk" import icon %}
+{%- set h1text = heading or title %}
+<section class="phead{% if headImage %} phead--media{% endif %}{% if h1text | length > 34 %} phead--long{% endif %}">
+  {{ thread("head", "phead__thread") }}
+  <div class="wrap phead__grid">
+    <div>
+      <nav aria-label="Breadcrumb">
+        <ol class="crumbs">
+          <li><a href="/">Home</a></li>
+          {%- for c in crumbs %}<li>{% if c.href %}<a href="{{ c.href }}">{{ c.label }}</a>{% else %}{{ c.label }}{% endif %}</li>{% endfor %}
+          <li aria-current="page">{{ crumbTitle or title }}</li>
+        </ol>
+      </nav>
+      {% if label %}<p class="label">{{ label }}</p>{% endif %}
+      <h1>{{ h1text | safe }}</h1>
+      {% if lead %}<p class="lead">{{ lead | safe }}</p>{% endif %}
+      {% if byline %}<p class="note phead__byline">{{ byline }}</p>{% endif %}
+      {%- if headActions %}
+      <div class="btn-row">{% for a in headActions %}<a class="btn {{ 'btn--give' if a.give else 'btn--line' }}" href="{{ a.href }}"{% if a.external %} target="_blank" rel="noopener"{% endif %}>{{ a.label }}{% if a.give %} {{ icon("arrow-right", "icon--go") }}{% endif %}</a>{% endfor %}</div>
+      {%- endif %}
+    </div>
+    {%- if headImage %}
+    {%- set hp = headImage | portrait if headFit == "portrait" else null %}
+    <figure class="print{% if headFit == 'doc' %} print--doc{% endif %}{% if hp %} print--portrait{% endif %}" style="--tilt: 2.2deg">
+      {%- if hp %}<img src="{{ hp }}" alt="{{ headImageAlt or '' }}" width="800" height="800" fetchpriority="high">
+      {%- elif headFit == "doc" %}<img src="{{ headImage | img }}" alt="{{ headImageAlt or '' }}" fetchpriority="high">
+      {%- else %}{% photo headImage, headImageAlt or "", "(max-width: 900px) 92vw, 440px", "", "eager", true %}{% endif %}
+      {% if headCaption %}<figcaption>{{ headCaption }}</figcaption>{% endif %}
+    </figure>
+    {%- endif %}
+  </div>
+</section>

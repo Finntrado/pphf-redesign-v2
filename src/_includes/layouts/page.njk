@@ -1,0 +1,6 @@
+---
+layout: layouts/base.njk
+---
+{% include "partials/phead.njk" %}
+{{ content | safe }}
+{%- if not noCloser %}{% include "partials/closer.njk" %}{% endif %}

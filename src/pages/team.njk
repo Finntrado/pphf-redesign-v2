@@ -1,0 +1,15 @@
+---
+layout: layouts/page.njk
+permalink: /team/
+copyKey: team
+navSection: About
+---
+<nav class="subnav" aria-label="Team sections"><div class="wrap"><ul><li><a href="#advisory-council">Advisory Council</a></li><li><a href="#board">Board Members</a></li><li><a href="#team">Team</a></li></ul></div></nav>
+{%- for grp in [["advisory-council", "Advisory Council", team.advisoryCouncil, "members", "adv"], ["board", "Board Members", team.board, "members", "board"], ["team", "Team", team.team, "people", "team"]] %}
+<section class="sec{% if loop.index == 2 %} sheet sheet--paper2{% endif %}" id="{{ grp[0] }}">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">{{ grp[2].length }} {{ grp[3] }}</p><h2>{{ grp[1] }}</h2></div>
+    {% set people = grp[2] %}{% set gid = grp[4] %}{% include "partials/person-grid.njk" %}
+  </div>
+</section>
+{%- endfor %}

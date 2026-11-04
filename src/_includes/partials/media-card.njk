@@ -1,0 +1,46 @@
+{#- Media cards — one markup family for every media type.
+    {{ mediaCard(item) }}                       image-top card (grids)
+    {{ mediaCard(item, "feature", true) }}      large lead story (eager image = LCP)
+    {{ mediaCard(item, "row") }}                compact horizontal row (lists, "latest")
+    {{ noticeRow(item) }}                       RFP / vacancy row (no image)
+    item: normalised newsroom item (src/_data/newsroom.js) -#}
+{% from "partials/icons.njk" import icon %}
+
+{%- macro mediaCard(item, variant = "", eager = false) -%}
+<article class="mcard{% if variant %} mcard--{{ variant }}{% endif %} mcard--{{ item.kind }}">
+  <div class="mcard__media">
+    {%- set sz = "(max-width: 900px) calc(100vw - 32px), 60vw" if variant == "feature" else "(max-width: 680px) calc(100vw - 32px), (max-width: 1000px) 46vw, 400px" %}
+    {%- if variant == "row" %}{% set sz = "160px" %}{% endif %}
+    {%- if item.image %}{% mediaImg item.image, sz, "", eager %}{% endif %}
+    {%- if item.kind == "event" and item.date %}
+    <span class="mcard__datebox" aria-hidden="true"><b>{{ item.date | date("day") }}</b>{{ item.date | date("mon") }}</span>
+    {%- endif %}
+    {%- if item.kind == "gallery" %}<span class="mcard__count">{{ icon("image", "icon--sm") }} {{ item.photos.length }}</span>{% endif %}
+  </div>
+  <div class="mcard__body">
+    <p class="mcard__meta">
+      <span class="mcard__kind">{{ item.kindLabel }}</span>
+      {%- if item.date %}<time datetime="{{ item.date | isoDate }}">{{ item.date | date("month" if item.kind == "gallery" else "long") }}</time>{% endif %}
+      {%- if item.readMinutes and variant != "row" %}<span>{{ item.readMinutes }} min read</span>{% endif %}
+    </p>
+    {%- set hl = "h2" if variant == "feature" else "h3" %}<{{ hl }} class="mcard__title"><a href="{{ item.url }}">{{ item.title }}</a></{{ hl }}>
+    {%- if variant != "row" and item.excerpt %}<p class="mcard__excerpt">{{ item.excerpt if variant == "feature" else (item.excerpt | truncate(150, true, "…")) }}</p>{% endif %}
+    {%- if variant == "feature" %}<span class="mcard__more" aria-hidden="true">Read the story {{ icon("arrow-right", "icon--sm") }}</span>{% endif %}
+  </div>
+</article>
+{%- endmacro -%}
+
+{%- macro noticeRow(item) -%}
+{#- Kept deliberately flat (7 elements per row) — the RFP list runs to ~100 rows. -#}
+<article class="notice notice--{{ item.kind }}" data-status="{{ item.status }}" data-cat="{{ item.category or '' }}" data-text="{{ (item.title + ' ' + (item.ref or '') + ' ' + (item.location or '') + ' ' + (item.category or '')) | lower }}">
+  {%- if item.kind == "rfp" %}<span class="notice__ref">{{ item.ref or item.category }}</span>{% else %}<span class="notice__icon" aria-hidden="true"></span>{% endif %}
+  <h3 class="notice__title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+  {%- if item.kind == "rfp" %}
+  <p class="notice__meta">{{ item.category }}{% if item.date %} · Published {{ item.date | date("short") }}{% endif %}</p>
+  <p class="notice__side"{% if item.status == "open" and item.deadline %} data-closes="{{ item.deadline }}"{% endif %}><span class="status status--{{ item.status }}">{{ item.statusLabel }}</span>{% if item.deadline %}{{ " Closes " if item.status == "open" else " Closed " }}{{ item.deadline | date("short") }}{% endif %}</p>
+  {%- else %}
+  <p class="notice__meta notice__loc">{{ item.location }} · {{ item.employment }}{% if item.positions %} · {{ item.positions }} position{{ "s" if item.positions != "1" }}{% endif %}</p>
+  <p class="notice__side"{% if item.status == "open" and item.deadline %} data-closes="{{ item.deadline }}"{% endif %}><span class="status status--{{ item.status }}">{{ item.statusLabel }}</span>{% if item.deadline %}{{ " Apply by " if item.status == "open" else " Closed " }}{{ item.deadline | date("short") }}{% endif %}</p>
+  {%- endif %}
+</article>
+{%- endmacro -%}

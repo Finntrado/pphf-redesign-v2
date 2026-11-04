@@ -1,0 +1,22 @@
+---
+# One template → every individual Media / Opportunities page (posts, events, press, gallery albums, RFPs, vacancies).
+pagination:
+  data: newsroom.items
+  size: 1
+  alias: item
+  addAllPagesToCollections: true
+permalink: "{{ item.url }}"
+layout: layouts/media-item.njk
+eleventyComputed:
+  title: "{{ item.title | safe }}"
+  seoTitle: "{{ item.title | truncate(58, true, '…') | safe }} | {{ item.section.label | safe }} | PPHF"
+  description: "{{ item.description | safe }}"
+  ogImageUrl: "{{ item.image | mediaSrc(1280) if item.image else '' }}"
+  ogImageAlt: "{{ item.image.alt | safe if item.image else '' }}"
+  publishedTime: "{{ item.date | isoDateTime if item.kind in ['news', 'press', 'event'] else '' }}"
+  modifiedTime: "{{ item.modified | isoDateTime if item.modified else '' }}"
+  preloadImage: "{{ item.image | mediaSrc(1280) if item.image and item.kind != 'gallery' else '' }}"
+  preloadSrcset: "{{ item.image | mediaSrcset if item.image else '' }}"
+  preloadSizes: "(max-width: 1240px) calc(100vw - 32px), 1240px"
+  navSection: "{{ 'Get Involved' if item.kind in ['rfp', 'vacancy'] else 'Media' }}"
+---

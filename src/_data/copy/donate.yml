@@ -1,0 +1,84 @@
+# Donate page. Anything marked todo: needs a fact from PPHF before launch (see TODO.md).
+title: Donate
+heading: Put health in <em>someone's</em> hands.
+lead: >-
+  Your gift travels person to person: through trained health workers, community volunteers and
+  local health systems, until it reaches a family that needs care.
+
+# Payment link for online giving (Razorpay / PayU / Give.do etc). Leave empty until it exists:
+# the form then falls back to an email that carries the donor's choices.
+paymentUrl: ""
+
+frequencies:
+  - { value: once, label: "Give once" }
+  - { value: monthly, label: "Give monthly" }
+
+amounts:
+  - { value: 1000, label: "1,000" }
+  - { value: 2500, label: "2,500" }
+  - { value: 5000, label: "5,000" }
+  - { value: 10000, label: "10,000" }
+  - { value: 25000, label: "25,000" }
+
+causes:
+  - { value: needed, label: "Where it's needed most" }
+  - { value: flood, label: "Bihar Flood Relief Appeal 2026" }
+  - { value: ncd, label: "Non-Communicable Diseases" }
+  - { value: nutrition, label: "Nutrition" }
+  - { value: wach, label: "Women, Adolescent and Child Health" }
+  - { value: idhw, label: "Integrated Development for Health and Wellbeing" }
+  - { value: infectious, label: "Infectious Diseases" }
+  - { value: environment, label: "Environmental Health" }
+
+formNote: >-
+  Online payments are being set up. For now, pressing the button opens an email to our team with your choices
+  filled in, and we will reply with payment details and your receipt.
+
+bank:
+  title: Bank transfer / UPI
+  text: Prefer to transfer directly? Use these details and email us your name, PAN and transaction reference for an 80G receipt.
+  rows:
+    - { k: "Account name", v: "People to People Health Foundation" }
+    - { k: "Bank & branch", todo: "Bank name and branch" }
+    - { k: "Account number", todo: "Account number" }
+    - { k: "IFSC", todo: "IFSC code" }
+    - { k: "UPI ID", todo: "UPI ID (if any)" }
+
+tax:
+  title: Tax benefit
+  text: >-
+    PPHF holds 12AA and 80G registration, so donations from Indian taxpayers are eligible for a deduction
+    under section 80G of the Income Tax Act. Share your PAN with your gift so we can issue your receipt.
+  todo: Confirm the 80G deduction rate and current validity of the certificate
+
+where:
+  title: Where your money goes
+  points:
+    - { n: "90%", text: "of funds utilised for programme implementation" }
+    - { n: "90%", text: "of funding support from private sources" }
+    - { n: "ISO", text: "9001:2015 certified, with robust M&E and partnership management" }
+
+big:
+  title: Giving as a company, foundation or institution?
+  text: >-
+    PPHF is registered to receive CSR funds (CSR-1) and has worked with 80+ partners, from co-investment models to
+    multi-state programmes. Let's design something together.
+
+faqs:
+  - q: Is PPHF a registered charity?
+    a: >-
+      Yes. People to People Health Foundation is a Section 8 company (non-profit) founded in 2016 with the Ministry of
+      Corporate Affairs, Government of India, under the Companies Act 2013. Our registration certificates are public on the
+      <a href="/dd-documents/">due-diligence documents</a> page.
+  - q: Will I get a receipt for tax?
+    a: Yes. Share your full name, address and PAN with your gift and we will send an 80G receipt.
+  - q: Can I choose what my gift supports?
+    a: >-
+      Yes: choose a cause above, or the Bihar Flood Relief Appeal. Gifts to "where it's needed most" let us respond fastest,
+      including in emergencies.
+  - q: Can I give from outside India?
+    todo: Confirm whether PPHF can accept foreign contributions (FCRA status) and how
+  - q: How do I know the money is used well?
+    a: >-
+      Read our <a href="/reports/">annual and financial reports</a>. PPHF is ISO 9001:2015 certified and graded IRR NGO 3 by
+      Fitch Solutions.

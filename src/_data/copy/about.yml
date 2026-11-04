@@ -1,0 +1,70 @@
+# Copy for /about/ (moved out of the template so a redesign never touches the words).
+title: About
+heading: The Journey of Transformation
+lead: People to People Health Foundation (PPHF) is a not-for-profit company registered under section 8 of the Company act
+  2013 in India.
+crumbs: []
+apart:
+- Technical expertise in 5+ major public health areas
+- Nearly 10 years of impact in 20+ states
+- 90% of funding support from private sources
+- 90% fund utilized for program implementation
+- Focused approach aligned with mutal interest and strategic investments
+- Co-investment models
+- Robust M&E and partnership management
+- ISO 9001:2015 Certified
+- Signature programming
+- Program Experience in Urban and Rural communities
+- Aligned with government initiatives
+- Focus on Continuum of Care Approach
+label: About us
+ceo:
+  quote: Catalysing change for wellbeing, You can't enjoy abundance of wealth if you're not in good health.
+  name: Dr. Laxmikant Palo
+  role: CEO
+  photo: laxmikant-palo.webp
+journey:
+- >-
+  Our foundation envisions a world where everyone has equal access to opportunities for better health, which is what we
+  aspire to do in a broad, enduring sense. We have endeavoured to continue to apply evidence and generate new knowledge
+  for better program impact. We remain committed to working together with our key stakeholders for better health
+  outcomes. We ensure that we continually advance and accelerate our actions so that we deliver and exceed expectations.
+- >-
+  “Catalysing change for wellbeing” inspires us to continue creating and refining our approach to influence people’s
+  health positively. It reflects our readiness to take on new public health challenges and to keep pushing the boundaries
+  of what’s possible to “transform lives for improved health and wellbeing through locally-driven solutions”. We work
+  collaboratively with stakeholders, leveraging partnerships and influencing policies and practices.
+keyAreas:
+  title: Three key areas
+  intro: >-
+    Drawing on our experiences and recognizing the unique needs of each region, PPHF works in partnership with key
+    stakeholders to design and deliver targeted responses. Our programs integrate innovative, evidence-based interventions
+    in three key areas:
+  items:
+  - Building the skills of health care workers and the capacity of the local health care system
+  - Improving access to quality services
+  - Establishing and expanding community support systems
+solutions:
+  title: Our Solutions
+  intro: 'We work closely with communities and key actors on sustainable solutions for public health challenges. Our areas of expertise include:'
+  aastha:
+    title: AASTHA secretariat
+    text: >-
+      We host the secretariate of AASTHA (Asia-Africa Supply Chain Transform Health Alliance), a multi-stakeholder alliance
+      platform of leaders by bringing partners together, fostering collaboration, leveraging technology, improving end-to-end
+      processes, and mobilizing collective strengths for sustainable health supply chain processes.
+  gender:
+    title: Gender-inclusive programming
+    text: >-
+      PPHF believes that the underlying causes of the gender gap in health service delivery can be addressed by facilitating
+      equal access to women and men in their use of preventive health care, their health behaviours, and their health care
+      and treatment. We focus on gender-inclusive approaches for better health programming in collaboration with stakeholders.
+      That is PPHF — a not-for-profit company with a proud past and a bright future to be a change agent for health and wellbeing!
+apartTitle: What Sets Us Apart?
+apartLead: PPHF develops “win-win” partnerships with a step-by-step approach by leveraging government and corporate resources for greater impact and coverage (PPP Model).
+advisory:
+  title: Meet Advisory Council
+  text: PPHF has benefited from a robust, active, and independent board of directors, as well as skilled and technical specialists, since its inception.
+  more: Meet Rest of the Mentors
+teamTitle: Meet the Team
+teamMore: Meet Rest of the Team

@@ -1,0 +1,19 @@
+{
+  "name": "pphf-site-thread",
+  "version": "1.0.0",
+  "description": "PPHF website — 'The Thread' redesign",
+  "scripts": {
+    "build": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\" && eleventy",
+    "serve": "eleventy --serve --port 8080",
+    "verify": "node scripts/verify.mjs",
+    "test": "npm run build && node scripts/verify.mjs",
+    "qa": "node -e \"require('fs').copyFileSync('scripts/qa-harness.html','_site/__qa.html')\""
+  },
+  "type": "module",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "esbuild": "^0.25.12",
+    "js-yaml": "^4.1.0"
+  },
+  "private": true
+}

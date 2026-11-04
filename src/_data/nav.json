@@ -1,0 +1,182 @@
+{
+  "main": [
+    {
+      "label": "About",
+      "intro": "Who we are, who leads us, and how we're accountable.",
+      "items": [
+        {
+          "label": "About PPHF",
+          "href": "/about/",
+          "desc": "Our journey, solutions and what sets us apart"
+        },
+        {
+          "label": "Team",
+          "href": "/team/",
+          "desc": "Advisory council, board and team"
+        },
+        {
+          "label": "Technical Capacity",
+          "href": "/technical-capacity/",
+          "desc": "Expertise we bring to every programme"
+        },
+        {
+          "label": "DD Documents",
+          "href": "/dd-documents/",
+          "desc": "Due diligence & compliance"
+        },
+        {
+          "label": "PPHF@10",
+          "href": "/a-decade-of-catalysing-change/",
+          "desc": "A decade of catalysing change"
+        }
+      ]
+    },
+    {
+      "label": "Our Work",
+      "intro": "Locally driven solutions across six thematic areas.",
+      "items": [
+        {
+          "label": "Thematic Areas",
+          "href": "/our-work/",
+          "desc": "NCDs, nutrition, WACH and more"
+        },
+        {
+          "label": "Signature Programs",
+          "href": "/signature-programs-2/",
+          "desc": "Our flagship models"
+        },
+        {
+          "label": "Ongoing Projects",
+          "href": "/ongoing-projects/",
+          "desc": "Where we're working now"
+        },
+        {
+          "label": "Past Projects",
+          "href": "/past-projects/",
+          "desc": "A decade of programmes"
+        },
+        {
+          "label": "Outreach",
+          "href": "/outreach/",
+          "desc": "Our footprint across India"
+        },
+        {
+          "label": "AASTHA",
+          "href": "/aastha/",
+          "desc": "Asia–Africa Supply Chain Transform Health Alliance"
+        },
+        {
+          "label": "DEESHA",
+          "href": "/partnership/deesha/",
+          "desc": "Action group for Type 1 Diabetes in India"
+        }
+      ]
+    },
+    {
+      "label": "Media",
+      "intro": "Reports, research and stories from the field.",
+      "items": [
+        {
+          "label": "Newsroom",
+          "href": "/media/",
+          "desc": "Everything we publish, in one place"
+        },
+        {
+          "label": "Blogs & News",
+          "href": "/blogs-and-news/",
+          "desc": "Stories and updates from the field"
+        },
+        {
+          "label": "Press",
+          "href": "/press/",
+          "desc": "PPHF in the news"
+        },
+        {
+          "label": "Events",
+          "href": "/events/",
+          "desc": "Convenings and consultations"
+        },
+        {
+          "label": "Gallery",
+          "href": "/gallery/",
+          "desc": "Photos from our work"
+        },
+        {
+          "label": "Videos",
+          "href": "/videos/",
+          "desc": "Films and stories"
+        },
+        {
+          "label": "Publications",
+          "href": "/publications/",
+          "desc": "Position papers, briefs and studies"
+        },
+        {
+          "label": "Reports",
+          "href": "/reports/",
+          "desc": "Annual, programme and financial reports"
+        }
+      ]
+    },
+    {
+      "label": "Get Involved",
+      "intro": "Give, partner, volunteer, intern or work with us.",
+      "items": [
+        {
+          "label": "Donate",
+          "href": "/donate/",
+          "desc": "Give once or every month"
+        },
+        {
+          "label": "Flood Relief Appeal 2026",
+          "href": "/flood-relief-appeal-2026/",
+          "desc": "Urgent: Bihar floods"
+        },
+        {
+          "label": "Partnership",
+          "href": "/partnership/",
+          "desc": "Collaborate with PPHF"
+        },
+        {
+          "label": "PPHF Pulse Fund",
+          "href": "/pphf-pulse-fund/",
+          "desc": "Call for proposals"
+        },
+        {
+          "label": "Internship",
+          "href": "/internship/",
+          "desc": "Learn with our teams"
+        },
+        {
+          "label": "Corporate Volunteering",
+          "href": "/pphf-corporate-volunteering-program/",
+          "desc": "Bring your skills"
+        },
+        {
+          "label": "Vacancies",
+          "href": "/vacancies/",
+          "desc": "Join our team"
+        },
+        {
+          "label": "RFP / EOI",
+          "href": "/request-for-proposal/",
+          "desc": "Tenders & procurement notices"
+        }
+      ]
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "cta": {
+    "label": "Donate",
+    "href": "/donate/"
+  },
+  "appeal": {
+    "label": "Flood Relief Appeal 2026",
+    "href": "/flood-relief-appeal-2026/",
+    "short": "Bihar floods: 48.70 lakh people affected.",
+    "long": "Families across 15 districts need relief and health care."
+  }
+}

@@ -1,0 +1,13 @@
+{#- The orange thread. JS draws it with scroll (data-thread); without JS / with reduced motion it is simply drawn.
+    {{ thread("head", "phead__thread") }} -#}
+{%- macro thread(name, cls = "", tone = "") -%}
+{%- set paths = {
+  "head": ["0 0 820 400", "M-10 320C140 300 180 150 320 170C440 188 430 300 520 290C610 280 560 160 480 190C400 220 470 330 600 300C700 278 720 140 830 120"],
+  "hero": ["0 0 900 700", "M-20 640C120 600 90 470 210 430C330 390 420 520 540 470C650 424 600 300 520 320C440 340 470 470 590 470C720 470 760 300 700 200C650 118 720 40 920 30"],
+  "closer": ["0 0 900 420", "M-10 380C160 360 220 220 360 240C480 257 470 360 560 350C650 340 610 210 530 236C450 262 510 380 650 350C760 326 800 160 910 110"],
+  "under": ["0 0 300 24", "M2 15C60 6 120 20 170 12S260 8 298 14"],
+  "flat": ["0 0 1200 120", "M-10 70C200 20 330 110 520 70C650 42 700 20 760 50C820 80 780 120 720 96C660 72 760 30 900 40C1030 50 1100 90 1210 60"]
+} %}
+{%- set p = paths[name] %}
+<svg class="thread{% if tone %} thread--{{ tone }}{% endif %} {{ cls }}" viewBox="{{ p[0] }}" fill="none" aria-hidden="true" focusable="false" data-thread preserveAspectRatio="xMidYMid meet"><path d="{{ p[1] }}" pathLength="1"/></svg>
+{%- endmacro -%}

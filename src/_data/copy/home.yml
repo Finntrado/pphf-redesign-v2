@@ -1,0 +1,201 @@
+# Homepage copy. Every figure here comes from PPHF's own published material (pphfglobal.org,
+# the Flood Relief Appeal, the About page, PPHF@10). Sections appear in this order on the page.
+
+hero:
+  note: Since 2016 · 27+ states &amp; UTs · 35.5 million lives touched
+  title: Health, passed from <em>people</em> to <em>people</em>.
+  lead: >-
+    We partner with communities, governments and companies to strengthen health systems,
+    improve access to quality care and deliver locally driven public health solutions
+    across India, from village screening camps to flood relief.
+  trust:
+    - Section 8 not-for-profit
+    - 80G tax benefit
+    - ISO 9001:2015 certified
+    - Fitch-graded NGO
+  prints:
+    - image: maternal-child-adolescent-health-1.webp
+      alt: A mother smiling with her baby in her arms
+      caption: Women, adolescent &amp; child health
+      tilt: -4deg
+    - image: screenshot-2026-03-02-125805.webp
+      alt: Health workers screening villagers at an SBI Sanjeevani Clinic on Wheels camp
+      caption: SBI Sanjeevani Clinic on Wheels
+      tilt: 3deg
+    - image: g8a5473-scaled.webp
+      alt: Women from the community gathered in a health awareness session
+      caption: A community health session
+      tilt: -1.5deg
+
+appeal:
+  label: Urgent appeal · Bihar floods 2026
+  title: Floodwaters reached 48.70 lakh people. Help us reach <em>them</em>.
+  text: >-
+    Severe monsoon flooding has disrupted homes, livelihoods, healthcare, water and sanitation across Bihar.
+    Families face damaged homes and limited access to food, safe water, healthcare and basic household supplies.
+    PPHF is coordinating with district administrations and local partners to bring relief to the most affected.
+  figures:
+    - n: "48.70 lakh"
+      label: people affected across 15 districts
+    - n: "575"
+      label: Gram Panchayats across 88 blocks impacted
+    - n: "~1 lakh ha"
+      label: of standing crops affected
+  needs:
+    - title: Humanitarian aid kits
+      text: Essential supplies for daily living.
+    - title: Support for health camps
+      text: Ongoing medical relief where it's needed most.
+  photo: flood-photo-2.webp
+  photoAlt: Families wading through floodwaters with their livestock in Bihar
+
+numbers:
+  label: Impact to date
+  title: Ten years of work you can <em>count</em>.
+  note: and counting
+  stats:
+    - { value: "35.5", suffix: "M", label: "lives touched", long: "Over 35.5 million" }
+    - { value: "80", suffix: "+", label: "partnerships", long: "Through 80+" }
+    - { value: "27", suffix: "+", label: "states &amp; UTs", long: "Across 27+" }
+    - { value: "58", suffix: "+", label: "districts", long: "More than 58" }
+  intro: >-
+    People to People Health Foundation is a Section 8 company (non-profit) founded in 2016 with the
+    Ministry of Corporate Affairs, Government of India, under the Companies Act 2013.
+  mission: Transforming lives for improved health and well-being through locally driven solutions.
+
+route:
+  label: Where your support goes
+  title: How your support travels, <em>hand to hand</em>.
+  intro: >-
+    PPHF builds "win-win" partnerships step by step, leveraging government and corporate resources
+    for greater impact and coverage (the PPP model). This is the route a rupee takes.
+  steps:
+    - who: You
+      title: A gift, a grant, a partnership
+      text: Individuals, companies and institutions fund the work. 90% of PPHF's funding comes from private sources.
+      note: you are here
+    - who: PPHF
+      title: Public &amp; private sector collaboration
+      text: >-
+        We work with government and stakeholders, leveraging partnerships, and put 90% of funds into programme
+        implementation, with robust M&amp;E and partnership management.
+    - who: The health system
+      title: Health system strengthening
+      text: >-
+        Technical support on quality public health delivery, capacity strengthening and health technology:
+        building the skills of health care workers and the capacity of the local health care system.
+    - who: The community
+      title: Community mobilisation
+      text: Establishing and expanding community support systems, so that care continues long after a programme ends.
+    - who: A person
+      title: Access to quality care
+      text: Improving access to quality services, close to home.
+      quote: When the SBIF Sanjeevani Clinic on Wheels came to our village, the doctor gave me medicines and told me what to eat and do every day. Now I feel stronger.
+      quoteBy: Mr. Baisanaba Nial, Balangir, Odisha
+    - who: And back again
+      title: Policy advocacy &amp; scaling up
+      text: >-
+        What we learn in the field becomes new knowledge through research and demonstration, then
+        advocacy for sustainable programming at scale.
+  strategy: Read PPHF Strategy 2030
+
+themes:
+  label: The causes
+  title: Six ways to <em>care</em>.
+  intro: >-
+    PPHF works closely with communities and key actors on sustainable solutions for public health challenges.
+    Choose the one that moves you.
+
+voices:
+  label: In their words
+  title: The people at the other end of the <em>thread</em>.
+  hint: Drag, swipe or use the arrows
+
+trust:
+  label: Why give through PPHF
+  title: Every rupee, <em>accounted</em> for.
+  intro: >-
+    PPHF develops "win-win" partnerships with a step-by-step approach, and it shows its working.
+    These are the commitments donors and partners hold us to.
+  ledger:
+    - { n: "90%", text: "of funding support from private sources" }
+    - { n: "90%", text: "of funds utilised for programme implementation" }
+    - { n: "20+", text: "states reached in nearly 10 years of impact" }
+    - { n: "5+", text: "major public health areas of technical expertise" }
+  apart:
+    - Focused approach aligned with mutual interest and strategic investments
+    - Co-investment models
+    - Robust M&amp;E and partnership management
+    - Signature programming
+    - Programme experience in urban and rural communities
+    - Aligned with government initiatives
+    - Focus on a continuum-of-care approach
+  stamps:
+    - { title: "80G", text: "Tax exemption for Indian donors", href: "/wp-content/uploads/03.-80G-certificate-Updated.pdf" }
+    - { title: "12AA", text: "Income-tax registration as a charitable entity", href: "/wp-content/uploads/02.-12AA-Certificate-Updated.pdf" }
+    - { title: "CSR-1", text: "Registered to receive CSR funds", href: "/wp-content/uploads/10.-CSR-1-Registration-letter.pdf" }
+    - { title: "ISO 9001", text: "2015 quality management", href: "/wp-content/uploads/2022/12/FINAL-PEOPLE-TO-PEOPLE-HEALTH-FOUNDATION-9001-QVA-1.pdf" }
+    - { title: "IRR NGO 3", text: "Fitch Solutions NGO grading", href: "/wp-content/uploads/NGO-Grading-Report_People-to-People-Health-Foundation_7th-June-2024.pdf" }
+  report:
+    label: Annual Report 2025-26
+    text: Building Healthy Communities Through Locally Driven Solutions.
+    href: /pphf-annual-report-2025-26/
+    image: phf-annual-report-2025-26.webp
+
+decade:
+  label: PPHF@10
+  title: A decade of catalysing <em>change</em>.
+  hint: Drag the timeline
+
+partners:
+  label: In good company
+  title: Partners who believe in us.
+
+give:
+  label: Ways to give
+  title: Pick up the <em>thread</em>.
+  donate:
+    title: Donate
+    text: >-
+      Give once or every month to where it's needed most, to the Bihar flood relief appeal, or to a cause you care about.
+      Donations from Indian taxpayers are eligible for 80G tax benefits.
+  rows:
+    - title: Partner with us (CSR &amp; institutions)
+      text: PPHF has been instrumental in leveraging government and private sector resources for programme implementation.
+      href: /partnership/
+    - title: Corporate volunteering
+      text: Bring your team's skills to our ongoing programmes, in the field or behind the scenes.
+      href: /pphf-corporate-volunteering-program/
+    - title: PPHF PULSE Fund
+      text: Grants and mentoring for local organisations that screen adults for common NCDs and link them to care.
+      href: /pphf-pulse-fund/
+    - title: Internships &amp; careers
+      text: Learn with our teams, or join them.
+      href: /vacancies/
+
+field:
+  label: From the field
+  title: What we've been <em>up to</em>.
+
+glance:
+  label: PPHF at a glance
+  title: Who we are.
+  vmv:
+    - title: Vision
+      text: We envision a world where everyone has equal access to opportunities for better health.
+    - title: Mission
+      text: Transforming lives for improved health and well-being through locally driven solutions.
+    - title: Values
+      text: >-
+        Stewardship to fulfil our commitment to make a positive impact. Accountability for our work and results.
+        We do more because we collaborate. We strive constantly to innovate.
+  ceo:
+    quote: Catalysing change for wellbeing. You can't enjoy abundance of wealth if you're not in good health.
+    name: Dr. Laxmikant Palo
+    role: CEO, PPHF
+    photo: laxmikant-palo.webp
+  facts:
+    - { k: "Founded", v: "2016, New Delhi" }
+    - { k: "Legal form", v: "Section 8 company (non-profit), MCA, Government of India" }
+    - { k: "Offices", v: "New Delhi (head office), Bengaluru, Bhubaneshwar, Kolkata" }
+    - { k: "Governance", v: "Independent board of directors and an advisory council" }

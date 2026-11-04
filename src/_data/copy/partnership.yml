@@ -1,0 +1,31 @@
+# Copy for /partnership/ (moved out of the template so a redesign never touches the words).
+title: Partnership
+heading: Partnership
+lead: PPHF has been instrumental in leveraging government and private sector resources for program implementation. We have
+  the capability to coordinate and deploy volunteers to any of our global health programs and contribute to the improvement
+  of the quality of health services.
+headImage: building-partnership-1.webp
+headImageAlt: PPHF and partners at a partnership signing
+crumbs:
+- label: Get Involved
+label: Get Involved
+body: >-
+  We work closely with our corporate partners to meet local needs and ensure volunteers from the private sector assist field
+  offices in delivering their health programs. We also leverage and integrate local, host nation, and state volunteers into
+  our field programs. These volunteers add additional skills and provide continuity and sustainability to the programs. PPHF
+  mobilizes private sector partnerships for volunteer support for health, technology, communication, and monitoring to
+  increase the availability and access to health services.
+contactTitle: Contact Us Here
+contactText: Let us connect and explore possible collaborations in areas of common interests and contribute to a world where everyone has equal access to opportunities for better health.
+models:
+  title: How we partner
+  items:
+  - { title: "CSR programmes", text: "PPHF is registered to receive CSR funds (CSR-1) and designs and delivers programmes with corporate partners, from co-investment models to multi-state initiatives." }
+  - { title: "Government collaboration", text: "Aligned with government initiatives: technical support, capacity building and demonstration models within public health systems." }
+  - { title: "Volunteering", text: "Corporate volunteers support programmes in health, technology, communication and monitoring." }
+partnersTitle: Partners Who Believe in Us
+involveTitle: Get Involved
+involve:
+- { title: Corporate Volunteering, text: We are inviting corporate volunteers to support the ongoing programs based on their interest areas., href: /pphf-corporate-volunteering-program/ }
+- { title: Internship, text: Internship Opportunities, href: /internship/ }
+- { title: PPHF Pulse Fund, text: PPHF PULSE Fund call for proposals., href: /pphf-pulse-fund/ }

@@ -1,0 +1,26 @@
+# Copy for /outreach/ (moved out of the template so a redesign never touches the words).
+title: Outreach
+heading: PPHF's Outreach
+crumbs:
+- label: Our Work
+  href: /our-work/
+stats:
+- pre: Over
+  value: '35.5'
+  suffix: ' million'
+  label: Lives Touched
+- pre: Through
+  value: '80'
+  suffix: +
+  label: Partnerships
+- pre: Across
+  value: '27'
+  suffix: +
+  label: States & UT's
+- pre: More Than
+  value: '58'
+  suffix: ''
+  label: Districts
+headImage: expanding-reach-1.webp
+headImageAlt: A PPHF clinic-on-wheels van at a programme site
+label: Our Work

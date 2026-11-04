@@ -1,0 +1,34 @@
+---
+layout: layouts/media-landing.njk
+title: Events
+permalink: /events/
+crumbs:
+  - { label: Media, href: /media/ }
+seoTitle: "Events — Dialogues, Dissemination Meets & Consultations | PPHF"
+description: "Convenings by People to People Health Foundation (PPHF): stakeholder dialogues, dissemination and learning meets, launches and consultations on public health in India."
+lead: "Dialogues, dissemination meets, launches and consultations — where we bring government, partners and communities to one table."
+eleventyComputed:
+  stats:
+    - { n: "{{ newsroom.events.length }}", label: "Events" }
+    - { n: "{{ newsroom.years.events | length }}", label: "Years" }
+  preloadImage: "{{ newsroom.events[0].image | mediaSrc(1280) }}"
+  preloadSrcset: "{{ newsroom.events[0].image | mediaSrcset }}"
+  preloadSizes: "(max-width: 900px) calc(100vw - 32px), 60vw"
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/media-card.njk" import mediaCard %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="lead-grid lead-grid--solo">{{ mediaCard(newsroom.events[0], "feature", true) }}</div>
+    <nav class="year-nav" aria-label="Jump to year">
+      {%- for y in newsroom.years.events %}<a href="#y{{ y }}">{{ y }}</a>{% endfor %}
+    </nav>
+    {%- for y in newsroom.years.events %}
+    <section class="timeline" id="y{{ y }}" aria-labelledby="y{{ y }}-h">
+      <h2 class="timeline__year" id="y{{ y }}-h">{{ y }}</h2>
+      <div class="pgrid pgrid--3 mgrid">{% for e in newsroom.events | where("year", y) %}{{ mediaCard(e) }}{% endfor %}</div>
+    </section>
+    {%- endfor %}
+  </div>
+</section>
+<script type="application/ld+json">{{ newsroom.events | collectionLd({ base: site.url, url: page.url, name: title, description: description, crumbs: [{ name: "Media", url: "/media/" }] }) | safe }}</script>

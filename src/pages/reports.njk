@@ -1,0 +1,82 @@
+---
+layout: layouts/media-landing.njk
+title: Reports
+permalink: /reports/
+crumbs:
+  - { label: Media, href: /media/ }
+seoTitle: "Reports — Annual, Programme & Financial Reports | PPHF"
+description: "Annual reports, programme reports and audited financial reports of People to People Health Foundation (PPHF) — how we work and how funds are used."
+lead: "Annual, programme and financial reports — how we work, what changed and how every rupee is used."
+eleventyComputed:
+  stats:
+    - { n: "{{ reports.annual.length }}", label: "Annual reports" }
+    - { n: "{{ reports.program.length }}", label: "Programme reports" }
+---
+{% from "partials/icons.njk" import icon %}
+<nav class="subnav" aria-label="Report types">
+  <div class="wrap">
+    <ul>
+      <li><a href="#annual">Annual Reports</a></li>
+      <li><a href="#program">Program Reports</a></li>
+      <li><a href="#financial">Financial Reports</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="sec" id="annual">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><h2>Annual Reports</h2></div>
+      <a class="go" href="/annual-reports/">View all Annual Reports {{ icon("arrow-right") }}</a>
+    </div>
+    {%- set latest = reports.annual[0] %}
+    <a class="report-spotlight reveal" href="/{{ latest.slug }}/">
+      {%- set cv = latest.cover | cover %}{%- set full = latest.cover | imgSize %}<span class="report-spotlight__stage"><img src="{{ latest.cover | img }}" srcset="{{ cv.srcset }}, {{ latest.cover | img }} {{ full.w }}w" sizes="(max-width: 760px) 60vw, 380px" alt="{{ latest.title }} cover" width="{{ full.w }}" height="{{ full.h }}" fetchpriority="high"></span>
+      <span class="report-spotlight__body">
+        <span class="report-spotlight__tag">Latest</span>
+        <span class="report-spotlight__title">{{ latest.title }}</span>
+        <span class="btn btn--give btn--lg">Read online {{ icon("arrow-right") }}</span>
+      </span>
+    </a>
+    <div class="pgrid pgrid--3 report-rest">
+      {%- for r in reports.annual | take(4) %}{% if not loop.first %}
+      <a class="cover reveal" href="/{{ r.slug }}/">
+        <span class="cover__img">{%- set cv = r.cover | cover %}<img src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="(max-width: 680px) 44vw, 240px"{% endif %} width="{{ cv.w }}" height="{{ cv.h }}" alt="" loading="lazy" decoding="async"></span>
+        <span class="cover__t">{{ r.title }}</span>
+        <span class="cover__a">Read online {{ icon("arrow-right", "icon--sm") }}</span>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec sheet sheet--paper2" id="program">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><h2>Program Reports</h2></div>
+      <a class="go" href="{{ reports.programAll | wp }}">View all Program Reports {{ icon("arrow-right") }}</a>
+    </div>
+    <div class="covers">
+      {%- for r in reports.program %}
+      <a class="cover reveal" href="{{ r.href | wp }}">
+        <span class="cover__img">{%- set cv = r.cover | cover %}<img src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="(max-width: 680px) 44vw, 240px"{% endif %} width="{{ cv.w }}" height="{{ cv.h }}" alt="" loading="lazy" decoding="async"></span>
+        <span class="cover__t">{{ r.title }}</span>
+        <span class="cover__a">Download Report {{ icon("arrow-up-right", "icon--sm") }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="financial">
+  <div class="wrap">
+    <div class="grid-2 grid-2--wide-left financial">
+      <div>
+        <h2>Financial Reports</h2>
+        <p class="lead">90% of funding support from private sources. 90% fund utilized for program implementation.</p>
+      </div>
+      <div>{% set docs = reports.financial %}{% include "partials/doc-list.njk" %}</div>
+    </div>
+  </div>
+</section>
+

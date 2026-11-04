@@ -1,0 +1,21 @@
+---
+layout: layouts/page.njk
+permalink: /past-projects/
+copyKey: past
+navSection: Our Work
+eleventyComputed:
+  lead: "{{ collections.projectsPast.length }} past projects across India."
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="toolbar">
+      <label hidden data-filter-select-wrap><span>Filter by state</span>
+        <select data-filter-select><option value="all">All states</option>{%- for st in collections.projectsPast | statesIn %}<option value="{{ st.key }}">{{ st.name }} ({{ st.count }})</option>{% endfor %}</select>
+      </label>
+      <p class="visually-hidden" aria-live="polite" data-filter-count></p>
+      <a class="go" href="/ongoing-projects/">Ongoing projects {{ icon("arrow-right") }}</a>
+    </div>
+    <div class="pgrid pgrid--3 pgrid--stagger" data-filter-grid>{% for p in collections.projectsPast %}{% include "partials/project-card.njk" %}{% endfor %}</div>
+  </div>
+</section>

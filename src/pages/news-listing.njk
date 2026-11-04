@@ -1,0 +1,37 @@
+---
+layout: layouts/media-landing.njk
+title: "Blogs & News"
+permalink: "/blogs-and-news/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+crumbs:
+  - { label: Media, href: /media/ }
+pagination:
+  data: newsroom.news
+  size: 12
+  alias: entries
+eleventyComputed:
+  seoTitle: "{{ 'Blogs & News' | safe }}{{ ' — Page ' + (pagination.pageNumber + 1) if pagination.pageNumber > 0 else '' }} | PPHF"
+  description: "Read the latest blogs and news from People to People Health Foundation (PPHF) — field stories, partnerships, policy dialogues and programme updates on public health in India.{{ ' Page ' + (pagination.pageNumber + 1) + '.' if pagination.pageNumber > 0 else '' }}"
+  lead: "Field stories, partnerships and policy dialogues from PPHF’s work across India."
+  stats:
+    - { n: "{{ newsroom.news.length }}", label: "{{ 'Stories' if 'news' == 'news' else 'Articles' }}" }
+    - { n: "{{ newsroom.years.news | last }}–{{ newsroom.years.news | first }}", label: "Years covered" }
+  preloadImage: "{{ entries[0].image | mediaSrc(1280) }}"
+  preloadSrcset: "{{ entries[0].image | mediaSrcset }}"
+  preloadSizes: "{{ '(max-width: 900px) calc(100vw - 32px), 60vw' if pagination.pageNumber == 0 else '(max-width: 680px) calc(100vw - 32px), (max-width: 1000px) 46vw, 400px' }}"
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/media-card.njk" import mediaCard %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    {%- if pagination.pageNumber == 0 %}
+    <div class="lead-grid lead-grid--solo">{{ mediaCard(entries[0], "feature", true) }}</div>
+    <h2 class="label">More {{ "stories" if "news" == "news" else "coverage" }}</h2>
+    <div class="pgrid pgrid--3 mgrid">{% for p in entries %}{% if not loop.first %}{{ mediaCard(p) }}{% endif %}{% endfor %}</div>
+    {%- else %}
+    <h2 class="label">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</h2>
+    <div class="pgrid pgrid--3 mgrid">{% for p in entries %}{{ mediaCard(p, "", loop.first) }}{% endfor %}</div>
+    {%- endif %}
+    {% include "partials/pager.njk" %}
+  </div>
+</section>
+<script type="application/ld+json">{{ entries | collectionLd({ base: site.url, url: page.url, name: title, description: description, crumbs: [{ name: "Media", url: "/media/" }] }) | safe }}</script>

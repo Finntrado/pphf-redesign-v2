@@ -1,0 +1,94 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "eleventy",
+  "buildCommand": "npm run build",
+  "outputDirectory": "_site",
+  "cleanUrls": false,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/Ongoing-Projects",
+      "destination": "/ongoing-projects/",
+      "permanent": true
+    },
+    {
+      "source": "/MY-HEALTH",
+      "destination": "/my-health/",
+      "permanent": true
+    },
+    {
+      "source": "/Non-Communicable-Diseases",
+      "destination": "/non-communicable-diseases/",
+      "permanent": true
+    },
+    {
+      "source": "/Nutrition",
+      "destination": "/nutrition/",
+      "permanent": true
+    },
+    {
+      "source": "/ongoing-projects/samarth-project-kolkata",
+      "destination": "/our-programs/samarth-project-kolkata/",
+      "permanent": true
+    },
+    {
+      "source": "/images-2",
+      "destination": "/gallery/",
+      "permanent": true
+    },
+    {
+      "source": "/images-2/",
+      "destination": "/gallery/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(css|js|fonts)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
+}

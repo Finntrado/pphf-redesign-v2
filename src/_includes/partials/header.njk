@@ -1,0 +1,80 @@
+{% from "partials/icons.njk" import icon %}
+{%- macro navHref(item) -%}{{ (item.href | wp) if item.wp else item.href }}{%- endmacro -%}
+{%- if page.url != nav.appeal.href %}
+<div class="ribbon">
+  <a href="{{ nav.appeal.href }}"><span class="ribbon__dot" aria-hidden="true"></span><b>Urgent</b><span>{{ nav.appeal.short }} <span class="ribbon__long">{{ nav.appeal.long }}</span></span><u>Help now</u></a>
+</div>
+{%- endif %}
+<header class="hdr" data-header>
+  <div class="wrap wrap--wide hdr__bar">
+    <a class="hdr__logo" href="/" aria-label="PPHF, People to People Health Foundation: home">
+      <img src="{{ site.logo | img }}" alt="People to People Health Foundation" width="168" height="60">
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        {%- set activeGroup = nav.main | navGroup(page.url, navSection) %}
+        {%- for group in nav.main %}
+        {%- set active = (loop.index0 == activeGroup) %}
+        {%- if group.items %}
+        <li class="nav__item">
+          <button class="nav__link{% if active %} is-active{% endif %}" type="button" aria-expanded="false" aria-controls="menu-{{ loop.index }}" data-menu-toggle>{{ group.label }} {{ icon("chevron-down") }}</button>
+          <div class="mega" id="menu-{{ loop.index }}" hidden>
+            <div class="mega__intro">
+              <p class="mega__title">{{ group.label }}</p>
+              <p>{{ group.intro }}</p>
+            </div>
+            <ul class="mega__links{% if group.items.length > 5 %} mega__links--cols{% endif %}">
+              {%- for item in group.items %}
+              <li><a href="{{ navHref(item) }}"{% if page.url == item.href %} aria-current="page"{% endif %}><span class="mega__label">{{ item.label }}</span><span class="mega__desc">{{ item.desc }}</span></a></li>
+              {%- endfor %}
+            </ul>
+          </div>
+        </li>
+        {%- else %}
+        <li class="nav__item"><a class="nav__link{% if page.url == group.href %} is-active{% endif %}" href="{{ group.href }}"{% if page.url == group.href %} aria-current="page"{% endif %}>{{ group.label }}</a></li>
+        {%- endif %}
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <div class="hdr__actions">
+      <button class="lang notranslate" translate="no" type="button" aria-pressed="false" data-lang title="Read this site in Hindi (हिन्दी)"><span class="lang__en">EN</span><span class="lang__hi" lang="hi">हिं</span><span class="visually-hidden">: switch language to Hindi</span></button>
+      <a class="btn btn--give btn--sm hdr__give" href="{{ nav.cta.href }}"{% if page.url == nav.cta.href %} aria-current="page"{% endif %}>{{ icon("heart", "icon--sm") }} {{ nav.cta.label }}</a>
+    </div>
+  </div>
+</header>
+
+<nav class="dock" aria-label="Quick actions" data-dock>
+  <a class="dock__give" href="{{ nav.cta.href }}">{{ icon("heart") }} Donate</a>
+  <button class="dock__menu" type="button" aria-expanded="false" aria-controls="drawer" data-drawer-open>{{ icon("menu") }} Menu</button>
+</nav>
+
+<div class="drawer" id="drawer" hidden data-drawer>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__grab" aria-hidden="true"></div>
+    <div class="drawer__top">
+      <a href="/" class="hdr__logo"><img src="{{ site.logo | img }}" alt="PPHF home" width="116" height="41" loading="lazy"></a>
+      <button class="drawer__close" type="button" data-drawer-close>{{ icon("close") }}<span class="visually-hidden">Close menu</span></button>
+    </div>
+    <ul class="drawer__list">
+      {%- for group in nav.main %}
+      {%- if group.items %}
+      <li>
+        <details class="drawer__group">
+          <summary>{{ group.label }} {{ icon("plus") }}</summary>
+          <ul>{% for item in group.items %}<li><a href="{{ navHref(item) }}">{{ item.label }}</a></li>{% endfor %}</ul>
+        </details>
+      </li>
+      {%- else %}
+      <li><a class="drawer__single" href="{{ group.href }}">{{ group.label }} {{ icon("arrow-right") }}</a></li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+    <div class="drawer__foot">
+      <a class="btn btn--give btn--lg btn--block" href="{{ nav.cta.href }}">{{ icon("heart") }} Donate to PPHF</a>
+      <a class="btn btn--line btn--block" href="{{ nav.appeal.href }}">{{ nav.appeal.label }}</a>
+      <p class="drawer__contact"><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a> · <a href="tel:{{ site.contact.phoneHref }}">{{ site.contact.phone }}</a></p>
+    </div>
+  </div>
+</div>

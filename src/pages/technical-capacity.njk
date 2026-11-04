@@ -1,0 +1,16 @@
+---
+layout: layouts/page.njk
+permalink: /technical-capacity/
+copyKey: capacity
+navSection: About
+---
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--center">
+    <figure class="print" style="--tilt: -2deg">{% photo c.photo, c.photoAlt, "(max-width: 900px) 92vw, 520px" %}<figcaption>{{ c.photoAlt }}</figcaption></figure>
+    <ol class="caps" role="list">
+      {%- for k in c.capacities %}
+      <li class="reveal" style="--d: {{ loop.index0 * 0.06 }}s"><span class="caps__n">{{ "0" + loop.index }}</span><div><h2 class="h3">{{ k.title }}</h2><p>{{ k.text }}</p></div></li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>

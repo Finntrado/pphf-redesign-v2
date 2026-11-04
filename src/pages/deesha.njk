@@ -1,0 +1,56 @@
+---
+layout: layouts/page.njk
+permalink: /partnership/deesha/
+copyKey: deesha
+navSection: Our Work
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div class="prose">
+      <h2>{{ c.context.title }}</h2>
+      {% for p in c.context.paras %}<p>{{ p }}</p>{% endfor %}
+      <ol class="nlist">{% for x in c.consensus %}<li>{{ x }}</li>{% endfor %}</ol>
+    </div>
+    <div><button class="video" type="button" data-yt="{{ c.video.id }}" aria-label="Play video: {{ c.video.title }}"><img src="https://i.ytimg.com/vi/{{ c.video.id }}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="video__play">{{ icon("play") }}</span></button></div>
+  </div>
+</section>
+<section class="sec sheet sheet--rose">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Why it exists</p><h2>{{ c.purposeTitle }}</h2></div>
+    <ul class="checks checks--2" role="list" style="margin-top:0" data-clamp="420">{% for p in c.purpose %}<li>{{ icon("check") }}<span>{{ p }}</span></li>{% endfor %}</ul>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Roadmap</p><h2>{{ c.phasesTitle }}</h2></div>
+    <div class="roadmap">
+      {%- for ph in c.phases %}
+      <div class="roadmap__group">
+        <h3 class="roadmap__label">{{ ph.group }}</h3>
+        {%- for per in ph.periods %}
+        <div class="roadmap__phase reveal"><p class="roadmap__when">{{ per.when }}</p><ol class="nlist" data-clamp="220">{% for it in per.items %}<li>{{ it }}</li>{% endfor %}</ol></div>
+        {%- endfor %}
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Structure</p><h2>{{ c.modelTitle }}</h2></div>
+    <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Structure</th><th scope="col">Composition</th><th scope="col">Key Functions</th></tr></thead><tbody>{% for m in c.model %}<tr><th scope="row">{{ m.structure }}</th><td data-label="Composition">{{ m.composition }}</td><td data-label="Key Functions">{{ m.functions }}</td></tr>{% endfor %}</tbody></table></div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div><h2>{{ c.secretariatTitle }}</h2><ol class="nlist" style="margin-top:20px">{% for r in c.secretariat %}<li>{{ r }}</li>{% endfor %}</ol></div>
+    <aside class="card card--night"><h3>{{ c.connect }}</h3><p><a href="mailto:{{ c.email }}">{{ c.email }}</a></p><div class="btn-row"><a class="btn btn--give" href="{{ c.ppt | wp }}">Download DEESHA Overview (PPT) {{ icon("download", "icon--sm") }}</a></div></aside>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><h2>{{ c.docsTitle }}</h2></div><a class="go" href="/publications/">All publications {{ icon("arrow-right") }}</a></div>
+    <div class="covers">{% for d in c.docs %}<a class="cover" href="{{ d.href | wp }}" target="_blank" rel="noopener"><span class="cover__img"><img src="{{ d.cover | img }}" alt="" loading="lazy" decoding="async"></span><span class="cover__t">{{ d.title }}</span><span class="cover__a">Download {{ icon("download", "icon--sm") }}</span></a>{% endfor %}</div>
+  </div>
+</section>

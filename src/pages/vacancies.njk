@@ -1,0 +1,53 @@
+---
+layout: layouts/media-landing.njk
+title: Vacancies
+heading: Work with PPHF
+crumbTitle: Vacancies
+permalink: /vacancies/
+mediaGroup: opportunities
+crumbs:
+  - { label: Get Involved, href: /partnership/ }
+seoTitle: "Vacancies — Public Health Jobs at PPHF | PPHF"
+description: "Current vacancies at People to People Health Foundation (PPHF): programme, field, medical, communications and operations roles across India. Equal-opportunity employer."
+lead: "We look for motivated people who want to improve health and wellbeing for underserved communities. PPHF is an equal-opportunity employer."
+ctaTitle: "Didn’t find the right role?"
+ctaText: "Send your CV and a short note about the work you’d like to do to connect@pphfglobal.org — we keep strong profiles on file for future openings."
+eleventyComputed:
+  stats:
+    - { n: "{{ newsroom.vacancyOpen }}", label: "Open now" }
+    - { n: "{{ newsroom.vacancies.length }}", label: "Roles listed" }
+    - { n: "{{ newsroom.vacancyLocations.length }}", label: "Locations" }
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/media-card.njk" import noticeRow %}
+<section class="sec sec--sm">
+  <div class="wrap listing" data-listing>
+    <aside class="apply-box">
+      <h2>How to apply</h2>
+      <ol class="apply-steps">
+        <li><b>Pick a role</b> and read the full description.</li>
+        <li><b>Prepare</b> your CV (Word or PDF, up to 500 KB) and a statement of purpose — why you want to join PPHF — in up to 500 words.</li>
+        <li><b>Email</b> both to the address given in the role (usually <a href="mailto:career@pphfglobal.org">career@pphfglobal.org</a>) before its last date, with the role and location in the subject line.</li>
+      </ol>
+    </aside>
+    {%- if newsroom.vacancyOpen == 0 %}
+    <p class="notice-banner notice-banner--closed"><strong>No positions are open right now.</strong> Past roles stay listed below for reference; new openings are published here first.</p>
+    {%- endif %}
+    <div class="listing__tools" data-listing-tools hidden>
+      <div class="chips" role="group" aria-label="Filter by status">
+        <button type="button" class="chip" data-listing-filter="status" data-value="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-listing-filter="status" data-value="open" aria-pressed="false">Open ({{ newsroom.vacancyOpen }})</button>
+        <button type="button" class="chip" data-listing-filter="status" data-value="closed" aria-pressed="false">Closed</button>
+      </div>
+      <label class="search">
+        {{ icon("search", "icon--sm") }}<span class="visually-hidden">Search roles</span>
+        <input type="search" placeholder="Search by role or location" data-listing-search autocomplete="off">
+      </label>
+    </div>
+    <h2 class="visually-hidden">Open roles</h2>
+    <p class="listing__count" aria-live="polite" data-listing-count>{{ newsroom.vacancies.length }} roles</p>
+    <div class="notices" data-listing-items>{% for v in newsroom.vacancies %}{{ noticeRow(v) }}{% endfor %}</div>
+    <p class="listing__empty" data-listing-empty hidden>No roles match your search. Try another word, or write to us at <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>.</p>
+  </div>
+</section>
+<script type="application/ld+json">{{ newsroom.vacancies | collectionLd({ base: site.url, url: page.url, name: "Vacancies at PPHF", description: description, crumbs: [{ name: "Get Involved", url: "/partnership/" }] }) | safe }}</script>

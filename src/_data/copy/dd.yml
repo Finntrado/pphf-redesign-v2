@@ -1,0 +1,18 @@
+# Copy for /dd-documents/ (moved out of the template so a redesign never touches the words).
+title: DD Documents
+heading: Due Diligence/Compliance Documents
+crumbs:
+- label: About
+  href: /about/
+docs:
+- title: Certificate of Incorporation
+  href: /wp-content/uploads/01.-Certificate-of-Incorporation.pdf
+- title: CSR-1 Registration letter
+  href: /wp-content/uploads/10.-CSR-1-Registration-letter.pdf
+- title: PAN PPHF
+  href: /wp-content/uploads/06.-PAN-PPHF.pdf
+- title: 12AA Certificate
+  href: /wp-content/uploads/02.-12AA-Certificate-Updated.pdf
+- title: 80G certificate
+  href: /wp-content/uploads/03.-80G-certificate-Updated.pdf
+label: About PPHF

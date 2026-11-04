@@ -1,0 +1,28 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Netlify / Cloudflare Pages redirect rules (generated — edit src/pages/redirects.njk)
+# Legacy mixed-case and moved permalinks from the WordPress site
+/Ongoing-Projects/  /ongoing-projects/  301
+/Ongoing-Projects  /ongoing-projects/  301
+/MY-HEALTH/  /my-health/  301
+/MY-HEALTH  /my-health/  301
+/Non-Communicable-Diseases/  /non-communicable-diseases/  301
+/Nutrition/  /nutrition/  301
+/ongoing-projects/samarth-project-kolkata/  /our-programs/samarth-project-kolkata/  301
+/%E0%A4%AE%E0%A4%AE%E0%A4%A4%E0%A5%8D%E0%A4%B5-mamatv/  /mamatv/  301
+/ममत्व-mamatv/  /mamatv/  301
+/technical-capacity  /technical-capacity/  301
+/reports  /reports/  301
+/press  /press/  301
+/vacancies  /vacancies/  301
+/images-2/  /gallery/  301
+/images-2  /gallery/  301
+/gallery  /gallery/  301
+/blogs-and-news/page/1/  /blogs-and-news/  301
+{%- if site.wpBase != site.url %}
+# Phase 2: WordPress lives at {{ site.wpBase }} — send everything that isn't a static page there.
+/wp-content/*  {{ "/wp-content/:splat" | wp }}  302
+/*  {{ "/:splat" | wp }}  302
+{%- endif %}

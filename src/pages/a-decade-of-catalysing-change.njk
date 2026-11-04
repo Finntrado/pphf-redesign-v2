@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+permalink: /a-decade-of-catalysing-change/
+copyKey: decadepage
+navSection: About
+crumbs: []
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/thread.njk" import thread %}
+<section class="ahero sheet night dhero">
+  {{ thread("hero", "dhero__thread") }}
+  <div class="wrap ahero__grid">
+    <div>
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">PPHF@10</li></ol></nav>
+      <p class="note">{{ c.label }}</p>
+      <h1>{{ c.heading | safe }}</h1>
+      <p class="lead">{{ decade.intro }}</p>
+      <div class="btn-row"><a class="btn btn--give btn--lg" href="#timeline">Explore Our Journey {{ icon("arrow-right", "icon--go") }}</a><a class="btn btn--line btn--lg" href="#strategy2036">Discover Strategy 2036</a></div>
+    </div>
+    <div class="dhero__logo"><img src="{{ 'pphf-10-years-2.png' | img }}" alt="PPHF 10 Year Anniversary Logo" width="640" height="640"></div>
+  </div>
+</section>
+<section class="sec sec--sm">
+  <div class="wrap">
+    <dl class="ledger">
+      {%- for s in copy.home.numbers.stats %}<div class="ledger__row reveal"><dt>{{ s.long }} {{ s.label | safe }}</dt><dd aria-hidden="true"><span class="ledger__n"><span data-count="{{ s.value }}">{{ s.value }}</span>{{ s.suffix }}</span><span class="ledger__l">{{ s.label | safe }}</span></dd></div>{% endfor %}
+    </dl>
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap grid-2 grid-2--center">
+    {%- set cp = 'laxmikant-palo.webp' | portrait %}
+    <figure class="print print--portrait" style="--tilt: -2deg">{% if cp %}<img src="{{ cp }}" alt="Dr. Laxmikant Palo" loading="lazy" width="800" height="800">{% endif %}<figcaption>{{ c.ceoSign }}, CEO</figcaption></figure>
+    <div>
+      <p class="label">{{ c.ceoSub }}</p>
+      <h2>{{ c.ceoTitle }}</h2>
+      <div class="prose" style="margin-top:20px">{% for p in decade.ceo %}<p>{{ p }}</p>{% endfor %}</div>
+      <p class="note" style="margin-top:18px">{{ c.ceoSign }}, CEO, PPHF</p>
+    </div>
+  </div>
+</section>
+<section class="sec decade sheet night" id="timeline">
+  <div class="wrap"><div class="sec-head"><p class="label">2016 — 2025</p><h2>{{ c.timelineTitle }}</h2><p>{{ c.timelineSub }}</p></div></div>
+  <div class="tl" tabindex="0" aria-label="Timeline 2016 to 2025, scrollable" data-drag>
+    <ol class="tl__track" role="list">{% for t in decade.timeline %}<li class="tl__item"><span class="tl__year">{{ t.year }}</span><h3>{{ t.title }}</h3><p>{{ t.text }}</p></li>{% endfor %}</ol>
+  </div>
+  <div class="wrap"><p class="note tl__hint">Drag the timeline →</p></div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">{{ c.milestonesSub }}</p><h2>{{ c.milestonesTitle }}</h2><p>{{ c.milestonesText }}</p></div>
+    <div class="pgrid pgrid--3 pgrid--stagger">{% for m in decade.milestones %}<div class="pcard reveal"><span class="pcard__img">{% photo m.image, m.title, "(max-width: 640px) 92vw, 360px" %}</span><span class="pcard__title">{{ m.title }}</span><span class="pcard__text">{{ m.text }}</span></div>{% endfor %}</div>
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Focus areas</p><h2>{{ c.focusTitle }}</h2><p>{{ c.focusText }}</p></div>
+    <ol class="tindex" role="list">{% for f in decade.focus %}<li><a class="tindex__row" href="{{ f.href }}"><span class="tindex__n">{{ "0" + loop.index }}</span><span class="tindex__thumb">{% photo f.image, "", "96px" %}</span><span class="tindex__title">{{ f.title }}</span><span class="tindex__text">{{ f.text }}</span><span class="tindex__go">{{ icon("arrow-right") }}</span></a></li>{% endfor %}</ol>
+  </div>
+</section>
+<section class="sec" id="strategy2036">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div><p class="label">{{ c.nextSub }}</p><h2>{{ c.nextTitle }}</h2><div class="prose" style="margin-top:20px">{% for p in decade.next %}<p>{{ p }}</p>{% endfor %}</div></div>
+    <blockquote class="pull"><p>{{ c.nextQuote }}</p></blockquote>
+  </div>
+</section>
+{% include "partials/closer.njk" %}

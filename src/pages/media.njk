@@ -1,0 +1,101 @@
+---
+layout: layouts/media-landing.njk
+title: Media & Newsroom
+crumbTitle: Media
+heading: Newsroom
+permalink: /media/
+seoTitle: "Media & Newsroom — Stories, Press, Events, Reports | PPHF"
+description: "News, press coverage, events, photo galleries, videos, publications and reports from People to People Health Foundation (PPHF) — public health work across India."
+lead: "Stories from the field, PPHF in the news, convenings, photographs, films and the research behind our programmes — all in one place."
+eleventyComputed:
+  stats:
+    - { n: "{{ newsroom.news.length }}", label: "Stories" }
+    - { n: "{{ newsroom.press.length }}", label: "Press mentions" }
+    - { n: "{{ newsroom.events.length }}", label: "Events" }
+    - { n: "{{ newsroom.photoCount }}", label: "Photographs" }
+  preloadImage: "{{ newsroom.news[0].image | mediaSrc(1280) }}"
+  preloadSrcset: "{{ newsroom.news[0].image | mediaSrcset }}"
+  preloadSizes: "(max-width: 900px) calc(100vw - 32px), 60vw"
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/media-card.njk" import mediaCard %}
+{%- set lead = newsroom.news[0] %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="lead-grid">
+      {{ mediaCard(lead, "feature", true) }}
+      <div class="lead-grid__list">
+        <h2 class="label">Latest</h2>
+        {%- for p in newsroom.posts | take(6) %}{% if p.url != lead.url %}{{ mediaCard(p, "row") }}{% endif %}{% endfor %}
+        <a class="go" href="/blogs-and-news/">All stories {{ icon("arrow-right") }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sheet sheet--paper2" aria-labelledby="explore-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><h2 id="explore-h">Explore the newsroom</h2><p>Every format we publish in, from field stories to financial reports.</p></div></div>
+    {%- set tiles = [
+      { label: "Blogs & News", href: "/blogs-and-news/", n: newsroom.news.length, unit: "stories", icon: "newspaper", img: newsroom.news[1].image, tint: "navy" },
+      { label: "Press", href: "/press/", n: newsroom.press.length, unit: "mentions", icon: "megaphone", img: newsroom.press[2].image, tint: "orange" },
+      { label: "Events", href: "/events/", n: newsroom.events.length, unit: "convenings", icon: "calendar", img: newsroom.events[0].image, tint: "green" },
+      { label: "Gallery", href: "/gallery/", n: newsroom.photoCount, unit: "photographs", icon: "image", img: newsroom.gallery[0].image, tint: "magenta" },
+      { label: "Videos", href: "/videos/", n: videos.length, unit: "films", icon: "youtube", yt: videos[0].id, tint: "navy" },
+      { label: "Publications", href: "/publications/", n: publications.length, unit: "papers & briefs", icon: "file", cover: publications[0].cover, tint: "green" },
+      { label: "Reports", href: "/reports/", n: reports.annual.length + reports.program.length, unit: "reports", icon: "file", cover: reports.annual[0].cover, tint: "orange" }
+    ] %}
+    <ul class="tiles">
+      {%- for t in tiles %}
+      <li class="tile tile--{{ t.tint }}">
+        <a href="{{ t.href }}">
+          <span class="tile__media" aria-hidden="true">
+            {%- if t.img %}{% mediaImg t.img, "(max-width: 680px) 50vw, 300px", "" %}
+            {%- elif t.yt %}<img src="/assets/img/yt/{{ t.yt }}-320.webp" srcset="/assets/img/yt/{{ t.yt }}-320.webp 320w, /assets/img/yt/{{ t.yt }}-640.webp 640w" sizes="(max-width: 900px) 46vw, 300px" alt="" width="640" height="360" loading="lazy" decoding="async">
+            {%- elif t.cover %}{%- set cv = t.cover | cover %}<img class="tile__cover" src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="140px"{% endif %} alt="" width="{{ cv.w }}" height="{{ cv.h }}" loading="lazy" decoding="async">{% endif %}
+          </span>
+          <span class="tile__body">
+            <span class="tile__icon">{{ icon(t.icon) }}</span>
+            <span class="tile__label">{{ t.label }}</span>
+            <span class="tile__n"><b>{{ t.n }}</b> {{ t.unit }}</span>
+          </span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="press-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><h2 id="press-h">PPHF in the news</h2></div><a class="go" href="/press/">All press {{ icon("arrow-right") }}</a></div>
+    <div class="pgrid pgrid--3 mgrid">{% for p in newsroom.press | take(3) %}{{ mediaCard(p) }}{% endfor %}</div>
+  </div>
+</section>
+
+<section class="sec sheet sheet--paper2" aria-labelledby="gal-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><h2 id="gal-h">From the field</h2><p>Photo albums from our programmes and convenings.</p></div><a class="go" href="/gallery/">Open the gallery {{ icon("arrow-right") }}</a></div>
+    <div class="pgrid pgrid--3 mgrid">{% for a in newsroom.gallery | take(3) %}{{ mediaCard(a) }}{% endfor %}</div>
+  </div>
+</section>
+
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="opps">
+      <a class="opps__card" href="/request-for-proposal/">
+        <span class="label">Opportunities</span>
+        <span class="opps__title">RFP, RFQ &amp; EOI notices</span>
+        <span class="opps__text">{{ newsroom.rfps.length }} procurement notices, published openly — {{ newsroom.rfpOpen }} open now.</span>
+        <span class="go">View notices {{ icon("arrow-right") }}</span>
+      </a>
+      <a class="opps__card opps__card--green" href="/vacancies/">
+        <span class="label">Careers</span>
+        <span class="opps__title">Work with PPHF</span>
+        <span class="opps__text">{{ newsroom.vacancyOpen }} open position{{ '' if newsroom.vacancyOpen == 1 else 's' }} now — programmes, operations and communications.</span>
+        <span class="go">See vacancies {{ icon("arrow-right") }}</span>
+      </a>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json">{{ newsroom.posts | take(12) | collectionLd({ base: site.url, url: page.url, name: "PPHF Newsroom", description: description }) | safe }}</script>

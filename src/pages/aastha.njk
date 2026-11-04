@@ -1,0 +1,42 @@
+---
+layout: layouts/page.njk
+permalink: /aastha/
+copyKey: aastha
+navSection: Our Work
+---
+<section class="sec sec--sm">
+  <div class="wrap grid-2 grid-2--wide-left grid-2--center">
+    <div><h2>{{ c.initiativesTitle }}</h2><ol class="nlist" style="margin-top:20px">{% for i in c.initiatives %}<li>{{ i }}</li>{% endfor %}</ol></div>
+    <img class="rounded" src="{{ 'y-2048x531.webp' | img }}" alt="Unseen workers: ASHAs, sanitation workers and truck drivers" loading="lazy">
+  </div>
+</section>
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Leadership</p><h2>{{ c.councilTitle }}</h2></div>
+    {% set people = c.council %}{% set gid = "aastha" %}{% include "partials/person-grid.njk" %}
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap grid-2 grid-2--center">
+    <div><h2>{{ c.unhu.title }}</h2><h3 style="margin-top:18px">{{ c.unhu.subtitle }}</h3><p class="lead" style="margin-top:14px">{{ c.unhu.lead }}</p><p style="margin-top:12px">{{ c.unhu.text }}</p></div>
+    <figure class="print" style="--tilt: 2deg">{% photo "z.webp", "Two women smiling and lifting a baby", "(max-width: 900px) 92vw, 520px" %}</figure>
+  </div>
+</section>
+<section class="sec sheet sheet--leaf">
+  <div class="wrap">
+    <div class="grid-2">
+      <div class="card card--night"><h3>{{ c.missionTitle }}</h3><ul class="clist" role="list" style="margin-top:16px">{% for m in c.mission %}<li>{{ m }}</li>{% endfor %}</ul></div>
+      <div class="card"><h3>{{ c.needsTitle }}</h3><ul class="clist" role="list" style="margin-top:16px">{% for n in c.needs %}<li>{{ n }}</li>{% endfor %}</ul></div>
+    </div>
+    <div class="grid-2 grid-2--center" style="margin-top:48px">
+      <img class="rounded" src="{{ 'zx.webp' | img }}" alt="Unseen workers' unmet needs: Dignity and Respect; Social and Family Security; Basic Life Facilities; Safety of Life on Road" loading="lazy">
+      <div><h2 class="h3">{{ c.goalsTitle }}</h2><ul class="pills" role="list" style="margin-top:18px">{% for g in c.goals %}<li>{{ g }}</li>{% endfor %}</ul></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap pair">
+    <figure class="print" style="--tilt: -1.5deg">{% photo "xz.webp", "A health worker administering a vaccine", "(max-width: 900px) 92vw, 520px" %}</figure>
+    <figure class="print" style="--tilt: 2deg">{% photo "zxc.webp", "A field worker speaking with a farmer", "(max-width: 900px) 92vw, 520px" %}</figure>
+  </div>
+</section>

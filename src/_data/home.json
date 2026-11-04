@@ -1,0 +1,61 @@
+{
+  "hero": {
+    "eyebrow": "People to People Health Foundation",
+    "title": "Catalysing change for wellbeing",
+    "lead": "Transforming lives for improved health and well-being through locally driven solutions.",
+    "image": "g8a5473-scaled.webp",
+    "imageAlt": "Women from the community gathered in a health awareness session",
+    "badgeImage": "maternal-child-adolescent-health-1.webp"
+  },
+  "highlights": [
+    { "label": "Appeal", "title": "Flood Relief Appeal 2026", "text": "Flood-affected families urgently need relief and essential health services.", "href": "/flood-relief-appeal-2026/", "image": "flood-photo-1.webp", "alt": "Aerial view of flooded homes in Bihar", "tone": "orange" },
+    { "label": "Report", "title": "Annual Report 2025-26", "text": "Building Healthy Communities Through Locally Driven Solutions.", "href": "/pphf-annual-report-2025-26/", "image": "phf-annual-report-2025-26.webp", "alt": "PPHF Annual Report 2025-26 cover", "tone": "navy" },
+    { "label": "PPHF@10", "title": "A Decade of Catalysing Change", "text": "For ten years, we've worked alongside communities, governments and partners to strengthen health systems.", "href": "/a-decade-of-catalysing-change/", "image": "a-decade-catalysing-change.webp", "alt": "PPHF 10 years — A Decade of Catalysing Change", "tone": "magenta" },
+    { "label": "Strategy", "title": "PPHF Strategy 2030", "text": "Catalyzing change for well-being.", "href": "/wp-content/uploads/PPHF-Strategy-2030.pdf", "wp": true, "image": "strategy-2030-pphf.webp", "alt": "Strategy 2030 — Catalyzing change for well-being", "tone": "green" }
+  ],
+  "intro": "People to People Health Foundation is a Section 8 company (Non-Profit) founded in the year 2016, with the Ministry of Corporate Affairs (MCA), GOI, under the Companies Act 2013.",
+  "stats": [
+    { "pre": "Over", "value": "35.5", "suffix": " million", "label": "Lives Touched" },
+    { "pre": "Through", "value": "80", "suffix": "+", "label": "Partnerships" },
+    { "pre": "Across", "value": "27", "suffix": "+", "label": "States & UT's" }
+  ],
+  "vmv": [
+    { "title": "Vision", "text": "We envision a world where everyone has equal access to opportunities for better health.", "tone": "navy" },
+    { "title": "Mission", "text": "Transforming lives for improved health and well-being through locally driven solutions.", "tone": "green" },
+    { "title": "Values", "text": "Stewardship to fulfill our commitment to make a positive impact. Accountability for our work and results. We do more because we collaborate. We strive constantly to innovate", "tone": "magenta" }
+  ],
+  "approach": [
+    { "title": "Health System Strengthening & Community Mobilization", "text": "Providing technical support on quality public health delivery, capacity strengthening and health technology.", "icon": "s.webp" },
+    { "title": "Public & Private Sector Collaboration", "text": "Working in collaboration with stakeholder and leveraging partnerships.", "icon": "partnership.png" },
+    { "title": "Policy Advocacy & Scaling up", "text": "Generating new knowledge through research & demonstration for sustainable programming and advocacy for scaling up.", "icon": "s2.webp" }
+  ],
+  "thematicIntro": "People to People Health Foundation (PPHF) works closely with communities and key actors on sustainable solutions for public health challenges. Our area of expertise include :",
+  "inFocus": [
+    {
+      "title": "Rare Diseases in India: Charting the Path Forward",
+      "date": "September 8, 2026",
+      "category": "Blog",
+      "excerpt": "People to People Health Foundation (PPHF) convened a multi-stakeholder development dialogue in New Delhi on September 08, 2026, bringing together policymakers, clinicians, industry leaders, development partners, and healthcare institutions to address key challenges in rare disease care.",
+      "href": "/rare-diseases-in-india-charting-the-path-forward/",
+      "image": "blog-and-news-photo.webp"
+    },
+    {
+      "title": "From Partnerships to Frontline Impact",
+      "date": "August 17, 2026",
+      "category": "Blog",
+      "excerpt": "Our CSR partner GE HealthCare India recently welcomed us to Raichur, Karnataka, for a field visit that brought together government leaders, healthcare professionals and community ...",
+      "href": "/from-partnerships-to-frontline-impact/",
+      "image": "blog-and-news-1.webp"
+    },
+    {
+      "title": "Building Partnerships to Strengthen the Healthcare System",
+      "date": "August 7, 2026",
+      "category": "Blog",
+      "excerpt": "The People to People Health Foundation (PPHF) team recently met with Dr. Anil Bonde, Honourable MP and Chairperson of the Indian Medical Parliamentarians Forum, to ...",
+      "href": "/building-partnerships-to-strengthen-the-healthcare-system/",
+      "image": "blog-and-news-3.webp"
+    }
+  ],
+  "videos": ["pTRzNPZyI8Q", "kfjOcFOIHNQ", "wIsECVWSNCc", "6mEgfain5xY", "boJoL-re5W8", "BtyyXpeWdyA"],
+  "partnersIntro": "We work with companies, governments, non-profits, and diverse organizations to improve the health and well-being of people through locally driven solutions. Our partners share our values and help us accomplish our mission to have an effective impact on people’s health."
+}

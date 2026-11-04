@@ -1,0 +1,51 @@
+---
+layout: layouts/media-landing.njk
+title: "Request for Proposals (RFP) & EOI"
+crumbTitle: RFP / EOI
+permalink: /request-for-proposal/
+mediaGroup: opportunities
+crumbs:
+  - { label: Get Involved, href: /partnership/ }
+seoTitle: "RFP, RFQ & EOI — Tenders and Procurement Notices | PPHF"
+description: "Active and past tenders from People to People Health Foundation (PPHF): requests for proposals, quotations, applications and expressions of interest for works, supplies and consultancies."
+lead: "Tenders, quotations and expressions of interest for works, supplies and consultancies. Every notice is published openly — read the full notice and download the documents before you submit."
+ctaTitle: "Work with PPHF as a vendor or consultant"
+ctaText: "Questions about a notice? Write to procurement@pphfglobal.org and quote the reference number."
+eleventyComputed:
+  stats:
+    - { n: "{{ newsroom.rfpOpen }}", label: "Open now" }
+    - { n: "{{ newsroom.rfps.length }}", label: "Notices published" }
+    - { n: "{{ newsroom.rfpCategories.length }}", label: "Categories" }
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/media-card.njk" import noticeRow %}
+<section class="sec sec--sm">
+  <div class="wrap listing" data-listing>
+    {%- if newsroom.rfpOpen == 0 %}
+    <p class="notice-banner notice-banner--closed"><strong>No notices are open right now.</strong> Past notices stay listed below for transparency. New ones are published here first.</p>
+    {%- endif %}
+    <div class="listing__tools" data-listing-tools hidden>
+      <div class="chips" role="group" aria-label="Filter by status">
+        <button type="button" class="chip" data-listing-filter="status" data-value="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-listing-filter="status" data-value="open" aria-pressed="false">Open</button>
+        <button type="button" class="chip" data-listing-filter="status" data-value="closed" aria-pressed="false">Closed</button>
+      </div>
+      <label class="select">
+        <span class="visually-hidden">Category</span>
+        <select data-listing-select="cat">
+          <option value="all">All categories</option>
+          {%- for c in newsroom.rfpCategories %}<option value="{{ c.name }}">{{ c.name }} ({{ c.n }})</option>{% endfor %}
+        </select>
+      </label>
+      <label class="search">
+        {{ icon("search", "icon--sm") }}<span class="visually-hidden">Search notices</span>
+        <input type="search" placeholder="Search by title, place or reference" data-listing-search autocomplete="off">
+      </label>
+    </div>
+    <h2 class="visually-hidden">All notices</h2>
+    <p class="listing__count" aria-live="polite" data-listing-count>{{ newsroom.rfps.length }} notices</p>
+    <div class="notices" data-listing-items>{% for r in newsroom.rfps %}{{ noticeRow(r) }}{% endfor %}</div>
+    <p class="listing__empty" data-listing-empty hidden>No notices match these filters.</p>
+  </div>
+</section>
+<script type="application/ld+json">{{ newsroom.rfps | collectionLd({ base: site.url, url: page.url, name: "PPHF procurement notices", description: description, crumbs: [{ name: "Get Involved", url: "/partnership/" }] }) | safe }}</script>

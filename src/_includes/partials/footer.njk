@@ -1,0 +1,43 @@
+{% from "partials/icons.njk" import icon %}
+<footer class="foot sheet night">
+  <div class="wrap wrap--wide">
+    <div class="foot__top">
+      <div>
+        <a href="/" class="foot__logo"><img src="{{ site.logo | img }}" alt="People to People Health Foundation" width="168" height="60" loading="lazy"></a>
+        <p class="foot__about">{{ copy.global.footerAbout }}</p>
+        <ul class="socials" aria-label="PPHF on social media">
+          {%- for s in site.socials %}<li><a href="{{ s.href }}" rel="noopener" target="_blank" aria-label="{{ s.name }}">{{ icon(s.icon) }}</a></li>{% endfor %}
+        </ul>
+      </div>
+      <div class="foot__cols">
+        {%- for group in nav.main %}{% if group.items %}
+        <div>
+          <p class="foot__h">{{ group.label }}</p>
+          <ul>{% for item in group.items %}<li><a href="{{ (item.href | wp) if item.wp else item.href }}">{{ item.label }}</a></li>{% endfor %}</ul>
+        </div>
+        {%- endif %}{% endfor %}
+      </div>
+    </div>
+    <div class="foot__mid">
+      <address class="foot__contact">
+        <p class="foot__h">Head office</p>
+        <span>{{ site.contact.address }}</span>
+        <span><a href="tel:{{ site.contact.phoneHref }}">{{ site.contact.phone }}</a> · <a href="tel:{{ site.contact.mobileHref }}">{{ site.contact.mobile }}</a></span>
+        <span><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></span>
+        <span>Regional offices: {{ site.contact.regionalOffices | join(", ") }}</span>
+      </address>
+      <div>
+        <p class="foot__h">Certified &amp; graded</p>
+        <ul class="foot__certs">
+          {%- for c in site.certifications %}
+          <li><a href="{{ c.href | wp }}" target="_blank" rel="noopener" title="{{ c.name }}">{%- set cs = c.image | imgSize %}<img src="{{ c.image | img }}" alt="{{ c.name }}" loading="lazy" decoding="async" width="{{ (cs.w * 56 / cs.h) | round }}" height="56"></a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <p>© {{ "" | year }} People to People Health Foundation · {{ copy.global.regShort }}</p>
+      <p><a href="{{ site.onePager | wp }}" target="_blank" rel="noopener">One-pager (PDF)</a> · <a href="/dd-documents/">Compliance documents</a> · <a href="/contact/">Contact</a></p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,7 @@
+{#- Document rows. Var: docs [{title, href}] (hrefs are WordPress media paths) -#}
+{% from "partials/icons.njk" import icon %}
+<ul class="docs" role="list">
+  {%- for d in docs %}
+  <li><a class="doc" href="{{ d.href | wp }}" target="_blank" rel="noopener"><span class="doc__ico" aria-hidden="true">PDF</span><span class="doc__t">{{ d.title }}</span><span class="doc__a">Download {{ icon("download", "icon--sm") }}</span></a></li>
+  {%- endfor %}
+</ul>

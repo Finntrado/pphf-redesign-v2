@@ -1,0 +1,31 @@
+# Copy for /technical-capacity/ (moved out of the template so a redesign never touches the words).
+title: Technical Capacity
+lead: 'People to People Health Foundation (PPHF) works closely with communities and key actors on sustainable solutions for
+  public health challenges. Our area of expertise include:'
+crumbs:
+- label: About
+  href: /about/
+capacities:
+- title: Technical Support
+  text: Providing technical support on quality public health delivery
+  icon: providing-technical-support.png
+  tone: navy
+- title: Skill Building
+  text: Building the skills of health care providers and the capacity of the local health care system
+  icon: building-the-skills.png
+  tone: green
+- title: Community Mobilization
+  text: Mobilizing community and expanding community support systems
+  icon: mobilising-community.png
+  tone: magenta
+- title: Knowledge Hub
+  text: Generating new knowledge for better programming and influencing policies and practices for scale-up
+  icon: generating-new-knowledge.png
+  tone: orange
+- title: Leveraging Partnerships
+  text: Leveraging partnerships to impact the health and well-being of people
+  icon: partnership.png
+  tone: cream
+label: About PPHF
+photo: photo-2-1.webp
+photoAlt: A capacity-building workshop with health workers

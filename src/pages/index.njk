@@ -1,0 +1,346 @@
+---
+layout: layouts/base.njk
+title: Home
+permalink: /
+bodyClass: page-home
+description: People to People Health Foundation (PPHF) partners with communities, governments and companies to strengthen health systems, improve access to quality care and deliver locally driven public health solutions across India. Donate or partner with us.
+preloadImage: /assets/img/photos/maternal-child-adolescent-health-1-800.webp
+preloadSrcset: /assets/img/photos/maternal-child-adolescent-health-1-800.webp 800w, /assets/img/photos/maternal-child-adolescent-health-1-1600.webp 1600w
+preloadSizes: "(max-width: 899px) 62vw, 330px"
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/thread.njk" import thread %}
+{%- set h = copy.home %}
+
+{#- 1 ─ Hero: who, what, where, and the two ways in -#}
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap wrap--wide hero__grid">
+    <div class="hero__copy">
+      <p class="note hero__note">{{ h.hero.note | safe }}</p>
+      <h1 id="hero-h" class="display hero__title">{{ h.hero.title | safe }}</h1>
+      <p class="lead hero__lead">{{ h.hero.lead }}</p>
+      <div class="btn-row hero__actions">
+        <a class="btn btn--give btn--lg" href="/donate/">{{ icon("heart") }} Donate</a>
+        <a class="btn btn--line btn--lg" href="/partnership/">Partner with us {{ icon("arrow-right", "icon--go") }}</a>
+      </div>
+      <ul class="hero__trust" role="list">
+        {%- for t in h.hero.trust %}<li>{{ icon("shield", "icon--sm") }}{{ t }}</li>{% endfor %}
+      </ul>
+    </div>
+    <div class="hero__prints" data-prints>
+      {{ thread("hero", "hero__thread") }}
+      {%- for p in h.hero.prints %}
+      <figure class="print hero__print hero__print--{{ loop.index }}" style="--tilt: {{ p.tilt }}">
+        {% photo p.image, p.alt, "(max-width: 899px) 62vw, 330px", "", ("eager" if loop.first else "lazy"), loop.first %}
+        <figcaption>{{ p.caption | safe }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{#- 2 ─ The urgent appeal -#}
+<section class="appeal sheet night" aria-labelledby="appeal-h">
+  <div class="wrap appeal__grid">
+    <div class="appeal__copy">
+      <p class="label"><span class="ribbon__dot" aria-hidden="true"></span>{{ h.appeal.label }}</p>
+      <h2 id="appeal-h">{{ h.appeal.title | safe }}</h2>
+      <p class="appeal__text">{{ h.appeal.text }}</p>
+      <dl class="appeal__figs">
+        {%- for f in h.appeal.figures %}<div class="reveal" style="--d: {{ loop.index0 * 0.08 }}s"><dt>{{ f.label }}</dt><dd>{{ f.n }}</dd></div>{% endfor %}
+      </dl>
+      <div class="btn-row">
+        <a class="btn btn--give btn--lg" href="/donate/?for=flood">{{ icon("heart") }} Give to flood relief</a>
+        <a class="btn btn--line btn--lg" href="/flood-relief-appeal-2026/">Read the appeal</a>
+      </div>
+    </div>
+    <figure class="appeal__media reveal">
+      {% photo h.appeal.photo, h.appeal.photoAlt, "(max-width: 899px) 92vw, 460px" %}
+      <figcaption class="appeal__needs">
+        <p class="note">Families urgently need</p>
+        <ul role="list">{% for n in h.appeal.needs %}<li><strong>{{ n.title }}</strong> {{ n.text }}</li>{% endfor %}</ul>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+{#- 3 ─ Proof in numbers -#}
+<section class="sec numbers" aria-labelledby="num-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">{{ h.numbers.label }}</p>
+      <h2 id="num-h">{{ h.numbers.title | safe }}</h2>
+    </div>
+    <dl class="ledger">
+      {%- for s in h.numbers.stats %}
+      <div class="ledger__row reveal" style="--d: {{ loop.index0 * 0.08 }}s">
+        <dt>{{ s.long }} {{ s.label | safe }}</dt>
+        <dd aria-hidden="true"><span class="ledger__n"><span data-count="{{ s.value }}">{{ s.value }}</span>{{ s.suffix }}</span><span class="ledger__l">{{ s.label | safe }}</span></dd>
+        {%- if loop.first %}<span class="note ledger__note" aria-hidden="true">{{ h.numbers.note }}</span>{% endif %}
+      </div>
+      {%- endfor %}
+    </dl>
+    <div class="numbers__foot">
+      <p class="numbers__mission"><span class="label label--plain">Our mission</span>{{ h.numbers.mission }}</p>
+      <p class="muted">{{ h.numbers.intro }} <a class="go" href="/outreach/">See our outreach {{ icon("arrow-right") }}</a></p>
+    </div>
+  </div>
+</section>
+
+{#- 4 ─ How support travels: the thread, drawn by scrolling -#}
+<section class="sec route-sec sheet sheet--paper2" aria-labelledby="route-h" data-route>
+  <div class="wrap route-wrap">
+    <div class="route-head">
+      <p class="label">{{ h.route.label }}</p>
+      <h2 id="route-h">{{ h.route.title | safe }}</h2>
+      <p class="muted">{{ h.route.intro }}</p>
+      <a class="go" href="{{ site.strategy2030 | wp }}" target="_blank" rel="noopener">{{ h.route.strategy }} {{ icon("download") }}</a>
+    </div>
+    <ol class="route" role="list">
+      <svg class="route__line" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false" data-thread><path d="M20 0C34 120 6 200 20 330S34 520 20 660 6 860 20 1000" pathLength="1" vector-effect="non-scaling-stroke"/></svg>
+      {%- for s in h.route.steps %}
+      <li class="route__step{% if loop.last %} route__step--back{% endif %}" data-step>
+        <span class="route__node" aria-hidden="true"></span>
+        <p class="route__who">{{ s.who }}{% if s.note %} <span class="note">{{ s.note }}</span>{% endif %}</p>
+        <h3>{{ s.title | safe }}</h3>
+        <p>{{ s.text | safe }}</p>
+        {%- if s.quote %}
+        <blockquote class="route__quote"><p>“{{ s.quote }}”</p><footer>{{ s.quoteBy }}</footer></blockquote>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+{#- 5 ─ The causes: an index with a photograph that follows the pointer -#}
+<section class="sec causes" aria-labelledby="causes-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div>
+        <p class="label">{{ h.themes.label }}</p>
+        <h2 id="causes-h">{{ h.themes.title | safe }}</h2>
+      </div>
+      <p>{{ h.themes.intro }}</p>
+    </div>
+    <ol class="tindex" role="list" data-tindex>
+      {%- for f in decade.focus %}
+      <li>
+        <a class="tindex__row" href="{{ f.href }}" data-peek="{{ loop.index0 }}">
+          <span class="tindex__n">{{ "0" + loop.index }}</span>
+          <span class="tindex__thumb">{% photo f.image, "", "96px" %}</span>
+          <span class="tindex__title">{{ f.title }}</span>
+          <span class="tindex__text">{{ f.text }}</span>
+          <span class="tindex__go">{{ icon("arrow-right") }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ol>
+    <div class="tindex__peek" aria-hidden="true" data-peek-stage>
+      {%- for f in decade.focus %}<span class="tindex__peekimg">{% photo f.image, "", "320px" %}</span>{% endfor %}
+    </div>
+  </div>
+</section>
+
+{#- 6 ─ Voices: a fanned deck of real testimonials -#}
+<section class="sec voices sheet sheet--rose" aria-labelledby="voices-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div>
+        <p class="label">{{ h.voices.label }}</p>
+        <h2 id="voices-h">{{ h.voices.title | safe }}</h2>
+      </div>
+      <div class="deck-ctrl">
+        <span class="note">{{ h.voices.hint }}</span>
+        <button class="round-btn" type="button" data-deck-prev>{{ icon("arrow-left") }}<span class="visually-hidden">Previous voice</span></button>
+        <button class="round-btn" type="button" data-deck-next>{{ icon("arrow-right") }}<span class="visually-hidden">Next voice</span></button>
+      </div>
+    </div>
+  </div>
+  <ul class="deck" role="list" tabindex="0" aria-label="Testimonials" data-deck>
+    {%- for t in testimonials %}
+    <li class="deck__card deck__card--{{ loop.index }}">
+      <figure>
+        <blockquote{% if t.quote.length > 300 %} class="is-long"{% endif %}>“{{ t.quote }}”</blockquote>
+        <figcaption>
+          <span><strong>{{ t.name }}</strong><br>{{ t.role }}</span>
+          <img src="{{ t.logo | img }}" alt="{{ t.org }}" loading="lazy" decoding="async" height="40">
+        </figcaption>
+      </figure>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+{#- 7 ─ Trust: why give through PPHF -#}
+<section class="sec trust" aria-labelledby="trust-h">
+  <div class="wrap">
+    <div class="trust__grid">
+      <div>
+        <p class="label">{{ h.trust.label }}</p>
+        <h2 id="trust-h">{{ h.trust.title | safe }}</h2>
+        <p class="lead trust__intro">{{ h.trust.intro }}</p>
+        <dl class="tally">
+          {%- for l in h.trust.ledger %}<div class="reveal" style="--d: {{ loop.index0 * 0.07 }}s"><dt>{{ l.text }}</dt><dd>{{ l.n }}</dd></div>{% endfor %}
+        </dl>
+      </div>
+      <div class="trust__side">
+        <ul class="stamps" role="list" data-stamps>
+          {%- for s in h.trust.stamps %}
+          <li style="--r: {{ [-7, 5, -3, 8, -5][loop.index0] }}deg; --i: {{ loop.index0 }}"><a class="stamp stamp--{{ loop.index }}" href="{{ s.href | wp }}" target="_blank" rel="noopener"><b>{{ s.title }}</b><span>{{ s.text }}</span></a></li>
+          {%- endfor %}
+        </ul>
+        <a class="report-card" href="{{ h.trust.report.href }}">
+          <img src="{{ h.trust.report.image | img }}" alt="" width="120" height="170" loading="lazy" decoding="async">
+          <span><span class="label label--plain">Latest</span><strong>{{ h.trust.report.label }}</strong><span class="muted">{{ h.trust.report.text }}</span><span class="go">Read online {{ icon("arrow-right") }}</span></span>
+        </a>
+      </div>
+    </div>
+    <ul class="checks checks--2" role="list">
+      {%- for a in h.trust.apart %}<li>{{ icon("check") }}<span>{{ a | safe }}</span></li>{% endfor %}
+    </ul>
+    <p class="trust__docs"><a class="go" href="/dd-documents/">All due-diligence documents {{ icon("arrow-right") }}</a> <a class="go" href="/reports/#financial">Financial reports {{ icon("arrow-right") }}</a></p>
+  </div>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></svg>
+</section>
+
+{#- 8 ─ Ten years -#}
+<section class="sec decade sheet night" aria-labelledby="decade-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div>
+        <p class="label">{{ h.decade.label }}</p>
+        <h2 id="decade-h">{{ h.decade.title | safe }}</h2>
+      </div>
+      <p>{{ decade.intro }}</p>
+    </div>
+  </div>
+  <div class="tl" tabindex="0" aria-label="Timeline 2016 to 2025, scrollable" data-drag>
+    <ol class="tl__track" role="list">
+      {%- for t in decade.timeline %}
+      <li class="tl__item"><span class="tl__year">{{ t.year }}</span><h3>{{ t.title }}</h3><p>{{ t.text }}</p></li>
+      {%- endfor %}
+      <li class="tl__item tl__item--next"><span class="tl__year">2036</span><h3>Catalysing Change 2036</h3><p>{{ decade.next[1] }}</p><a class="go" href="/a-decade-of-catalysing-change/">Explore PPHF@10 {{ icon("arrow-right") }}</a></li>
+    </ol>
+  </div>
+  <div class="wrap"><p class="note tl__hint">{{ h.decade.hint }} →</p></div>
+</section>
+
+{#- 9 ─ Partners -#}
+<section class="sec partners" aria-labelledby="partners-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <p class="label">{{ h.partners.label }}</p>
+      <h2 id="partners-h">{{ h.partners.title }}</h2>
+      <p>{{ home.partnersIntro }}</p>
+    </div>
+  </div>
+  {%- set half = (partners.length / 2) | round(0, "ceil") %}
+  {%- for row in partners | chunk(half) %}
+  <div class="marquee{% if loop.index == 2 %} marquee--rev{% endif %}">
+    <ul class="marquee__track" role="list">
+      {%- for p in row %}<li><img src="{{ p.src | img }}" alt="{{ p.name }}" loading="lazy" decoding="async"></li>{% endfor %}
+      {%- for p in row %}<li aria-hidden="true"><img src="{{ p.src | img }}" alt="" loading="lazy" decoding="async"></li>{% endfor %}
+    </ul>
+  </div>
+  {%- endfor %}
+</section>
+
+{#- 10 ─ Ways to give -#}
+<section class="sec give" aria-labelledby="give-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">{{ h.give.label }}</p>
+      <h2 id="give-h">{{ h.give.title | safe }}</h2>
+    </div>
+    <div class="give__grid">
+      <div class="give__donate">
+        <h3>{{ h.give.donate.title }}</h3>
+        <p>{{ h.give.donate.text }}</p>
+        <div class="amounts" role="group" aria-label="Choose an amount">
+          {%- for a in copy.donate.amounts | take(4) %}<a class="amount" href="/donate/?amount={{ a.value }}">₹{{ a.label }}</a>{% endfor %}
+          <a class="amount amount--other" href="/donate/">Other</a>
+        </div>
+        <a class="btn btn--give btn--lg btn--block" href="/donate/">{{ icon("heart") }} Give now {{ icon("arrow-right", "icon--go") }}</a>
+      </div>
+      <ul class="rows" role="list">
+        {%- for r in h.give.rows %}
+        <li><a class="rows__item" href="{{ r.href }}"><span><strong>{{ r.title | safe }}</strong><span>{{ r.text }}</span></span>{{ icon("arrow-right") }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{#- 11 ─ From the field: stories + films -#}
+<section class="sec field sheet sheet--paper2" aria-labelledby="field-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div>
+        <p class="label">{{ h.field.label }}</p>
+        <h2 id="field-h">{{ h.field.title | safe }}</h2>
+      </div>
+      <a class="go" href="/media/">The newsroom {{ icon("arrow-right") }}</a>
+    </div>
+    <div class="stories">
+      {%- for p in newsroom.news | take(3) %}
+      <article class="story{% if loop.first %} story--lead{% endif %}">
+        <div class="story__img">{% mediaImg p.image, ("(max-width: 860px) 92vw, 560px" if loop.first else "(max-width: 860px) 92vw, 300px") %}</div>
+        <div class="story__body">
+          <p class="story__meta">{{ p.kindLabel }} · <time datetime="{{ p.date | isoDate }}">{{ p.date | date }}</time></p>
+          <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
+          {%- if loop.first and p.excerpt %}<p class="muted">{{ p.excerpt | truncate(220, true, "…") }}</p>{% endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="films">
+      {%- for id in home.videos | take(3) %}
+      {%- set v = videos | findBy("id", id) %}
+      <figure class="film">
+        <button class="video" type="button" data-yt="{{ id }}" aria-label="Play video: {{ v.title if v else 'PPHF film' }}">
+          <img src="/assets/img/yt/{{ id }}-640.webp" srcset="/assets/img/yt/{{ id }}-320.webp 320w, /assets/img/yt/{{ id }}-640.webp 640w" sizes="(max-width: 860px) 80vw, 340px" alt="" width="640" height="360" loading="lazy" decoding="async">
+          <span class="video__play">{{ icon("play") }}</span>
+        </button>
+        {% if v %}<figcaption>{{ v.title }}</figcaption>{% endif %}
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{#- 12 ─ PPHF at a glance (for everyone who wants to know who we are) -#}
+<section class="sec glance" aria-labelledby="glance-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">{{ h.glance.label }}</p>
+      <h2 id="glance-h">{{ h.glance.title | safe }}</h2>
+    </div>
+    <dl class="vmv">
+      {%- for v in h.glance.vmv %}<div class="reveal" style="--d: {{ loop.index0 * 0.08 }}s"><dt>{{ v.title }}</dt><dd>{{ v.text }}</dd></div>{% endfor %}
+    </dl>
+    <div class="glance__grid">
+      <figure class="ceo">
+        {%- set cp = h.glance.ceo.photo | portrait %}
+        {% if cp %}<img src="{{ cp }}" alt="{{ h.glance.ceo.name }}" width="800" height="800" loading="lazy" decoding="async">{% endif %}
+        <div>
+          <blockquote>“{{ h.glance.ceo.quote }}”</blockquote>
+          <figcaption><strong>{{ h.glance.ceo.name }}</strong>, {{ h.glance.ceo.role }}</figcaption>
+        </div>
+      </figure>
+      <div>
+        <dl class="facts">
+          {%- for f in h.glance.facts %}<div><dt>{{ f.k }}</dt><dd>{{ f.v }}</dd></div>{% endfor %}
+        </dl>
+        <div class="btn-row glance__links">
+          <a class="btn btn--line btn--sm" href="/about/">About PPHF</a>
+          <a class="btn btn--line btn--sm" href="/team/">Board &amp; team</a>
+          <a class="btn btn--line btn--sm" href="/technical-capacity/">Technical capacity</a>
+          <a class="btn btn--line btn--sm" href="{{ site.onePager | wp }}" target="_blank" rel="noopener">One-pager (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/closer.njk" %}

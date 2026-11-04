@@ -1,0 +1,43 @@
+---
+layout: layouts/media-landing.njk
+title: Gallery
+permalink: /gallery/
+crumbs:
+  - { label: Media, href: /media/ }
+seoTitle: "Photo Gallery — PPHF in the Field | PPHF"
+description: "Photo albums from People to People Health Foundation (PPHF) programmes, health camps, dialogues and dissemination meets across India."
+lead: "Photographs from our programmes, health camps and convenings — the people and places behind the numbers."
+eleventyComputed:
+  stats:
+    - { n: "{{ newsroom.gallery.length }}", label: "Albums" }
+    - { n: "{{ newsroom.photoCount }}", label: "Photographs" }
+    - { n: "{{ videos.length }}", label: "Films" }
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <ul class="albums">
+      {%- for a in newsroom.gallery %}
+      <li class="albumcard">
+        <a href="{{ a.url }}">
+          <span class="albumcard__mosaic" aria-hidden="true">
+            {%- for ph in a.photos | take(3) %}{% if loop.first %}{% mediaImg ph, "(max-width: 680px) calc(100vw - 32px), 400px" %}{% else %}{% mediaImg ph, "200px" %}{% endif %}{% endfor %}
+          </span>
+          <span class="albumcard__body">
+            <span class="albumcard__title">{{ a.subject }}</span>
+            <span class="albumcard__meta">{% if a.date %}<time datetime="{{ a.date }}">{{ a.date | date("month") }}</time> · {% endif %}{{ a.photos.length }} photos</span>
+          </span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+    <aside class="gallery-videos">
+      <div>
+        <h2>Prefer film?</h2>
+        <p>Impact stories, campaign films and programme walk-throughs on our video page.</p>
+      </div>
+      <a class="btn" href="/videos/">{{ icon("play") }} Watch videos</a>
+    </aside>
+  </div>
+</section>
+<script type="application/ld+json">{{ newsroom.gallery | collectionLd({ base: site.url, url: page.url, name: title, description: description, crumbs: [{ name: "Media", url: "/media/" }] }) | safe }}</script>

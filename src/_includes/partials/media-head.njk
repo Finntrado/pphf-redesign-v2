@@ -1,0 +1,47 @@
+{% from "partials/thread.njk" import thread %}
+{#- Landing-page header for Media & Opportunities.
+    Page data: title, heading, lead, eyebrow, mediaGroup ("media" | "opportunities"), stats [{n, label}], crumbs
+    The switcher lets readers hop between sibling landing pages without opening the menu. -#}
+{%- set groups = {
+  "media": [
+    ["Newsroom", "/media/"], ["Blogs & News", "/blogs-and-news/"], ["Press", "/press/"], ["Events", "/events/"],
+    ["Gallery", "/gallery/"], ["Videos", "/videos/"], ["Publications", "/publications/"], ["Reports", "/reports/"]
+  ],
+  "opportunities": [
+    ["RFP / EOI", "/request-for-proposal/"], ["Vacancies", "/vacancies/"], ["Internship", "/internship/"], ["Corporate Volunteering", "/pphf-corporate-volunteering-program/"]
+  ]
+} %}
+{%- set sectionUrl = (pagination.href.first if pagination and pagination.href else page.url) %}
+<section class="mhead mhead--{{ mediaGroup or 'media' }}">
+  {{ thread("head", "phead__thread") }}
+  <div class="wrap">
+    <nav aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Home</a></li>
+        {%- for c in crumbs %}<li>{% if c.href %}<a href="{{ c.href }}">{{ c.label }}</a>{% else %}{{ c.label }}{% endif %}</li>{% endfor %}
+        <li aria-current="page">{{ crumbTitle or title }}</li>
+      </ol>
+    </nav>
+    <div class="mhead__grid">
+      <div class="mhead__copy">
+        <p class="label">{{ eyebrow or ("Opportunities" if mediaGroup == "opportunities" else "Media") }}</p>
+        <h1>{{ heading or title }}{% if pagination and pagination.pageNumber > 0 %}<span class="mhead__page"> — page {{ pagination.pageNumber + 1 }}</span>{% endif %}</h1>
+        {% if lead %}<p class="lead">{{ lead | safe }}</p>{% endif %}
+      </div>
+      {%- if stats %}
+      <dl class="mhead__stats">
+        {%- for s in stats %}<div><dt>{{ s.label }}</dt><dd>{{ s.n }}</dd></div>{% endfor %}
+      </dl>
+      {%- endif %}
+    </div>
+  </div>
+  <nav class="mswitch" aria-label="{{ 'Opportunities' if mediaGroup == 'opportunities' else 'Media' }} sections">
+    <div class="wrap">
+      <ul>
+        {%- for g in groups[mediaGroup or "media"] %}
+        <li><a href="{{ g[1] }}"{% if sectionUrl == g[1] or page.url == g[1] %} aria-current="page"{% endif %}>{{ g[0] }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </nav>
+</section>

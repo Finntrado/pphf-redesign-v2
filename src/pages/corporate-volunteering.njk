@@ -1,0 +1,18 @@
+---
+layout: layouts/page.njk
+permalink: /pphf-corporate-volunteering-program/
+copyKey: volunteering
+navSection: Get Involved
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Where you fit</p><h2>{{ c.oppTitle }}</h2></div>
+    <ol class="vopps" role="list">
+      {%- for o in c.opportunities %}
+      <li class="reveal"><span class="plan__n">{{ "0" + loop.index }}</span><h3>{{ o.title }}</h3><ul class="clist" role="list">{% for i in o.items %}<li>{{ i }}</li>{% endfor %}</ul></li>
+      {%- endfor %}
+    </ol>
+    <div class="card card--thread notebar"><p>{{ c.note }} <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></p><a class="btn btn--give" href="mailto:{{ site.contact.email }}?subject=Corporate%20Volunteering">Get in touch {{ icon("mail", "icon--sm") }}</a></div>
+  </div>
+</section>

@@ -1,0 +1,80 @@
+---
+layout: layouts/page.njk
+permalink: /about/
+copyKey: about
+navSection: About
+headImage: g8a5473-1536x1024.webp
+headImageAlt: Women from the community gathered in a health awareness session
+headCaption: Catalysing change for wellbeing
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    {%- set cp = c.ceo.photo | portrait %}
+    <figure class="ceo ceo--big">
+      {% if cp %}<img src="{{ cp }}" alt="{{ c.ceo.name }}, {{ c.ceo.role }}, PPHF" width="800" height="800" loading="lazy">{% endif %}
+      <div><blockquote>“{{ c.ceo.quote }}”</blockquote><figcaption><strong>{{ c.ceo.name }}</strong>, {{ c.ceo.role }}</figcaption></div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap grid-2 grid-2--wide-left">
+    <div class="prose">{% for p in c.journey %}<p>{{ p }}</p>{% endfor %}</div>
+    <aside class="card card--soft">
+      <h2 class="h3">{{ c.keyAreas.title }}</h2>
+      <p class="muted">{{ c.keyAreas.intro }}</p>
+      <ol class="nlist" style="margin-top:14px">{% for k in c.keyAreas.items %}<li>{{ k }}</li>{% endfor %}</ol>
+    </aside>
+  </div>
+</section>
+
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><p class="label">What we do</p><h2>{{ c.solutions.title }}</h2></div>
+      <p>{{ c.solutions.intro }}</p>
+    </div>
+    <ol class="tindex tindex--compact" role="list">
+      {%- for t in collections.themes %}
+      <li><a class="tindex__row" href="{{ t.url }}"><span class="tindex__n">{{ "0" + loop.index }}</span><span class="tindex__thumb">{% photo t.data.image, "", "96px" %}</span><span class="tindex__title">{{ t.data.title }}</span><span class="tindex__go">{{ icon("arrow-right") }}</span></a></li>
+      {%- endfor %}
+    </ol>
+    <div class="grid-2 duo">
+      <div><h3>{{ c.solutions.aastha.title }}</h3><p>{{ c.solutions.aastha.text }}</p><a class="go" href="/aastha/">About AASTHA {{ icon("arrow-right") }}</a></div>
+      <div><h3>{{ c.solutions.gender.title }}</h3><p>{{ c.solutions.gender.text }}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap grid-2">
+    <div>
+      <p class="label">Why PPHF</p>
+      <h2>{{ c.apartTitle }}</h2>
+      <p class="lead" style="margin-top:18px">{{ c.apartLead }}</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a class="btn" href="{{ site.onePager | wp }}" target="_blank" rel="noopener">PPHF Global one-pager {{ icon("download", "icon--sm") }}</a>
+        <a class="btn btn--line" href="/dd-documents/">Compliance documents</a>
+      </div>
+    </div>
+    <ul class="checks" role="list" style="margin-top:0">{% for a in c.apart %}<li class="reveal">{{ icon("check") }}<span>{{ a }}</span></li>{% endfor %}</ul>
+  </div>
+</section>
+
+<section class="sec sheet sheet--paper2">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><p class="label">Governance</p><h2>{{ c.advisory.title }}</h2><p>{{ c.advisory.text }}</p></div>
+      <a class="btn btn--line" href="/team/#advisory-council">{{ c.advisory.more }}</a>
+    </div>
+    {% set people = aboutPeople.advisory %}{% set gid = "about-adv" %}{% include "partials/person-grid.njk" %}
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><p class="label">The people</p><h2>{{ c.teamTitle }}</h2></div><a class="btn btn--line" href="/team/#team">{{ c.teamMore }}</a></div>
+    {% set people = aboutPeople.team %}{% set gid = "about-team" %}{% include "partials/person-grid.njk" %}
+  </div>
+</section>

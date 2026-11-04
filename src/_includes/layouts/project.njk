@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+---
+{% from "partials/icons.njk" import icon %}
+{%- set listUrl = "/ongoing-projects/" if status == "ongoing" else "/past-projects/" %}
+{%- set listLabel = "Ongoing Projects" if status == "ongoing" else "Past Projects" %}
+{%- set crumbs = [{ label: "Our Work", href: "/our-work/" }, { label: listLabel, href: listUrl }] %}
+{%- set crumbTitle = title %}
+{%- set label = "Ongoing project" if status == "ongoing" else "Past project" %}
+{%- set lead = summary %}
+{%- set headImage = hero %}
+{%- set headImageAlt = title %}
+{% include "partials/phead.njk" %}
+
+{%- if facts %}
+<section class="sec sec--sm pfacts-sec">
+  <div class="wrap">
+    <dl class="pfacts">
+      {%- if facts.geography and facts.geography[0] != "N/A" %}<div class="reveal"><dt>{{ icon("pin", "icon--sm") }} Geography</dt>{% for g in facts.geography %}<dd>{{ g }}</dd>{% endfor %}</div>{% endif %}
+      {%- if facts.reach and facts.reach[0] != "N/A" %}<div class="reveal"><dt>{{ icon("users", "icon--sm") }} Reach</dt>{% for r in facts.reach %}<dd>{{ r }}</dd>{% endfor %}</div>{% endif %}
+      {%- if facts.outcomes and facts.outcomes[0] != "N/A" %}
+      <div class="pfacts__wide reveal"><dt>{{ icon("check", "icon--sm") }} {{ "Expected outcomes" if status == "ongoing" and facts.outcomes.length > 1 else "Outcomes" }}</dt>
+        {%- if facts.outcomes.length > 1 %}<dd><ul class="clist" role="list">{% for o in facts.outcomes %}<li>{{ o }}</li>{% endfor %}</ul></dd>{% else %}<dd>{{ facts.outcomes[0] }}</dd>{% endif %}
+      </div>
+      {%- endif %}
+    </dl>
+  </div>
+</section>
+{%- endif %}
+
+<section class="sec sec--sm">
+  <div class="wrap pbody{% if docs %} pbody--docs{% endif %}">
+    <div class="prose pprose">{{ content | sectionize(heading or title) | safe }}</div>
+    {%- if docs %}
+    <aside class="pdocs" aria-labelledby="docs-title">
+      <h2 id="docs-title" class="label">Relevant documents</h2>
+      <ul role="list">
+        {%- for d in docs %}{%- set isPdf = ".pdf" in d.href %}
+        <li><a class="pdoc" href="{{ d.href | wp }}"{% if isPdf %} target="_blank" rel="noopener"{% endif %}>{%- if d.image %}<span class="pdoc__img"><img src="{{ d.image | img }}" alt="" loading="lazy" decoding="async"></span>{% endif %}<span><span class="pdoc__t">{{ d.title }}</span><span class="cover__a">{{ "Download PDF" if isPdf else "Read report" }} {{ icon("arrow-up-right", "icon--sm") }}</span></span></a></li>
+        {%- endfor %}
+      </ul>
+      <div class="card card--thread"><p class="h3" style="margin-bottom:8px">Back work like this</p><div class="btn-row" style="margin-top:12px"><a class="btn btn--give btn--sm" href="/donate/">{{ icon("heart", "icon--sm") }} Donate</a><a class="btn btn--line btn--sm" href="/partnership/">Partner</a></div></div>
+    </aside>
+    {%- endif %}
+  </div>
+</section>
+
+{%- set siblings = collections.projectsOngoing if status == "ongoing" else collections.projectsPast %}
+{%- set prev = siblings | getPreviousCollectionItem(page) %}
+{%- set next = (siblings | getNextCollectionItem(page)) or siblings[0] %}
+<nav class="sec sheet sheet--paper2" aria-label="More projects">
+  <div class="wrap">
+    <a class="nextp" href="{{ next.url }}">
+      <span class="nextp__img">{% if next.data.hero %}{% photo next.data.hero, "", "(max-width: 760px) 92vw, 480px" %}{% endif %}</span>
+      <span class="nextp__body"><span class="label">Next {{ "ongoing" if status == "ongoing" else "past" }} project</span><span class="nextp__t">{{ next.data.title }}</span>{% if next.data.summary %}<span class="muted">{{ next.data.summary | truncate(140) }}</span>{% endif %}<span class="go">Read on {{ icon("arrow-right") }}</span></span>
+    </a>
+    <div class="nextp__links">{% if prev %}<a class="go" href="{{ prev.url }}">← Previous: {{ prev.data.title }}</a>{% else %}<span></span>{% endif %}<a class="go" href="{{ listUrl }}">All {{ listLabel | lower }} {{ icon("arrow-right") }}</a></div>
+  </div>
+</nav>
+{% include "partials/closer.njk" %}

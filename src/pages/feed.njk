@@ -1,0 +1,25 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>PPHF — Blogs &amp; News</title>
+  <link>{{ site.url }}/blogs-and-news/</link>
+  <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>{{ site.description }}</description>
+  <language>en-IN</language>
+  <lastBuildDate>{{ newsroom.posts[0].modified | rfc822 }}</lastBuildDate>
+  {%- for p in newsroom.posts | take(30) %}
+  <item>
+    <title>{{ p.title }}</title>
+    <link>{{ site.url }}{{ p.url }}</link>
+    <guid isPermaLink="true">{{ site.url }}{{ p.url }}</guid>
+    <pubDate>{{ p.date | rfc822 }}</pubDate>
+    <category>{{ p.section.label }}</category>
+    <description>{{ p.excerpt }}</description>
+  </item>
+  {%- endfor %}
+</channel>
+</rss>

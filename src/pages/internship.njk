@@ -1,0 +1,28 @@
+---
+layout: layouts/page.njk
+permalink: /internship/
+copyKey: internship
+navSection: Get Involved
+---
+{% from "partials/icons.njk" import icon %}
+{%- for r in c.roles %}
+<section class="sec sec--sm">
+  <div class="wrap role">
+    <div class="prose">
+      <p><span class="tag tag--thread">{{ r.kind }}</span></p>
+      <h2>{{ r.title }}</h2>
+      <p class="muted">{{ icon("pin", "icon--sm") }} {{ r.location }}</p>
+      <p>{{ r.summary | safe }}</p>
+      <h3>{{ r.responsibilitiesTitle }}</h3>
+      {%- for g in r.responsibilities %}<h4>{{ g.title }}</h4><ul>{% for i in g.items %}<li>{{ i }}</li>{% endfor %}</ul>{% endfor %}
+      <h3>{{ r.qualificationsTitle }}</h3>
+      <ul>{% for q in r.qualifications %}<li>{{ q }}</li>{% endfor %}</ul>
+    </div>
+    <aside class="card card--soft role__aside">
+      <h3 class="h4">Application Deadline</h3><p>{{ r.deadline }}</p>
+      <h3 class="h4" style="margin-top:16px">Application Process</h3><p>{{ r.process }}: <a href="mailto:{{ r.email }}">{{ r.email }}</a></p>
+      <div class="btn-row"><a class="btn btn--give" href="mailto:{{ r.email }}?subject={{ r.title | urlencode }}">Apply by email {{ icon("mail", "icon--sm") }}</a></div>
+    </aside>
+  </div>
+</section>
+{%- endfor %}

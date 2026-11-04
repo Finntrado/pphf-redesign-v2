@@ -1,0 +1,87 @@
+---
+layout: layouts/base.njk
+permalink: /donate/
+copyKey: donate
+navSection: Get Involved
+description: Donate to People to People Health Foundation (PPHF). Give once or monthly to community health, nutrition, NCD care and the Bihar Flood Relief Appeal 2026. Eligible for 80G tax benefit.
+crumbs: [{ label: "Get Involved" }]
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/thread.njk" import thread %}
+<section class="phead give-head">
+  {{ thread("head", "phead__thread") }}
+  <div class="wrap">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li>Get Involved</li><li aria-current="page">Donate</li></ol></nav>
+    <div class="give-head__grid">
+      <div>
+        <p class="label">Donate</p>
+        <h1>{{ c.heading | safe }}</h1>
+        <p class="lead">{{ c.lead }}</p>
+        <dl class="give-proof">
+          {%- for p in c.where.points %}<div><dt>{{ p.text }}</dt><dd>{{ p.n }}</dd></div>{% endfor %}
+        </dl>
+      </div>
+
+      <form class="gform" data-donate data-mailto="{{ site.contact.email }}"{% if c.paymentUrl %} data-payment="{{ c.paymentUrl }}"{% endif %} action="mailto:{{ site.contact.email }}" method="post" enctype="text/plain">
+        <fieldset class="seg seg--freq">
+          <legend class="visually-hidden">How often</legend>
+          {%- for f in c.frequencies %}<label><input type="radio" name="frequency" value="{{ f.value }}"{% if loop.first %} checked{% endif %}><span>{{ f.label }}</span></label>{% endfor %}
+        </fieldset>
+        <fieldset class="seg seg--amt">
+          <legend>Amount (₹)</legend>
+          {%- for a in c.amounts %}<label><input type="radio" name="amount" value="{{ a.value }}"{% if loop.index == 3 %} checked{% endif %}><span>₹{{ a.label }}</span></label>{% endfor %}
+        </fieldset>
+        <div class="field">
+          <label for="d-other">Or enter another amount</label>
+          <input id="d-other" name="other" type="number" inputmode="numeric" min="100" step="1" placeholder="₹" data-custom-amount>
+        </div>
+        <div class="field">
+          <label for="d-cause">Where should it go?</label>
+          <select id="d-cause" name="cause">{% for x in c.causes %}<option value="{{ x.value }}">{{ x.label }}</option>{% endfor %}</select>
+        </div>
+        <p class="gform__summary" aria-live="polite" data-donate-summary></p>
+        <button class="btn btn--give btn--lg btn--block" type="submit">{{ icon("heart") }} Continue to give {{ icon("arrow-right", "icon--go") }}</button>
+        {%- if not c.paymentUrl %}
+        <p class="gform__note"><span class="todo">Add the online payment link (Razorpay / PayU / Give.do) in copy/donate.yml → paymentUrl</span> {{ c.formNote }}</p>
+        {%- endif %}
+        <p class="form-status" data-form-status role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--sm">
+  <div class="wrap give-ways">
+    <div class="card card--soft">
+      <h2 class="h3">{{ c.bank.title }}</h2>
+      <p class="muted">{{ c.bank.text }}</p>
+      <dl class="facts">
+        {%- for r in c.bank.rows %}<div><dt>{{ r.k }}</dt><dd>{% if r.todo %}<span class="todo">{{ r.todo }}</span>{% else %}{{ r.v }}{% endif %}</dd></div>{% endfor %}
+      </dl>
+    </div>
+    <div class="card card--soft">
+      <h2 class="h3">{{ c.tax.title }}</h2>
+      <p>{{ c.tax.text }}</p>
+      <p><span class="todo">{{ c.tax.todo }}</span></p>
+      <div class="btn-row"><a class="btn btn--line btn--sm" href="{{ '/wp-content/uploads/03.-80G-certificate-Updated.pdf' | wp }}" target="_blank" rel="noopener">80G certificate {{ icon("download", "icon--sm") }}</a><a class="btn btn--line btn--sm" href="/dd-documents/">All registrations</a></div>
+    </div>
+    <div class="card card--night">
+      <h2 class="h3">{{ c.big.title }}</h2>
+      <p>{{ c.big.text }}</p>
+      <div class="btn-row"><a class="btn btn--give" href="/partnership/">Partner with us {{ icon("arrow-right", "icon--go") }}</a><a class="btn btn--line" href="mailto:{{ site.contact.email }}?subject=CSR%20%2F%20institutional%20giving">{{ site.contact.email }}</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap wrap--narrow">
+    <div class="sec-head"><p class="label">Questions donors ask</p><h2>Before you <em>give</em>.</h2></div>
+    <div class="faq">
+      {%- for f in c.faqs %}
+      <details{% if loop.first %} open{% endif %}><summary>{{ f.q }} {{ icon("plus") }}</summary><div class="faq__a">{% if f.todo %}<p><span class="todo">{{ f.todo }}</span></p>{% else %}<p>{{ f.a | safe }}</p>{% endif %}</div></details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% set closerTitle = "Not ready to give? <em>Spread the word.</em>" %}{% set closerText = "Share the Bihar Flood Relief Appeal with someone who can help, or talk to us about partnering." %}{% set closerSecondary = { label: "See the appeal", href: "/flood-relief-appeal-2026/" } %}
+{% include "partials/closer.njk" %}

@@ -1,0 +1,38 @@
+---
+layout: layouts/page.njk
+title: Annual Reports
+navSection: Media
+permalink: /annual-reports/
+eyebrow: Media
+crumbs:
+  - label: Media
+  - label: Reports
+    href: /reports/
+headCovers:
+  - https://pphfglobal.org/wp-content/uploads/Annual-Report-2023-24-scaled.webp
+  - https://pphfglobal.org/wp-content/uploads/Screenshot-2026-08-20-093258.png
+  - https://pphfglobal.org/wp-content/uploads/pphf-2024-25-report-img.png
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec">
+  <div class="wrap">
+    <div class="covers">
+      {%- for r in reports.annual %}
+      {%- if r.slug %}
+      <a class="cover reveal" href="/{{ r.slug }}/">
+        <span class="cover__img">{%- set cv = r.cover | cover %}<img src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="(max-width: 680px) 44vw, 240px"{% endif %} width="{{ cv.w }}" height="{{ cv.h }}" alt="" loading="lazy" decoding="async"></span>
+        <span class="cover__t">{{ r.title }}</span>
+        <span class="cover__a">Read online {{ icon("arrow-right", "icon--sm") }}</span>
+      </a>
+      {%- else %}
+      <a class="cover reveal" href="{{ r.pdf | wp }}" target="_blank" rel="noopener">
+        <span class="cover__img">{%- set cv = r.cover | cover %}<img src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="(max-width: 680px) 44vw, 240px"{% endif %} width="{{ cv.w }}" height="{{ cv.h }}" alt="" loading="lazy" decoding="async"></span>
+        <span class="cover__t">{{ r.title }}</span>
+        <span class="cover__a">Download PDF {{ icon("download", "icon--sm") }}</span>
+      </a>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+

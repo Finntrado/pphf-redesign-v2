@@ -1,0 +1,26 @@
+---
+layout: layouts/page.njk
+permalink: /outreach/
+copyKey: outreach
+navSection: Our Work
+---
+{% from "partials/icons.njk" import icon %}
+<section class="sec sec--sm">
+  <div class="wrap">
+    <dl class="ledger">
+      {%- for s in c.stats %}
+      <div class="ledger__row reveal" style="--d: {{ loop.index0 * 0.08 }}s"><dt>{{ s.pre }} {{ s.value }}{{ s.suffix }} {{ s.label }}</dt><dd aria-hidden="true"><span class="ledger__n"><span data-count="{{ s.value }}">{{ s.value }}</span>{{ s.suffix | replace(" million", "M") }}</span><span class="ledger__l">{{ s.label }}</span></dd></div>
+      {%- endfor %}
+    </dl>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head sec-head--row"><div><p class="label">Where we are now</p><h2>Ongoing Projects</h2></div><a class="go" href="/ongoing-projects/">All ongoing projects {{ icon("arrow-right") }}</a></div>
+    <ul class="rlist rlist--geo" role="list">
+      {%- for p in collections.projectsOngoing %}{% if p.data.facts and p.data.facts.geography %}
+      <li><a class="rlist__a" href="{{ p.url }}"><span class="rlist__t">{{ p.data.title }}</span><span class="rlist__d">{{ icon("pin", "icon--sm") }} {{ p.data.facts.geography | join("; ") }}</span>{{ icon("arrow-right") }}</a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+  </div>
+</section>

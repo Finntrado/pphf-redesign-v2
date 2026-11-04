@@ -1,0 +1,7 @@
+{#- Project card. Var: p (collection item) -#}
+<a class="pcard reveal" href="{{ p.url }}" data-states="{{ p.data.facts.geography | projStates if p.data.facts else '' }}">
+  <span class="pcard__img">{% if p.data.hero %}{% photo p.data.hero, "", "(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 360px" %}{% endif %}</span>
+  {%- if p.data.facts and p.data.facts.geography and p.data.facts.geography[0] != "N/A" %}<span class="pcard__meta">{{ p.data.facts.geography[0] | truncate(60) }}</span>{% endif %}
+  <span class="pcard__title">{{ p.data.title }}</span>
+  {% if p.data.summary %}<span class="pcard__text">{{ p.data.summary | truncate(150) }}</span>{% endif %}
+</a>

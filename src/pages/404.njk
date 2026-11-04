@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+permalink: /404.html
+copyKey: notfound
+eleventyExcludeFromCollections: true
+robots: noindex
+---
+{% from "partials/icons.njk" import icon %}
+{% from "partials/thread.njk" import thread %}
+<section class="phead notfound">
+  {{ thread("head", "phead__thread") }}
+  <div class="wrap">
+    <p class="label">Error 404</p>
+    <h1>{{ c.heading | safe }}</h1>
+    <p class="lead">{{ c.lead }}</p>
+    <div class="btn-row"><a class="btn" href="/">Home</a><a class="btn btn--line" href="/our-work/">Our Work</a><a class="btn btn--line" href="/media/">Newsroom</a><a class="btn btn--give" href="/donate/">Donate</a></div>
+  </div>
+</section>
