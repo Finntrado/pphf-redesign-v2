@@ -277,9 +277,23 @@ import Lenis from "lenis";
     sync();
   });
 
-  /* ---------- Safety net: if the motion script never starts, lay its sections out statically ---------- */
-  if (document.querySelector('script[src*="/motion.js"]') && !reduceMotion) {
-    setTimeout(() => { if (!window.__motionReady) root.classList.add("motion-failed"); }, 4000);
+  /* ---------- Scroll set pieces (GSAP) load on the first scroll, touch or key press, so they never
+     compete with the first paint. Nothing moves before then anyway. If the script fails to start,
+     the sections fall back to their static layout. ---------- */
+  const motionSrc = document.querySelector('meta[name="pphf-motion"]')?.content;
+  if (motionSrc && !reduceMotion) {
+    let started = false;
+    const start = () => {
+      if (started) return; started = true;
+      ["wheel", "touchstart", "keydown", "pointerdown", "scroll"].forEach((ev) => window.removeEventListener(ev, start));
+      const sc = document.createElement("script");
+      sc.src = motionSrc; sc.async = true;
+      sc.onerror = () => root.classList.add("motion-failed");
+      document.head.append(sc);
+      setTimeout(() => { if (!window.__motionReady) root.classList.add("motion-failed"); }, 6000);
+    };
+    if (window.scrollY > 10 || location.hash) start();
+    else ["wheel", "touchstart", "keydown", "pointerdown", "scroll"].forEach((ev) => window.addEventListener(ev, start, { passive: true }));
   }
 
   /* ---------- Count-up numbers ---------- */
@@ -341,6 +355,16 @@ import Lenis from "lenis";
       if (st) { st.hidden = false; st.textContent = "Your email app should open with your gift details filled in. We'll reply with payment details and your receipt."; }
     });
     render();
+  });
+
+  /* ---------- Contact: choosing who to talk to sets the form's recipient and subject ---------- */
+  document.querySelectorAll("[data-contact-ways]").forEach((box) => {
+    const form = box.querySelector("[data-contact-form]");
+    const to = box.querySelector("[data-way-to]"), subj = box.querySelector("[data-way-subject]"), role = box.querySelector("[data-way-role]");
+    box.querySelectorAll('input[name="way"]').forEach((r) => r.addEventListener("change", () => {
+      form.dataset.mailto = r.dataset.email; to.textContent = r.dataset.email;
+      subj.value = r.dataset.subject; role.value = r.closest(".way").querySelector(".way__t").textContent;
+    }));
   });
 
   /* ---------- Contact form ---------- */

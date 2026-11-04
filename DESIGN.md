@@ -71,18 +71,20 @@ Rules: orange is the thread and the CTA, never decoration. Navy text sits on ora
 - **Asymmetry on purpose**: no rows of three identical cards. Lists are ledgers (ruled, numbered), indices (big type plus a hover image), decks (stacked cards), or a lead item with ruled rows.
 - **Phone first**: a floating **bottom dock** (Donate · Menu · हिन्दी) within thumb reach, like Zero's dock. On desktop, a compact top bar keeps the logo, navigation and Donate.
 
-## Motion (moderate, creative, purposeful)
+## Motion (revised after review: set pieces, not fade-ins)
 
-1. **The thread draws on scroll** (SVG `stroke-dashoffset` tied to scroll progress), and a dot travels the route in "How your support travels".
-2. **Pinned photographs** in the hero ease into place, then drift slightly with the pointer (desktop only).
-3. **Ledger figures** count up once when seen.
-4. **Stamps** land on the trust section (scale plus rotate plus ink-press).
-5. **Theme index**: a photograph follows the cursor over the list.
-6. **Voices deck**: drag or swipe to flip through cards; keyboard arrows work.
-7. **Sticky stacked sheets** on the homepage.
-8. Generic fade-ups are used sparingly.
+Built with GSAP ScrollTrigger and Lenis smooth scrolling. The GSAP bundle (`motion.js`) loads only on the homepage, and only on the visitor's first scroll, touch or key press, so it never slows the first paint.
 
-Everything sits behind `prefers-reduced-motion: no-preference`. With reduced motion the thread is simply drawn, cards are static, and counters show final values. With no JS, all content is visible.
+1. **Hero:** two photographs sit inside the headline. On scroll the second grows from its pill until it fills the screen, the headline dissolves, and the four impact figures rise over the photograph one at a time.
+2. **Flood appeal:** floodwater (with a moving wave edge) rises through the section as you scroll. The words stay readable as dark-on-white above the waterline and white-on-navy below it.
+3. **Journey:** the section pins and travels sideways. A marker rides the orange thread, the line draws behind it, and each stop's number lights up as the marker reaches it. On phones it becomes a vertical route.
+4. **Causes:** six photo panels. The one you point at, focus or tap opens; on phones they scroll sideways.
+5. **Voices:** the section pins on one testimonial at a time, and its words light up as you scroll.
+6. **Trust:** an evidence bento where every claim links to its document.
+7. **PPHF@10:** a large year turns over as each milestone passes the middle of the screen.
+8. **Partners:** a 3D drum of logos that spins faster while you scroll.
+
+With reduced motion, or if the script can't start, every section falls back to a plain static layout with all content visible.
 
 ## Language
 

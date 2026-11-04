@@ -101,8 +101,9 @@ body { top: 0 !important; }
 .phead { position: relative; padding: clamp(28px, 5vw, 64px) 0 clamp(48px, 7vw, 96px); overflow: clip; }
 .phead__grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; position: relative; z-index: 1; }
 @media (min-width: 900px) { .phead--media .phead__grid { grid-template-columns: 1.15fr .85fr; } }
-.phead h1 { margin-top: 14px; max-width: 16ch; }
-.phead--long h1 { font-size: clamp(2.1rem, 1.5rem + 2.8vw, 3.6rem); max-width: 22ch; }
+.phead h1 { margin-top: 14px; max-width: 14ch; font-size: clamp(2.8rem, 1.6rem + 5vw, 6.2rem); line-height: .95; letter-spacing: -.04em; }
+.phead h1 em { color: var(--thread-ink); }
+.phead--long h1 { font-size: clamp(2.3rem, 1.4rem + 3.6vw, 4.6rem); max-width: 20ch; }
 .phead .lead { margin-top: 22px; }
 .phead__byline { margin-top: 14px; }
 .phead .btn-row { margin-top: 28px; }
@@ -167,6 +168,7 @@ main:has(> .closer) + .foot .foot__top { border-top: 1px solid var(--line-night)
 .socials a:hover { background: var(--thread); border-color: var(--thread); color: var(--night); }
 .socials .icon { width: 18px; height: 18px; }
 .foot__mark { margin: clamp(32px, 5vw, 64px) 0 0; font: 300 min(11.6vw, 10.4rem)/.85 var(--serif); letter-spacing: -.05em; color: rgba(238, 241, 248, .1); white-space: nowrap; overflow: hidden; user-select: none; }
+.foot__mark [data-t]::before { content: attr(data-t); white-space: pre; }
 .foot__mark em { font-style: italic; color: rgba(255, 154, 92, .32); }
 .foot__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-top: 24px; font-size: var(--fs-xs); color: var(--on-night-2); }
 .foot__bottom a { color: var(--on-night); }

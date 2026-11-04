@@ -33,7 +33,7 @@ npm test           # clean build + verification suite
 | One-off page templates (design only) | `src/pages/*.njk` |
 | Styles | `src/assets/css/`: `tokens` (colours, type, spacing) → `fonts` → `base` → `chrome` (ribbon, header, dock, drawer, page head, closer, footer) → `components` → `home` → `pages` → `media`. Bundled, pruned per page and inlined at build time. |
 | Media & Opportunities content | `data/media/*.json` (synced from WordPress — see below) |
-| Behaviour | `src/assets/js/main.js`: menus, bottom-sheet drawer, Hindi switch, the scroll-drawn thread, route steps, hero prints, cause-index peek, voices deck, drag rails, counters, donate and contact forms, video, filters |
+| Behaviour | `src/js/main.js` (every page, bundled with Lenis by esbuild) and `src/js/motion.js` (homepage scroll set pieces with GSAP ScrollTrigger, loaded on first interaction; enable on any page with `motion: true` in front matter): menus, bottom-sheet drawer, Hindi switch, the scroll-drawn thread, route steps, hero prints, cause-index peek, voices deck, drag rails, counters, donate and contact forms, video, filters |
 | Images | `src/assets/img/` |
 
 ### Common edits
@@ -83,7 +83,7 @@ npm test                       # rebuild + verify
 - **No render-blocking requests.** All CSS is bundled + minified with esbuild at build time and inlined; each page keeps only the rules its HTML uses (`scripts/prune-css.js`). Classes added by JavaScript must start with `is-` (or be added to the safelist there).
 - **Self-hosted fonts:** Fraunces (roman and italic), Hanken Grotesk and Kalam, Latin-subset and weight-limited with fontTools (about 106 KB in total; three files preloaded), with metric-matched fallbacks so nothing shifts.
 - **Images:** every media image has width/height, `srcset` (400/720/1280 WebP) and correct `sizes`; the hero/lead image is preloaded with `fetchpriority="high"`; everything else is lazy. Covers: `python scripts/covers.py` (240/400px thumbs + self-hosted YouTube posters).
-- **JS** is one deferred, minified file; there are no third-party scripts until a visitor presses play on a video.
+- **JS:** `main.js` is one deferred, minified file (about 38 KB). `motion.js` (GSAP) loads only on pages with `motion: true`, after the first scroll or touch; there are no third-party scripts until a visitor presses play on a video.
 - **Caching/security headers** live in `vercel.json` (1-year immutable for `/assets/`).
 - **Every page:** unique title + description, canonical, Open Graph/Twitter cards, Organization + WebSite JSON-LD; `npm test` fails on a missing description/canonical, invalid JSON-LD, or a media image without dimensions.
 - ⚠️ `vercel.json` sends `X-Robots-Tag: noindex` on the preview. **Remove that header when the site goes live**, or Lighthouse SEO (and Google) will treat every page as blocked.

@@ -1,19 +1,20 @@
-{% from "partials/thread.njk" import thread %}
-{#- Landing-page header for Media & Opportunities.
-    Page data: title, heading, lead, eyebrow, mediaGroup ("media" | "opportunities"), stats [{n, label}], crumbs
-    The switcher lets readers hop between sibling landing pages without opening the menu. -#}
+{#- Landing header shared by every Media page and every Get Involved page.
+    Page data: title, heading, lead, label, mediaGroup ("media" | "involve"), stats [{n, label}], crumbs, headImage
+    The switcher lets readers hop between sibling pages without opening the menu. -#}
+{% from "partials/icons.njk" import icon %}
 {%- set groups = {
   "media": [
     ["Newsroom", "/media/"], ["Blogs & News", "/blogs-and-news/"], ["Press", "/press/"], ["Events", "/events/"],
     ["Gallery", "/gallery/"], ["Videos", "/videos/"], ["Publications", "/publications/"], ["Reports", "/reports/"]
   ],
-  "opportunities": [
-    ["RFP / EOI", "/request-for-proposal/"], ["Vacancies", "/vacancies/"], ["Internship", "/internship/"], ["Corporate Volunteering", "/pphf-corporate-volunteering-program/"]
+  "involve": [
+    ["Donate", "/donate/"], ["Partnership", "/partnership/"], ["Corporate Volunteering", "/pphf-corporate-volunteering-program/"], ["PULSE Fund", "/pphf-pulse-fund/"],
+    ["Internship", "/internship/"], ["Vacancies", "/vacancies/"], ["RFP / EOI", "/request-for-proposal/"]
   ]
 } %}
+{%- set g = mediaGroup or "media" %}
 {%- set sectionUrl = (pagination.href.first if pagination and pagination.href else page.url) %}
-<section class="mhead mhead--{{ mediaGroup or 'media' }}">
-  {{ thread("head", "phead__thread") }}
+<section class="mhead mhead--{{ g }}{% if headImage %} mhead--media{% endif %}">
   <div class="wrap">
     <nav aria-label="Breadcrumb">
       <ol class="crumbs">
@@ -24,22 +25,26 @@
     </nav>
     <div class="mhead__grid">
       <div class="mhead__copy">
-        <p class="label">{{ eyebrow or ("Opportunities" if mediaGroup == "opportunities" else "Media") }}</p>
-        <h1>{{ heading or title }}{% if pagination and pagination.pageNumber > 0 %}<span class="mhead__page"> — page {{ pagination.pageNumber + 1 }}</span>{% endif %}</h1>
+        <p class="label">{{ label or eyebrow or ("Get involved" if g == "involve" else "Newsroom") }}</p>
+        <h1>{{ (heading or title) | safe }}{% if pagination and pagination.pageNumber > 0 %}<span class="mhead__page"> · page {{ pagination.pageNumber + 1 }}</span>{% endif %}</h1>
         {% if lead %}<p class="lead">{{ lead | safe }}</p>{% endif %}
+        {%- if headActions %}<div class="btn-row">{% for a in headActions %}<a class="btn {{ 'btn--give' if a.give else 'btn--line' }}" href="{{ a.href }}"{% if a.external %} target="_blank" rel="noopener"{% endif %}>{{ a.label }}</a>{% endfor %}</div>{% endif %}
       </div>
-      {%- if stats %}
-      <dl class="mhead__stats">
-        {%- for s in stats %}<div><dt>{{ s.label }}</dt><dd>{{ s.n }}</dd></div>{% endfor %}
-      </dl>
+      {%- if headImage %}
+      <figure class="print mhead__print" style="--tilt: 2deg">{% photo headImage, headImageAlt or "", "(max-width: 900px) 80vw, 380px", "", "eager", true %}</figure>
       {%- endif %}
     </div>
+    {%- if stats %}
+    <dl class="mhead__stats">
+      {%- for s in stats %}<div><dt>{{ s.label }}</dt><dd>{{ s.n }}</dd></div>{% endfor %}
+    </dl>
+    {%- endif %}
   </div>
-  <nav class="mswitch" aria-label="{{ 'Opportunities' if mediaGroup == 'opportunities' else 'Media' }} sections">
+  <nav class="mswitch" aria-label="{{ 'Get involved' if g == 'involve' else 'Media' }} sections">
     <div class="wrap">
       <ul>
-        {%- for g in groups[mediaGroup or "media"] %}
-        <li><a href="{{ g[1] }}"{% if sectionUrl == g[1] or page.url == g[1] %} aria-current="page"{% endif %}>{{ g[0] }}</a></li>
+        {%- for it in groups[g] %}
+        <li><a href="{{ it[1] }}"{% if sectionUrl == it[1] or page.url == it[1] %} aria-current="page"{% endif %}>{{ it[0] }}</a></li>
         {%- endfor %}
       </ul>
     </div>

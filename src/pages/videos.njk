@@ -12,28 +12,32 @@ eleventyComputed:
     - { n: "{{ videos.length }}", label: "Films" }
 ---
 {% from "partials/icons.njk" import icon %}
-<section class="sec">
-  <div class="wrap">
+<section class="cinema night" data-cinema>
+  <div class="wrap wrap--wide cinema__grid">
     {%- set v0 = videos[0] %}
-    <figure class="video-feature">
-      <button class="video" type="button" data-yt="{{ v0.id }}" aria-label="Play video: {{ v0.title }}">
-        <img src="/assets/img/yt/{{ v0.id }}-640.webp" srcset="/assets/img/yt/{{ v0.id }}-320.webp 320w, /assets/img/yt/{{ v0.id }}-640.webp 640w" sizes="(max-width: 860px) calc(100vw - 32px), 60vw" alt="" width="640" height="360" fetchpriority="high">
+    <div class="cinema__screen">
+      <button class="video video--big" type="button" data-yt="{{ v0.id }}" aria-label="Play video: {{ v0.title }}" data-cinema-screen>
+        <img src="/assets/img/yt/{{ v0.id }}-640.webp" srcset="/assets/img/yt/{{ v0.id }}-320.webp 320w, /assets/img/yt/{{ v0.id }}-640.webp 640w" sizes="(max-width: 1000px) calc(100vw - 32px), 66vw" alt="" width="640" height="360" fetchpriority="high">
         <span class="video__play">{{ icon("play") }}</span>
       </button>
-      <figcaption><span class="label">Featured film</span><span class="video-feature__title">{{ v0.title }}</span></figcaption>
-    </figure>
-    <div class="pgrid pgrid--3 video-grid">
-      {%- for v in videos %}{% if not loop.first %}
-      <figure class="video-item reveal">
-        <button class="video" type="button" data-yt="{{ v.id }}" aria-label="Play video: {{ v.title }}">
-          <img src="/assets/img/yt/{{ v.id }}-640.webp" srcset="/assets/img/yt/{{ v.id }}-320.webp 320w, /assets/img/yt/{{ v.id }}-640.webp 640w" sizes="(max-width: 680px) calc(100vw - 32px), (max-width: 1000px) 46vw, 400px" alt="" width="640" height="360" loading="lazy" decoding="async">
-          <span class="video__play">{{ icon("play") }}</span>
-        </button>
-        <figcaption>{{ v.title }}</figcaption>
-      </figure>
-      {%- endif %}{% endfor %}
+      <div class="cinema__caption">
+        <p class="label">Now showing · <span data-cinema-n>01</span> / {{ "0" + videos.length if videos.length < 10 else videos.length }}</p>
+        <h2 class="cinema__title" data-cinema-title>{{ v0.title }}</h2>
+      </div>
     </div>
-    <p class="center video-more"><a class="btn btn--line" href="https://www.youtube.com/channel/UCFmuq4EiVAY6X10Z76qcBmw" target="_blank" rel="noopener">{{ icon("youtube") }} More on our YouTube channel</a></p>
+    <div class="cinema__side">
+      <p class="label">The reel</p>
+      <ol class="reel" role="list">
+        {%- for v in videos %}
+        <li><button type="button" class="reel__item{% if loop.first %} is-current{% endif %}" data-cinema-pick data-id="{{ v.id }}" data-title="{{ v.title }}"{% if loop.first %} aria-current="true"{% endif %}>
+          <span class="reel__thumb"><img src="/assets/img/yt/{{ v.id }}-320.webp" alt="" width="320" height="180" loading="lazy" decoding="async"></span>
+          <span class="reel__n">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span>
+          <span class="reel__t">{{ v.title }}</span>
+        </button></li>
+        {%- endfor %}
+      </ol>
+      <a class="btn btn--line" href="https://www.youtube.com/channel/UCFmuq4EiVAY6X10Z76qcBmw" target="_blank" rel="noopener">{{ icon("youtube") }} More on our YouTube channel</a>
+    </div>
   </div>
 </section>
 

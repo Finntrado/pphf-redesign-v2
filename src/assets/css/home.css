@@ -188,7 +188,7 @@
   .has-motion .voices__list { display: grid; }
   .has-motion .voice { grid-area: 1 / 1; align-self: center; opacity: 0; visibility: hidden; transform: translateY(18px); transition: opacity .18s ease-in, transform .18s ease-in, visibility 0s .18s; }
   .has-motion .voice.is-current { opacity: 1; visibility: visible; transform: none; transition: opacity .45s .2s var(--ease), transform .6s .2s var(--ease), visibility 0s .2s; }
-  .has-motion .voice__q .w { color: #C9D0E0; }
+  .has-motion .voice__q .w { color: #7A86A3; }
   .has-motion .voice__q .w.is-lit { color: var(--navy); }
   .has-motion .voices__count { display: block; text-align: center; margin-top: 32px; font: 500 var(--fs-sm)/1 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
   .has-motion .voices__count span { color: var(--thread-ink); }

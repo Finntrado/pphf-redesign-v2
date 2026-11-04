@@ -7,23 +7,19 @@ crumbs:
 seoTitle: "Reports — Annual, Programme & Financial Reports | PPHF"
 description: "Annual reports, programme reports and audited financial reports of People to People Health Foundation (PPHF) — how we work and how funds are used."
 lead: "Annual, programme and financial reports — how we work, what changed and how every rupee is used."
+headActions:
+  - { label: "Annual reports", href: "#annual" }
+  - { label: "Programme reports", href: "#program" }
+  - { label: "Financial reports", href: "#financial" }
 eleventyComputed:
   stats:
     - { n: "{{ reports.annual.length }}", label: "Annual reports" }
     - { n: "{{ reports.program.length }}", label: "Programme reports" }
 ---
 {% from "partials/icons.njk" import icon %}
-<nav class="subnav" aria-label="Report types">
-  <div class="wrap">
-    <ul>
-      <li><a href="#annual">Annual Reports</a></li>
-      <li><a href="#program">Program Reports</a></li>
-      <li><a href="#financial">Financial Reports</a></li>
-    </ul>
-  </div>
-</nav>
 
-<section class="sec" id="annual">
+
+<section class="sec sec--sm" id="annual">
   <div class="wrap">
     <div class="sec-head sec-head--row">
       <div><h2>Annual Reports</h2></div>
@@ -38,7 +34,7 @@ eleventyComputed:
         <span class="btn btn--give btn--lg">Read online {{ icon("arrow-right") }}</span>
       </span>
     </a>
-    <div class="pgrid pgrid--3 report-rest">
+    <div class="report-rest">
       {%- for r in reports.annual | take(4) %}{% if not loop.first %}
       <a class="cover reveal" href="/{{ r.slug }}/">
         <span class="cover__img">{%- set cv = r.cover | cover %}<img src="{{ cv.src }}"{% if cv.srcset %} srcset="{{ cv.srcset }}" sizes="(max-width: 680px) 44vw, 240px"{% endif %} width="{{ cv.w }}" height="{{ cv.h }}" alt="" loading="lazy" decoding="async"></span>

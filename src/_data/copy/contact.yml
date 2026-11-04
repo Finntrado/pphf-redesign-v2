@@ -6,3 +6,12 @@ lead: Let us connect and explore possible collaborations in areas of common inte
 label: Get In Touch
 formTitle: Send us a message
 roles: [I'd like to donate, I represent a company / CSR team, I'm from government or a development agency, I'd like to volunteer or intern, Media enquiry, Something else]
+# Contact page layout: a big headline, then a "who should I talk to?" switcher that sets the form subject.
+big: Let's talk about <em>health</em>.
+ways:
+- { key: donate, title: "I'd like to donate", text: "Questions about giving, receipts or 80G", email: connect@pphfglobal.org, subject: "Donation enquiry" }
+- { key: csr, title: "I represent a company", text: "CSR partnerships and co-investment", email: connect@pphfglobal.org, subject: "CSR partnership enquiry" }
+- { key: flood, title: "Bihar flood relief", text: "The appeal desk", email: usiddiqui@pphfglobal.org, phone: "+91 8377881415", phoneHref: "+918377881415", subject: "Bihar Flood Relief Appeal 2026" }
+- { key: work, title: "Jobs & internships", text: "Careers at PPHF", email: career@pphfglobal.org, subject: "Careers enquiry" }
+- { key: vendor, title: "Tenders (RFP / EOI)", text: "Procurement queries", email: procurement@pphfglobal.org, subject: "Procurement query" }
+- { key: other, title: "Something else", text: "Media, research, anything", email: connect@pphfglobal.org, subject: "Website enquiry" }

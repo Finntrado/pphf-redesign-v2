@@ -5,4 +5,4 @@ layout: layouts/base.njk
     Page data: title, heading, lead, eyebrow, mediaGroup, stats, crumbs, headCovers, ctaTitle, ctaText, noCta -#}
 {% include "partials/media-head.njk" %}
 {{ content | safe }}
-{%- if not noCta %}{% include "partials/closer.njk" %}{% endif %}
+{%- if not (noCta or noCloser) %}{% set closerTitle = closerTitle or ctaTitle %}{% set closerText = closerText or ctaText %}{% include "partials/closer.njk" %}{% endif %}

@@ -74,9 +74,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
     const measure = () => {
       W = mover.scrollWidth;
       mover.style.setProperty("--track-w", `${W}px`);
-      // look-up table of the line's y for a given x (the path is drawn in a 1000×60 box, stretched to W×60)
+      // Draw the wave at the real width (no stretching, so the dash maths stays exact)
+      const n = Math.max(4, Math.round(W / 170)), step = W / n;
+      let d = `M0 30 C ${step * 0.35} 16 ${step * 0.65} 16 ${step} 30`;
+      for (let k = 2; k <= n; k++) d += ` S ${step * (k - 0.35)} ${k % 2 ? 16 : 44} ${step * k} 30`;
+      line.setAttribute("viewBox", `0 0 ${W} 60`);
+      path.setAttribute("d", d);
       const L = path.getTotalLength();
-      table = Array.from({ length: 241 }, (_, i) => { const pt = path.getPointAtLength((L * i) / 240); return [pt.x / 1000, pt.y]; });
+      table = Array.from({ length: 241 }, (_, i) => { const pt = path.getPointAtLength((L * i) / 240); return [pt.x / W, pt.y]; });
     };
     const yAt = (t) => { for (let i = 1; i < table.length; i++) if (table[i][0] >= t) { const [x0, y0] = table[i - 1], [x1, y1] = table[i]; return y0 + ((y1 - y0) * (t - x0)) / ((x1 - x0) || 1); } return 30; };
     const dist = () => Math.max(0, W - window.innerWidth + 80);
@@ -152,5 +157,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
     gsap.from(h, { yPercent: 40, opacity: 0, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 88%" } });
   });
 
-  window.addEventListener("load", () => ScrollTrigger.refresh());
+  if (document.readyState === "complete") requestAnimationFrame(() => ScrollTrigger.refresh());
+  else window.addEventListener("load", () => ScrollTrigger.refresh());
 })();

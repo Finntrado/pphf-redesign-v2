@@ -9,7 +9,7 @@
 {%- macro mediaCard(item, variant = "", eager = false) -%}
 <article class="mcard{% if variant %} mcard--{{ variant }}{% endif %} mcard--{{ item.kind }}">
   <div class="mcard__media">
-    {%- set sz = "(max-width: 900px) calc(100vw - 32px), 60vw" if variant == "feature" else "(max-width: 680px) calc(100vw - 32px), (max-width: 1000px) 46vw, 400px" %}
+    {%- set sz = "(max-width: 900px) calc(100vw - 32px), 60vw" if variant in ["feature", "wide"] else "(max-width: 680px) calc(100vw - 32px), (max-width: 1000px) 46vw, 400px" %}
     {%- if variant == "row" %}{% set sz = "160px" %}{% endif %}
     {%- if item.image %}{% mediaImg item.image, sz, "", eager %}{% endif %}
     {%- if item.kind == "event" and item.date %}
@@ -24,8 +24,8 @@
       {%- if item.readMinutes and variant != "row" %}<span>{{ item.readMinutes }} min read</span>{% endif %}
     </p>
     {%- set hl = "h2" if variant == "feature" else "h3" %}<{{ hl }} class="mcard__title"><a href="{{ item.url }}">{{ item.title }}</a></{{ hl }}>
-    {%- if variant != "row" and item.excerpt %}<p class="mcard__excerpt">{{ item.excerpt if variant == "feature" else (item.excerpt | truncate(150, true, "…")) }}</p>{% endif %}
-    {%- if variant == "feature" %}<span class="mcard__more" aria-hidden="true">Read the story {{ icon("arrow-right", "icon--sm") }}</span>{% endif %}
+    {%- if variant != "row" and item.excerpt %}<p class="mcard__excerpt">{{ item.excerpt if variant == "feature" else (item.excerpt | truncate(170 if variant == "wide" else 120, true, "…")) }}</p>{% endif %}
+    {%- if variant in ["feature", "wide"] %}<span class="mcard__more" aria-hidden="true">Read the story {{ icon("arrow-right", "icon--sm") }}</span>{% endif %}
   </div>
 </article>
 {%- endmacro -%}

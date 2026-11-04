@@ -1,5 +1,6 @@
 ---
-layout: layouts/page.njk
+layout: layouts/media-landing.njk
+mediaGroup: involve
 permalink: /internship/
 copyKey: internship
 navSection: Get Involved
@@ -11,7 +12,7 @@ navSection: Get Involved
     <div class="prose">
       <p><span class="tag tag--thread">{{ r.kind }}</span></p>
       <h2>{{ r.title }}</h2>
-      <p class="muted">{{ icon("pin", "icon--sm") }} {{ r.location }}</p>
+      <p class="muted role__loc">{{ icon("pin", "icon--sm") }} {{ r.location }}</p>
       <p>{{ r.summary | safe }}</p>
       <h3>{{ r.responsibilitiesTitle }}</h3>
       {%- for g in r.responsibilities %}<h4>{{ g.title }}</h4><ul>{% for i in g.items %}<li>{{ i }}</li>{% endfor %}</ul>{% endfor %}

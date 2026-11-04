@@ -24,12 +24,12 @@ eleventyComputed:
 <section class="sec sec--sm">
   <div class="wrap">
     {%- if pagination.pageNumber == 0 %}
-    <div class="lead-grid lead-grid--solo">{{ mediaCard(entries[0], "feature", true) }}</div>
-    <h2 class="label">More {{ "stories" if "press" == "news" else "coverage" }}</h2>
-    <div class="pgrid pgrid--3 mgrid">{% for p in entries %}{% if not loop.first %}{{ mediaCard(p) }}{% endif %}{% endfor %}</div>
+    <div class="mfeature">{{ mediaCard(entries[0], "feature", true) }}</div>
+    <h2 class="label mag__label">More {{ "stories" if "press" == "news" else "coverage" }}</h2>
+    <div class="mag">{% for p in entries %}{% if not loop.first %}{{ mediaCard(p, "wide" if (loop.index0 - 1) % 7 in [0, 4] else "") }}{% endif %}{% endfor %}</div>
     {%- else %}
-    <h2 class="label">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</h2>
-    <div class="pgrid pgrid--3 mgrid">{% for p in entries %}{{ mediaCard(p, "", loop.first) }}{% endfor %}</div>
+    <h2 class="label mag__label">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</h2>
+    <div class="mag">{% for p in entries %}{{ mediaCard(p, "wide" if loop.index0 % 7 in [0, 4] else "", loop.first) }}{% endfor %}</div>
     {%- endif %}
     {% include "partials/pager.njk" %}
   </div>
