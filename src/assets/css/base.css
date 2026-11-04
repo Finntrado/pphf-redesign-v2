@@ -1,7 +1,10 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 24px); }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+/* Lenis smooth scroll (see src/js/main.js) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--fs-body)/1.62 var(--sans); font-kerning: normal; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: clip; }
 img, svg, video, iframe { display: block; max-width: 100%; }
 img { height: auto; }

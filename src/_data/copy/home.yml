@@ -2,8 +2,16 @@
 # the Flood Relief Appeal, the About page, PPHF@10). Sections appear in this order on the page.
 
 hero:
-  note: Since 2016 · 27+ states &amp; UTs · 35.5 million lives touched
-  title: Health, passed from <em>people</em> to <em>people</em>.
+  note: Since 2016 · 27+ states &amp; UTs
+  # The headline is set as: {{ before }} [photo A] {{ middle }} [photo B] {{ after }}
+  before: Health, passed from
+  middle: people to
+  after: people.
+  pillA:
+    image: maternal-child-adolescent-health-1.webp
+  # pillB grows to fill the screen; it uses the full-resolution original (photos/hero-community-*.webp)
+  pillB:
+    alt: Women from the community gathered in a health awareness session
   lead: >-
     We partner with communities, governments and companies to strengthen health systems,
     improve access to quality care and deliver locally driven public health solutions
@@ -13,19 +21,9 @@ hero:
     - 80G tax benefit
     - ISO 9001:2015 certified
     - Fitch-graded NGO
-  prints:
-    - image: maternal-child-adolescent-health-1.webp
-      alt: A mother smiling with her baby in her arms
-      caption: Women, adolescent &amp; child health
-      tilt: -4deg
-    - image: screenshot-2026-03-02-125805.webp
-      alt: Health workers screening villagers at an SBI Sanjeevani Clinic on Wheels camp
-      caption: SBI Sanjeevani Clinic on Wheels
-      tilt: 3deg
-    - image: g8a5473-scaled.webp
-      alt: Women from the community gathered in a health awareness session
-      caption: A community health session
-      tilt: -1.5deg
+  scrollHint: Scroll to meet them
+  stageCaption: A community health session, one of thousands PPHF has held since 2016
+  outreach: See our outreach
 
 appeal:
   label: Urgent appeal · Bihar floods 2026
@@ -66,6 +64,7 @@ numbers:
 route:
   label: Where your support goes
   title: How your support travels, <em>hand to hand</em>.
+  hint: "Keep scrolling, and follow the thread"
   intro: >-
     PPHF builds "win-win" partnerships step by step, leveraging government and corporate resources
     for greater impact and coverage (the PPP model). This is the route a rupee takes.
@@ -75,24 +74,34 @@ route:
       text: Individuals, companies and institutions fund the work. 90% of PPHF's funding comes from private sources.
       note: you are here
     - who: PPHF
+      image: building-partnership-1.webp
+      alt: PPHF and partners at a partnership signing
       title: Public &amp; private sector collaboration
       text: >-
         We work with government and stakeholders, leveraging partnerships, and put 90% of funds into programme
         implementation, with robust M&amp;E and partnership management.
     - who: The health system
+      image: health-system-strengthening-1.webp
+      alt: Health workers at a strengthened health facility
       title: Health system strengthening
       text: >-
         Technical support on quality public health delivery, capacity strengthening and health technology:
         building the skills of health care workers and the capacity of the local health care system.
     - who: The community
+      image: g8a5473-scaled.webp
+      alt: Women from the community gathered in a health awareness session
       title: Community mobilisation
       text: Establishing and expanding community support systems, so that care continues long after a programme ends.
     - who: A person
+      image: expanding-reach-1.webp
+      alt: A PPHF clinic-on-wheels van at a programme site
       title: Access to quality care
       text: Improving access to quality services, close to home.
       quote: When the SBIF Sanjeevani Clinic on Wheels came to our village, the doctor gave me medicines and told me what to eat and do every day. Now I feel stronger.
       quoteBy: Mr. Baisanaba Nial, Balangir, Odisha
     - who: And back again
+      image: influencing-policy-1.webp
+      alt: PPHF and partners at a policy convening
       title: Policy advocacy &amp; scaling up
       text: >-
         What we learn in the field becomes new knowledge through research and demonstration, then

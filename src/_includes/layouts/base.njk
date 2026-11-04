@@ -45,6 +45,8 @@
   <style>{% inlineCss %}</style>
   <script>document.documentElement.classList.add("js");try{if(/googtrans=\/en\/hi/.test(document.cookie))document.documentElement.classList.add("is-hi")}catch(e){}</script>
   <script src="/assets/js/main.js?v={{ build.version }}" defer></script>
+  {%- if motion %}
+  <script src="/assets/js/motion.js?v={{ build.version }}" defer></script>{% endif %}
   <script type="application/ld+json">{{ {
     "@context": "https://schema.org",
     "@graph": [

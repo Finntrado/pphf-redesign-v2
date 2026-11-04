@@ -41,12 +41,18 @@ export default function (eleventyConfig) {
     if (!(this.page.outputPath || "").endsWith(".html") || !html.includes("/*__INLINE_CSS__*/")) return html;
     return html.replace("/*__INLINE_CSS__*/", () => pruneFor(cssBundle, html));
   });
+  // JS: src/js/*.js are bundled + minified by esbuild into /assets/js/.
+  //   main.js   — every page (menus, forms, Lenis smooth scroll, small interactions)
+  //   motion.js — only pages with scroll set pieces (front matter `motion: true`): GSAP + ScrollTrigger
+  eleventyConfig.addWatchTarget("src/js/");
   eleventyConfig.on("eleventy.after", async ({ dir }) => {
-    const f = `${dir.output}/assets/js/main.js`;
-    if (!fs.existsSync(f)) return;
-    const out = await esbuild.transform(fs.readFileSync(f, "utf8"), { loader: "js", minify: true, target: "es2020" });
-    fs.writeFileSync(f, out.code);
+    await esbuild.build({
+      entryPoints: ["src/js/main.js", "src/js/motion.js"].filter((f) => fs.existsSync(f)),
+      bundle: true, minify: true, format: "iife", target: "es2020",
+      outdir: `${dir.output}/assets/js`, legalComments: "none",
+    });
   });
+
 
   // ---------- Dates (ISO in, human out). {{ "2026-09-08T14:46:26" | date }} → 8 September 2026
   const asDate = (d) => (d instanceof Date ? d : new Date(String(d).length === 10 ? d + "T00:00:00" : d));

@@ -1,18 +1,19 @@
-{#- Closing call. Optional vars: closerTitle, closerText, closerSecondary {label, href} -#}
+{#- Closing call. It sits last in <main> and joins the footer below it into one dark block.
+    Optional vars: closerTitle, closerText, closerSecondary {label, href} -#}
 {% from "partials/icons.njk" import icon %}
-{% from "partials/thread.njk" import thread %}
-<section class="closer sheet night" aria-labelledby="closer-h">
-  {{ thread("closer", "closer__thread") }}
-  <div class="wrap closer__inner">
+<section class="closer night" aria-labelledby="closer-h">
+  <div class="wrap wrap--wide closer__inner">
     <div>
       <p class="note">{{ copy.global.closer.note }}</p>
       <h2 id="closer-h">{{ (closerTitle or copy.global.closer.title) | safe }}</h2>
-      <p>{{ closerText or copy.global.closer.text }}</p>
     </div>
-    <div class="btn-row">
-      <a class="btn btn--give btn--lg" href="/donate/">{{ icon("heart") }} Donate</a>
-      {%- set sec = closerSecondary or { label: "Partner with us", href: "/partnership/" } %}
-      <a class="btn btn--line btn--lg" href="{{ sec.href }}">{{ sec.label }}</a>
+    <div class="closer__side">
+      <p>{{ closerText or copy.global.closer.text }}</p>
+      <div class="btn-row">
+        <a class="btn btn--give btn--lg" href="/donate/">{{ icon("heart") }} Donate</a>
+        {%- set sec = closerSecondary or { label: "Partner with us", href: "/partnership/" } %}
+        <a class="btn btn--line btn--lg" href="{{ sec.href }}">{{ sec.label }}</a>
+      </div>
     </div>
   </div>
 </section>

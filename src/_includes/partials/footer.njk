@@ -11,10 +11,10 @@
       </div>
       <div class="foot__cols">
         {%- for group in nav.main %}{% if group.items %}
-        <div>
-          <p class="foot__h">{{ group.label }}</p>
+        <details class="foot__group" open>
+          <summary class="foot__h">{{ group.label }} {{ icon("plus", "icon--sm") }}</summary>
           <ul>{% for item in group.items %}<li><a href="{{ (item.href | wp) if item.wp else item.href }}">{{ item.label }}</a></li>{% endfor %}</ul>
-        </div>
+        </details>
         {%- endif %}{% endfor %}
       </div>
     </div>
@@ -35,6 +35,7 @@
         </ul>
       </div>
     </div>
+    <p class="foot__mark" aria-hidden="true">People <em>to</em> People</p>
     <div class="foot__bottom">
       <p>© {{ "" | year }} People to People Health Foundation · {{ copy.global.regShort }}</p>
       <p><a href="{{ site.onePager | wp }}" target="_blank" rel="noopener">One-pager (PDF)</a> · <a href="/dd-documents/">Compliance documents</a> · <a href="/contact/">Contact</a></p>

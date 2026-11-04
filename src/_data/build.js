@@ -3,8 +3,8 @@ import fs from "node:fs";
 import crypto from "node:crypto";
 
 export default function () {
-  const files = [...fs.readdirSync("./src/assets/css").map((f) => `css/${f}`), "js/main.js"];
+  const files = [...fs.readdirSync("./src/assets/css").map((f) => `./src/assets/css/${f}`), ...fs.readdirSync("./src/js").map((f) => `./src/js/${f}`)];
   const hash = crypto.createHash("sha1");
-  for (const f of files) hash.update(fs.readFileSync(`./src/assets/${f}`));
+  for (const f of files) hash.update(fs.readFileSync(f));
   return { version: hash.digest("hex").slice(0, 10) };
 }

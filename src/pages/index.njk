@@ -3,230 +3,238 @@ layout: layouts/base.njk
 title: Home
 permalink: /
 bodyClass: page-home
+motion: true
 description: People to People Health Foundation (PPHF) partners with communities, governments and companies to strengthen health systems, improve access to quality care and deliver locally driven public health solutions across India. Donate or partner with us.
-preloadImage: /assets/img/photos/maternal-child-adolescent-health-1-800.webp
-preloadSrcset: /assets/img/photos/maternal-child-adolescent-health-1-800.webp 800w, /assets/img/photos/maternal-child-adolescent-health-1-1600.webp 1600w
-preloadSizes: "(max-width: 899px) 62vw, 330px"
 ---
 {% from "partials/icons.njk" import icon %}
-{% from "partials/thread.njk" import thread %}
 {%- set h = copy.home %}
 
-{#- 1 ─ Hero: who, what, where, and the two ways in -#}
-<section class="hero" aria-labelledby="hero-h">
-  <div class="wrap wrap--wide hero__grid">
-    <div class="hero__copy">
-      <p class="note hero__note">{{ h.hero.note | safe }}</p>
-      <h1 id="hero-h" class="display hero__title">{{ h.hero.title | safe }}</h1>
-      <p class="lead hero__lead">{{ h.hero.lead }}</p>
-      <div class="btn-row hero__actions">
+{#- ① HERO — the headline carries two photographs inline. On scroll the second one grows
+      until it fills the screen, and the impact figures arrive over it (motion.js). -#}
+<section class="xhero" aria-labelledby="hero-h" data-xhero>
+  <div class="xhero__pin">
+    <div class="xhero__copy" data-xhero-copy>
+      <p class="note xhero__note">{{ h.hero.note | safe }}</p>
+      <h1 id="hero-h" class="xhero__title">
+        {{ h.hero.before }}
+        <span class="pill pill--a">{% photo h.hero.pillA.image, "", "220px", "", "eager" %}</span>
+        {{ h.hero.middle }}
+        <span class="pill pill--b" data-xhero-pill><img src="/assets/img/photos/hero-community-900.webp" alt="" width="900" height="600" fetchpriority="high"></span>
+        <em>{{ h.hero.after }}</em>
+      </h1>
+      <p class="lead xhero__lead">{{ h.hero.lead }}</p>
+      <div class="btn-row xhero__actions">
         <a class="btn btn--give btn--lg" href="/donate/">{{ icon("heart") }} Donate</a>
         <a class="btn btn--line btn--lg" href="/partnership/">Partner with us {{ icon("arrow-right", "icon--go") }}</a>
       </div>
-      <ul class="hero__trust" role="list">
+      <ul class="xhero__trust" role="list">
         {%- for t in h.hero.trust %}<li>{{ icon("shield", "icon--sm") }}{{ t }}</li>{% endfor %}
       </ul>
+      <p class="xhero__hint" aria-hidden="true"><span class="xhero__mouse"></span>{{ h.hero.scrollHint }}</p>
     </div>
-    <div class="hero__prints" data-prints>
-      {{ thread("hero", "hero__thread") }}
-      {%- for p in h.hero.prints %}
-      <figure class="print hero__print hero__print--{{ loop.index }}" style="--tilt: {{ p.tilt }}">
-        {% photo p.image, p.alt, "(max-width: 899px) 62vw, 330px", "", ("eager" if loop.first else "lazy"), loop.first %}
-        <figcaption>{{ p.caption | safe }}</figcaption>
-      </figure>
-      {%- endfor %}
+
+    <div class="xhero__stage" data-xhero-stage>
+      <img class="xhero__img" src="/assets/img/photos/hero-community-1600.webp" srcset="/assets/img/photos/hero-community-900.webp 900w, /assets/img/photos/hero-community-1600.webp 1600w, /assets/img/photos/hero-community-2400.webp 2400w" sizes="100vw" width="2400" height="1600" alt="{{ h.hero.pillB.alt }}" loading="lazy" decoding="async">
+      <div class="xhero__shade" aria-hidden="true"></div>
+      <div class="xhero__facts">
+        <p class="label">{{ h.numbers.label }}</p>
+        <dl class="xhero__stats">
+          {%- for s in h.numbers.stats %}
+          <div data-xhero-stat><dt>{{ s.long }} {{ s.label | safe }}</dt><dd aria-hidden="true"><b>{{ s.value }}{{ s.suffix }}</b><span>{{ s.label | safe }}</span></dd></div>
+          {%- endfor %}
+        </dl>
+        <p class="xhero__caption"><span class="note">{{ h.hero.stageCaption | safe }}</span> <a class="go" href="/outreach/">{{ h.hero.outreach }} {{ icon("arrow-right") }}</a></p>
+      </div>
     </div>
   </div>
 </section>
 
-{#- 2 ─ The urgent appeal -#}
-<section class="appeal sheet night" aria-labelledby="appeal-h">
-  <div class="wrap appeal__grid">
-    <div class="appeal__copy">
-      <p class="label"><span class="ribbon__dot" aria-hidden="true"></span>{{ h.appeal.label }}</p>
-      <h2 id="appeal-h">{{ h.appeal.title | safe }}</h2>
-      <p class="appeal__text">{{ h.appeal.text }}</p>
-      <dl class="appeal__figs">
-        {%- for f in h.appeal.figures %}<div class="reveal" style="--d: {{ loop.index0 * 0.08 }}s"><dt>{{ f.label }}</dt><dd>{{ f.n }}</dd></div>{% endfor %}
-      </dl>
-      <div class="btn-row">
-        <a class="btn btn--give btn--lg" href="/donate/?for=flood">{{ icon("heart") }} Give to flood relief</a>
-        <a class="btn btn--line btn--lg" href="/flood-relief-appeal-2026/">Read the appeal</a>
-      </div>
-    </div>
-    <figure class="appeal__media reveal">
-      {% photo h.appeal.photo, h.appeal.photoAlt, "(max-width: 899px) 92vw, 460px" %}
-      <figcaption class="appeal__needs">
-        <p class="note">Families urgently need</p>
-        <ul role="list">{% for n in h.appeal.needs %}<li><strong>{{ n.title }}</strong> {{ n.text }}</li>{% endfor %}</ul>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-{#- 3 ─ Proof in numbers -#}
-<section class="sec numbers" aria-labelledby="num-h">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="label">{{ h.numbers.label }}</p>
-      <h2 id="num-h">{{ h.numbers.title | safe }}</h2>
-    </div>
-    <dl class="ledger">
-      {%- for s in h.numbers.stats %}
-      <div class="ledger__row reveal" style="--d: {{ loop.index0 * 0.08 }}s">
-        <dt>{{ s.long }} {{ s.label | safe }}</dt>
-        <dd aria-hidden="true"><span class="ledger__n"><span data-count="{{ s.value }}">{{ s.value }}</span>{{ s.suffix }}</span><span class="ledger__l">{{ s.label | safe }}</span></dd>
-        {%- if loop.first %}<span class="note ledger__note" aria-hidden="true">{{ h.numbers.note }}</span>{% endif %}
-      </div>
-      {%- endfor %}
+{#- ② APPEAL — floodwater rises through the section as you scroll past it. The words sit in
+      two identical layers: dark on white, and white on water. Only the base layer is interactive. -#}
+{%- macro floodContent(clone) -%}
+<div class="wrap flood__inner">
+  <p class="label"><span class="ribbon__dot" aria-hidden="true"></span>{{ h.appeal.label }}</p>
+  <h2{% if not clone %} id="flood-h"{% endif %} class="flood__title">{{ h.appeal.title | safe }}</h2>
+  <div class="flood__grid">
+    <p class="flood__text">{{ h.appeal.text }}</p>
+    <dl class="flood__figs">
+      {%- for f in h.appeal.figures %}<div><dt>{{ f.label }}</dt><dd>{{ f.n }}</dd></div>{% endfor %}
     </dl>
-    <div class="numbers__foot">
-      <p class="numbers__mission"><span class="label label--plain">Our mission</span>{{ h.numbers.mission }}</p>
-      <p class="muted">{{ h.numbers.intro }} <a class="go" href="/outreach/">See our outreach {{ icon("arrow-right") }}</a></p>
+  </div>
+  <div class="flood__foot">
+    <ul class="flood__needs" role="list">{% for n in h.appeal.needs %}<li><strong>{{ n.title }}</strong> {{ n.text }}</li>{% endfor %}</ul>
+    <div class="btn-row">
+      <a class="btn btn--give btn--lg" href="/donate/?for=flood"{% if clone %} tabindex="-1"{% endif %}>{{ icon("heart") }} Give to flood relief</a>
+      <a class="btn btn--line btn--lg" href="/flood-relief-appeal-2026/"{% if clone %} tabindex="-1"{% endif %}>Read the appeal</a>
     </div>
+  </div>
+</div>
+{%- endmacro %}
+<section class="flood" aria-labelledby="flood-h" data-flood>
+  <div class="flood__base">{{ floodContent(false) }}</div>
+  <div class="flood__wave" aria-hidden="true"></div>
+  <div class="flood__water" aria-hidden="true" inert data-flood-water>
+    {{ floodContent(true) }}
   </div>
 </section>
 
-{#- 4 ─ How support travels: the thread, drawn by scrolling -#}
-<section class="sec route-sec sheet sheet--paper2" aria-labelledby="route-h" data-route>
-  <div class="wrap route-wrap">
-    <div class="route-head">
-      <p class="label">{{ h.route.label }}</p>
-      <h2 id="route-h">{{ h.route.title | safe }}</h2>
-      <p class="muted">{{ h.route.intro }}</p>
-      <a class="go" href="{{ site.strategy2030 | wp }}" target="_blank" rel="noopener">{{ h.route.strategy }} {{ icon("download") }}</a>
-    </div>
-    <ol class="route" role="list">
-      <svg class="route__line" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false" data-thread><path d="M20 0C34 120 6 200 20 330S34 520 20 660 6 860 20 1000" pathLength="1" vector-effect="non-scaling-stroke"/></svg>
-      {%- for s in h.route.steps %}
-      <li class="route__step{% if loop.last %} route__step--back{% endif %}" data-step>
-        <span class="route__node" aria-hidden="true"></span>
-        <p class="route__who">{{ s.who }}{% if s.note %} <span class="note">{{ s.note }}</span>{% endif %}</p>
-        <h3>{{ s.title | safe }}</h3>
-        <p>{{ s.text | safe }}</p>
-        {%- if s.quote %}
-        <blockquote class="route__quote"><p>“{{ s.quote }}”</p><footer>{{ s.quoteBy }}</footer></blockquote>
-        {%- endif %}
-      </li>
-      {%- endfor %}
-    </ol>
-  </div>
-</section>
-
-{#- 5 ─ The causes: an index with a photograph that follows the pointer -#}
-<section class="sec causes" aria-labelledby="causes-h">
-  <div class="wrap">
-    <div class="sec-head sec-head--row">
+{#- ③ JOURNEY — scroll down, travel sideways: the route a rupee takes, one stop per panel. -#}
+<section class="journey" aria-labelledby="journey-h" data-journey>
+  <div class="journey__pin">
+    <div class="journey__head wrap">
       <div>
-        <p class="label">{{ h.themes.label }}</p>
-        <h2 id="causes-h">{{ h.themes.title | safe }}</h2>
+        <p class="label">{{ h.route.label }}</p>
+        <h2 id="journey-h">{{ h.route.title | safe }}</h2>
       </div>
+      <div class="journey__aside">
+        <p class="muted">{{ h.route.intro }}</p>
+        <a class="go" href="{{ site.strategy2030 | wp }}" target="_blank" rel="noopener">{{ h.route.strategy }} {{ icon("download") }}</a>
+      </div>
+    </div>
+    <div class="journey__rail" data-journey-rail>
+      <div class="journey__mover" data-journey-mover>
+      <svg class="journey__line" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30 C 60 16 110 44 170 30 S 280 16 340 30 S 450 44 510 30 S 620 16 680 30 S 790 44 850 30 S 960 16 1000 30" pathLength="1" vector-effect="non-scaling-stroke" data-journey-path/></svg>
+      <span class="journey__traveller" aria-hidden="true" data-journey-dot>{{ icon("heart", "icon--sm") }}</span>
+      <ol class="journey__track" role="list" data-journey-track>
+        {%- for s in h.route.steps %}
+        <li class="stop{% if not s.image %} stop--you{% endif %}">
+          <span class="stop__n" aria-hidden="true">{{ "0" + loop.index }}</span>
+          {%- if s.image %}<figure class="stop__img">{% photo s.image, s.alt, "(max-width: 899px) 86vw, 420px" %}</figure>{% endif %}
+          <div class="stop__body">
+            <p class="stop__who">{{ s.who }}{% if s.note %} <span class="note">{{ s.note }}</span>{% endif %}</p>
+            <h3>{{ s.title | safe }}</h3>
+            <p>{{ s.text | safe }}</p>
+            {%- if s.quote %}<blockquote class="stop__quote"><p>“{{ s.quote }}”</p><footer class="note">{{ s.quoteBy }}</footer></blockquote>{% endif %}
+            {%- if not s.image %}<a class="btn btn--give" href="/donate/">{{ icon("heart", "icon--sm") }} Start the thread</a>{% endif %}
+          </div>
+        </li>
+        {%- endfor %}
+      </ol>
+      </div>
+    </div>
+    <p class="journey__hint note wrap" aria-hidden="true">{{ h.route.hint }} →</p>
+  </div>
+</section>
+
+{#- ④ CAUSES — six photographs side by side; the one you point at (or tap) opens up. -#}
+<section class="sec causes" aria-labelledby="causes-h">
+  <div class="wrap wrap--wide">
+    <div class="sec-head sec-head--row">
+      <div><p class="label">{{ h.themes.label }}</p><h2 id="causes-h">{{ h.themes.title | safe }}</h2></div>
       <p>{{ h.themes.intro }}</p>
     </div>
-    <ol class="tindex" role="list" data-tindex>
+    <ul class="panels" role="list" data-panels>
       {%- for f in decade.focus %}
-      <li>
-        <a class="tindex__row" href="{{ f.href }}" data-peek="{{ loop.index0 }}">
-          <span class="tindex__n">{{ "0" + loop.index }}</span>
-          <span class="tindex__thumb">{% photo f.image, "", "96px" %}</span>
-          <span class="tindex__title">{{ f.title }}</span>
-          <span class="tindex__text">{{ f.text }}</span>
-          <span class="tindex__go">{{ icon("arrow-right") }}</span>
-        </a>
+      <li class="panel{% if loop.first %} is-open{% endif %}" data-panel>
+        <span class="panel__img">{% photo f.image, "", "(max-width: 899px) 86vw, 640px" %}</span>
+        <span class="panel__n" aria-hidden="true">{{ "0" + loop.index }}</span>
+        <h3 class="panel__title"><button type="button" class="panel__btn" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="panel-{{ loop.index }}" data-panel-btn>{{ f.title }}</button></h3>
+        <div class="panel__body" id="panel-{{ loop.index }}">
+          <p>{{ f.text }}</p>
+          <p class="panel__links"><a class="btn btn--paper btn--sm" href="{{ f.href }}">Explore {{ icon("arrow-right", "icon--sm") }}</a><a class="btn btn--give btn--sm" href="/donate/?for={{ ['ncd','nutrition','wach','idhw','infectious','environment'][loop.index0] }}">{{ icon("heart", "icon--sm") }} Give to this</a></p>
+        </div>
       </li>
       {%- endfor %}
-    </ol>
-    <div class="tindex__peek" aria-hidden="true" data-peek-stage>
-      {%- for f in decade.focus %}<span class="tindex__peekimg">{% photo f.image, "", "320px" %}</span>{% endfor %}
-    </div>
+    </ul>
   </div>
 </section>
 
-{#- 6 ─ Voices: a fanned deck of real testimonials -#}
-<section class="sec voices sheet sheet--rose" aria-labelledby="voices-h">
-  <div class="wrap">
-    <div class="sec-head sec-head--row">
-      <div>
+{#- ⑤ VOICES — one voice at a time; its words light up as you scroll. -#}
+<section class="voices" aria-labelledby="voices-h" data-voices>
+  <div class="voices__pin">
+    <div class="wrap voices__wrap">
+      <div class="voices__top">
         <p class="label">{{ h.voices.label }}</p>
-        <h2 id="voices-h">{{ h.voices.title | safe }}</h2>
+        <h2 id="voices-h" class="voices__h">{{ h.voices.title | safe }}</h2>
       </div>
-      <div class="deck-ctrl">
-        <span class="note">{{ h.voices.hint }}</span>
-        <button class="round-btn" type="button" data-deck-prev>{{ icon("arrow-left") }}<span class="visually-hidden">Previous voice</span></button>
-        <button class="round-btn" type="button" data-deck-next>{{ icon("arrow-right") }}<span class="visually-hidden">Next voice</span></button>
-      </div>
+      <ol class="voices__list" role="list">
+        {%- for t in testimonials %}
+        <li class="voice{% if loop.first %} is-current{% endif %}" data-voice>
+          <figure>
+            <blockquote class="voice__q{% if t.quote.length > 300 %} voice__q--long{% endif %}" data-words>“{{ t.quote }}”</blockquote>
+            <figcaption class="voice__by">
+              <img src="{{ t.logo | img }}" alt="{{ t.org }}" loading="lazy" decoding="async" height="40">
+              <span><strong>{{ t.name }}</strong> {{ t.role }}</span>
+            </figcaption>
+          </figure>
+        </li>
+        {%- endfor %}
+      </ol>
+      <p class="voices__count" aria-hidden="true"><span data-voice-n>01</span> / {{ "0" + testimonials.length }}</p>
     </div>
   </div>
-  <ul class="deck" role="list" tabindex="0" aria-label="Testimonials" data-deck>
-    {%- for t in testimonials %}
-    <li class="deck__card deck__card--{{ loop.index }}">
-      <figure>
-        <blockquote{% if t.quote.length > 300 %} class="is-long"{% endif %}>“{{ t.quote }}”</blockquote>
-        <figcaption>
-          <span><strong>{{ t.name }}</strong><br>{{ t.role }}</span>
-          <img src="{{ t.logo | img }}" alt="{{ t.org }}" loading="lazy" decoding="async" height="40">
-        </figcaption>
-      </figure>
-    </li>
-    {%- endfor %}
-  </ul>
 </section>
 
-{#- 7 ─ Trust: why give through PPHF -#}
+{#- ⑥ TRUST — a bento of evidence: every claim links to a document. -#}
 <section class="sec trust" aria-labelledby="trust-h">
   <div class="wrap">
-    <div class="trust__grid">
-      <div>
-        <p class="label">{{ h.trust.label }}</p>
-        <h2 id="trust-h">{{ h.trust.title | safe }}</h2>
-        <p class="lead trust__intro">{{ h.trust.intro }}</p>
-        <dl class="tally">
-          {%- for l in h.trust.ledger %}<div class="reveal" style="--d: {{ loop.index0 * 0.07 }}s"><dt>{{ l.text }}</dt><dd>{{ l.n }}</dd></div>{% endfor %}
-        </dl>
+    <div class="sec-head sec-head--row">
+      <div><p class="label">{{ h.trust.label }}</p><h2 id="trust-h">{{ h.trust.title | safe }}</h2></div>
+      <p>{{ h.trust.intro }}</p>
+    </div>
+    <div class="bento">
+      <div class="bento__cell bento__cell--big reveal">
+        <p class="bento__n"><span data-count="90">90</span>%</p>
+        <p class="bento__t">{{ h.trust.ledger[1].text }}</p>
+        <p class="bento__sub"><b>90%</b> {{ h.trust.ledger[0].text }}</p>
       </div>
-      <div class="trust__side">
-        <ul class="stamps" role="list" data-stamps>
-          {%- for s in h.trust.stamps %}
-          <li style="--r: {{ [-7, 5, -3, 8, -5][loop.index0] }}deg; --i: {{ loop.index0 }}"><a class="stamp stamp--{{ loop.index }}" href="{{ s.href | wp }}" target="_blank" rel="noopener"><b>{{ s.title }}</b><span>{{ s.text }}</span></a></li>
+      <a class="bento__cell bento__cell--stamp reveal" href="{{ h.trust.stamps[4].href | wp }}" target="_blank" rel="noopener" style="--d:.06s">
+        <span class="stamp stamp--5"><b>{{ h.trust.stamps[4].title }}</b><span>{{ h.trust.stamps[4].text }}</span></span>
+        <span class="bento__link">Grading report {{ icon("arrow-up-right", "icon--sm") }}</span>
+      </a>
+      <a class="bento__cell bento__cell--stamp reveal" href="{{ h.trust.stamps[3].href | wp }}" target="_blank" rel="noopener" style="--d:.12s">
+        <span class="stamp stamp--4"><b>{{ h.trust.stamps[3].title }}</b><span>{{ h.trust.stamps[3].text }}</span></span>
+        <span class="bento__link">Certificate {{ icon("arrow-up-right", "icon--sm") }}</span>
+      </a>
+      <div class="bento__cell bento__cell--docs reveal" style="--d:.06s">
+        <p class="bento__k">Registered &amp; tax-exempt</p>
+        <ul class="bento__docs" role="list">
+          {%- for s in h.trust.stamps | take(3) %}
+          <li><a href="{{ s.href | wp }}" target="_blank" rel="noopener"><b>{{ s.title }}</b><span>{{ s.text }}</span>{{ icon("download", "icon--sm") }}</a></li>
           {%- endfor %}
         </ul>
-        <a class="report-card" href="{{ h.trust.report.href }}">
-          <img src="{{ h.trust.report.image | img }}" alt="" width="120" height="170" loading="lazy" decoding="async">
-          <span><span class="label label--plain">Latest</span><strong>{{ h.trust.report.label }}</strong><span class="muted">{{ h.trust.report.text }}</span><span class="go">Read online {{ icon("arrow-right") }}</span></span>
-        </a>
+        <a class="go" href="/dd-documents/">All due-diligence documents {{ icon("arrow-right") }}</a>
+      </div>
+      <a class="bento__cell bento__cell--report reveal" href="{{ h.trust.report.href }}" style="--d:.12s">
+        <img src="{{ h.trust.report.image | img }}" alt="" loading="lazy" decoding="async">
+        <span class="bento__k">Latest</span>
+        <strong>{{ h.trust.report.label }}</strong>
+        <span class="go">Read online {{ icon("arrow-right") }}</span>
+      </a>
+      <div class="bento__cell bento__cell--reach reveal" style="--d:.18s">
+        <p class="bento__n bento__n--sm">{{ h.trust.ledger[2].n }}</p>
+        <p class="bento__t">{{ h.trust.ledger[2].text }}</p>
+        <p class="bento__n bento__n--sm">{{ h.trust.ledger[3].n }}</p>
+        <p class="bento__t">{{ h.trust.ledger[3].text }}</p>
+      </div>
+      <div class="bento__cell bento__cell--apart reveal" style="--d:.06s">
+        <p class="bento__k">What sets us apart</p>
+        <ul class="bento__chips" role="list">{% for a in h.trust.apart %}<li>{{ icon("check", "icon--sm") }}{{ a | safe }}</li>{% endfor %}</ul>
+        <a class="go" href="/reports/#financial">Financial reports {{ icon("arrow-right") }}</a>
       </div>
     </div>
-    <ul class="checks checks--2" role="list">
-      {%- for a in h.trust.apart %}<li>{{ icon("check") }}<span>{{ a | safe }}</span></li>{% endfor %}
-    </ul>
-    <p class="trust__docs"><a class="go" href="/dd-documents/">All due-diligence documents {{ icon("arrow-right") }}</a> <a class="go" href="/reports/#financial">Financial reports {{ icon("arrow-right") }}</a></p>
   </div>
-  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></svg>
 </section>
 
-{#- 8 ─ Ten years -#}
-<section class="sec decade sheet night" aria-labelledby="decade-h">
-  <div class="wrap">
-    <div class="sec-head sec-head--row">
-      <div>
-        <p class="label">{{ h.decade.label }}</p>
-        <h2 id="decade-h">{{ h.decade.title | safe }}</h2>
-      </div>
-      <p>{{ decade.intro }}</p>
+{#- ⑦ DECADE — a big year that turns over as you read down the milestones. -#}
+<section class="decade sheet night" aria-labelledby="decade-h" data-decade>
+  <div class="wrap decade__grid">
+    <div class="decade__side">
+      <p class="label">{{ h.decade.label }}</p>
+      <h2 id="decade-h">{{ h.decade.title | safe }}</h2>
+      <p class="decade__year" aria-hidden="true" data-decade-year>2016</p>
+      <a class="go" href="/a-decade-of-catalysing-change/">Explore PPHF@10 {{ icon("arrow-right") }}</a>
     </div>
-  </div>
-  <div class="tl" tabindex="0" aria-label="Timeline 2016 to 2025, scrollable" data-drag>
-    <ol class="tl__track" role="list">
+    <ol class="decade__list" role="list">
       {%- for t in decade.timeline %}
-      <li class="tl__item"><span class="tl__year">{{ t.year }}</span><h3>{{ t.title }}</h3><p>{{ t.text }}</p></li>
+      <li class="decade__item" data-decade-item data-year="{{ t.year }}"><span class="decade__y">{{ t.year }}</span><h3>{{ t.title }}</h3><p>{{ t.text }}</p></li>
       {%- endfor %}
-      <li class="tl__item tl__item--next"><span class="tl__year">2036</span><h3>Catalysing Change 2036</h3><p>{{ decade.next[1] }}</p><a class="go" href="/a-decade-of-catalysing-change/">Explore PPHF@10 {{ icon("arrow-right") }}</a></li>
+      <li class="decade__item decade__item--next" data-decade-item data-year="2036"><span class="decade__y">Next</span><h3>Catalysing Change 2036</h3><p>{{ decade.next[1] }}</p></li>
     </ol>
   </div>
-  <div class="wrap"><p class="note tl__hint">{{ h.decade.hint }} →</p></div>
 </section>
 
-{#- 9 ─ Partners -#}
+{#- ⑧ PARTNERS — a turning drum of logos. -#}
 <section class="sec partners" aria-labelledby="partners-h">
   <div class="wrap">
     <div class="sec-head sec-head--center">
@@ -235,24 +243,17 @@ preloadSizes: "(max-width: 899px) 62vw, 330px"
       <p>{{ home.partnersIntro }}</p>
     </div>
   </div>
-  {%- set half = (partners.length / 2) | round(0, "ceil") %}
-  {%- for row in partners | chunk(half) %}
-  <div class="marquee{% if loop.index == 2 %} marquee--rev{% endif %}">
-    <ul class="marquee__track" role="list">
-      {%- for p in row %}<li><img src="{{ p.src | img }}" alt="{{ p.name }}" loading="lazy" decoding="async"></li>{% endfor %}
-      {%- for p in row %}<li aria-hidden="true"><img src="{{ p.src | img }}" alt="" loading="lazy" decoding="async"></li>{% endfor %}
+  <div class="drum" data-drum>
+    <ul class="drum__ring" role="list" style="--n: {{ partners.length }}" data-drum-ring>
+      {%- for p in partners %}<li style="--i: {{ loop.index0 }}"><img src="{{ p.src | img }}" alt="{{ p.name }}" loading="lazy" decoding="async"></li>{% endfor %}
     </ul>
   </div>
-  {%- endfor %}
 </section>
 
-{#- 10 ─ Ways to give -#}
+{#- ⑨ WAYS TO GIVE -#}
 <section class="sec give" aria-labelledby="give-h">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="label">{{ h.give.label }}</p>
-      <h2 id="give-h">{{ h.give.title | safe }}</h2>
-    </div>
+    <div class="sec-head"><p class="label">{{ h.give.label }}</p><h2 id="give-h">{{ h.give.title | safe }}</h2></div>
     <div class="give__grid">
       <div class="give__donate">
         <h3>{{ h.give.donate.title }}</h3>
@@ -272,14 +273,11 @@ preloadSizes: "(max-width: 899px) 62vw, 330px"
   </div>
 </section>
 
-{#- 11 ─ From the field: stories + films -#}
+{#- ⑩ FROM THE FIELD -#}
 <section class="sec field sheet sheet--paper2" aria-labelledby="field-h">
   <div class="wrap">
     <div class="sec-head sec-head--row">
-      <div>
-        <p class="label">{{ h.field.label }}</p>
-        <h2 id="field-h">{{ h.field.title | safe }}</h2>
-      </div>
+      <div><p class="label">{{ h.field.label }}</p><h2 id="field-h">{{ h.field.title | safe }}</h2></div>
       <a class="go" href="/media/">The newsroom {{ icon("arrow-right") }}</a>
     </div>
     <div class="stories">
@@ -309,13 +307,10 @@ preloadSizes: "(max-width: 899px) 62vw, 330px"
   </div>
 </section>
 
-{#- 12 ─ PPHF at a glance (for everyone who wants to know who we are) -#}
+{#- ⑪ PPHF AT A GLANCE (for everyone who wants to know who we are) -#}
 <section class="sec glance" aria-labelledby="glance-h">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="label">{{ h.glance.label }}</p>
-      <h2 id="glance-h">{{ h.glance.title | safe }}</h2>
-    </div>
+    <div class="sec-head"><p class="label">{{ h.glance.label }}</p><h2 id="glance-h">{{ h.glance.title | safe }}</h2></div>
     <dl class="vmv">
       {%- for v in h.glance.vmv %}<div class="reveal" style="--d: {{ loop.index0 * 0.08 }}s"><dt>{{ v.title }}</dt><dd>{{ v.text }}</dd></div>{% endfor %}
     </dl>
@@ -330,7 +325,8 @@ preloadSizes: "(max-width: 899px) 62vw, 330px"
       </figure>
       <div>
         <dl class="facts">
-          {%- for f in h.glance.facts %}<div><dt>{{ f.k }}</dt><dd>{{ f.v }}</dd></div>{% endfor %}
+          <div><dt>Registration</dt><dd>{{ h.numbers.intro }}</dd></div>
+          {%- for f in h.glance.facts %}{% if f.k != "Legal form" %}<div><dt>{{ f.k }}</dt><dd>{{ f.v }}</dd></div>{% endif %}{% endfor %}
         </dl>
         <div class="btn-row glance__links">
           <a class="btn btn--line btn--sm" href="/about/">About PPHF</a>

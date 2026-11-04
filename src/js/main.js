@@ -1,9 +1,15 @@
 // PPHF site behaviour ("The Thread"). Progressive enhancement only: every page works without JS.
+import Lenis from "lenis";
+
 (() => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const root = document.documentElement;
   if (reduceMotion) root.classList.add("no-motion");
+
+  /* ---------- Smooth scrolling (Lenis). Off for reduced motion; motion.js syncs ScrollTrigger to it. ---------- */
+  const lenis = reduceMotion ? null : new Lenis({ duration: 1.1, easing: (t) => 1 - Math.pow(1 - t, 4), anchors: { offset: -96 }, autoRaf: true });
+  window.lenis = lenis;
   const onScrollFrame = (fn) => { let t = false; const run = () => { t = false; fn(); }; window.addEventListener("scroll", () => { if (!t) { t = true; requestAnimationFrame(run); } }, { passive: true }); window.addEventListener("resize", () => requestAnimationFrame(fn), { passive: true }); fn(); };
   const clamp01 = (x) => Math.max(0, Math.min(1, x));
 
@@ -56,6 +62,7 @@
       drawer.hidden = !on;
       openBtn.setAttribute("aria-expanded", String(on));
       document.body.classList.toggle("no-scroll", on);
+      if (lenis) on ? lenis.stop() : lenis.start();
       (on ? closeBtn : openBtn).focus();
     };
     openBtn.addEventListener("click", () => setOpen(true));
@@ -244,6 +251,36 @@
     window.addEventListener("resize", fan, { passive: true });
     fan();
   });
+
+  /* ---------- Footer link groups start folded on phones ---------- */
+  if (window.matchMedia("(max-width: 699.98px)").matches) document.querySelectorAll(".foot__group").forEach((d) => (d.open = false));
+  document.querySelectorAll(".foot__group summary").forEach((s) => s.addEventListener("click", (e) => { if (!window.matchMedia("(max-width: 699.98px)").matches) e.preventDefault(); }));
+
+  /* ---------- Cause panels: the one you point at, focus or tap opens (all open on phones) ---------- */
+  document.querySelectorAll("[data-panels]").forEach((list) => {
+    const panels = [...list.querySelectorAll("[data-panel]")];
+    const wide = window.matchMedia("(min-width: 900px)");
+    const open = (p) => panels.forEach((x) => {
+      const on = x === p;
+      x.classList.toggle("is-open", on);
+      x.querySelector("[data-panel-btn]").setAttribute("aria-expanded", String(on || !wide.matches));
+    });
+    panels.forEach((p) => {
+      const btn = p.querySelector("[data-panel-btn]");
+      btn.addEventListener("click", () => open(p));
+      btn.addEventListener("focus", () => wide.matches && open(p));
+      p.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse" && wide.matches) open(p); });
+      p.addEventListener("click", (e) => { if (wide.matches && !p.classList.contains("is-open") && !e.target.closest("a")) open(p); });
+    });
+    const sync = () => open(panels.find((x) => x.classList.contains("is-open")) || panels[0]);
+    wide.addEventListener("change", sync);
+    sync();
+  });
+
+  /* ---------- Safety net: if the motion script never starts, lay its sections out statically ---------- */
+  if (document.querySelector('script[src*="/motion.js"]') && !reduceMotion) {
+    setTimeout(() => { if (!window.__motionReady) root.classList.add("motion-failed"); }, 4000);
+  }
 
   /* ---------- Count-up numbers ---------- */
   const counters = document.querySelectorAll("[data-count]");
