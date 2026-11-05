@@ -256,41 +256,25 @@ import Lenis from "lenis";
   if (window.matchMedia("(max-width: 699.98px)").matches) document.querySelectorAll(".foot__group").forEach((d) => (d.open = false));
   document.querySelectorAll(".foot__group summary").forEach((s) => s.addEventListener("click", (e) => { if (!window.matchMedia("(max-width: 699.98px)").matches) e.preventDefault(); }));
 
-  /* ---------- Rails with arrow buttons ---------- */
-  document.querySelectorAll("[data-rail]").forEach((rail) => {
-    const sec = rail.closest("section");
-    const step = (d) => rail.scrollBy({ left: d * Math.min(rail.clientWidth * 0.8, 600), behavior: reduceMotion ? "auto" : "smooth" });
-    sec.querySelector("[data-rail-prev]")?.addEventListener("click", () => step(-1));
-    sec.querySelector("[data-rail-next]")?.addEventListener("click", () => step(1));
-  });
-
-  /* ---------- Cause story: the cause crossing the middle of the screen becomes current ---------- */
-  document.querySelectorAll("[data-cstory]").forEach((box) => {
-    const items = [...box.querySelectorAll("[data-citem]")];
-    const imgs = [...box.querySelectorAll("[data-cimg]")];
-    const count = box.querySelector("[data-ccount]");
-    let cur = 0;
-    const set = (i) => {
-      if (i === cur) return;
-      items.forEach((x, j) => x.classList.toggle("is-on", j === i));
-      imgs.forEach((x, j) => { x.classList.toggle("was-on", j === cur); x.classList.toggle("is-on", j === i); });
-      cur = i;
-      if (count) count.textContent = String(i + 1).padStart(2, "0");
-    };
-    if (!("IntersectionObserver" in window)) return;
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(items.indexOf(e.target)); }), { rootMargin: "-48% 0px -48% 0px" });
-    items.forEach((x) => io.observe(x));
-  });
-
-  /* ---------- Decade: the big year turns over as each milestone crosses the middle of the screen ---------- */
-  document.querySelectorAll("[data-decade]").forEach((box) => {
-    const yearEl = box.querySelector("[data-decade-year]");
-    const items = [...box.querySelectorAll("[data-decade-item]")];
-    const set = (it) => { items.forEach((x) => x.classList.toggle("is-on", x === it)); if (yearEl) yearEl.textContent = it.dataset.year; };
-    if (items[0]) set(items[0]);
-    if (!("IntersectionObserver" in window)) return;
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(e.target); }), { rootMargin: "-45% 0px -45% 0px" });
-    items.forEach((x) => io.observe(x));
+  /* ---------- Cause panels: the one you point at, focus or tap opens (all open on phones) ---------- */
+  document.querySelectorAll("[data-panels]").forEach((list) => {
+    const panels = [...list.querySelectorAll("[data-panel]")];
+    const wide = window.matchMedia("(min-width: 900px)");
+    const open = (p) => panels.forEach((x) => {
+      const on = x === p;
+      x.classList.toggle("is-open", on);
+      x.querySelector("[data-panel-btn]").setAttribute("aria-expanded", String(on || !wide.matches));
+    });
+    panels.forEach((p) => {
+      const btn = p.querySelector("[data-panel-btn]");
+      btn.addEventListener("click", () => open(p));
+      btn.addEventListener("focus", () => wide.matches && open(p));
+      p.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse" && wide.matches) open(p); });
+      p.addEventListener("click", (e) => { if (wide.matches && !p.classList.contains("is-open") && !e.target.closest("a")) open(p); });
+    });
+    const sync = () => open(panels.find((x) => x.classList.contains("is-open")) || panels[0]);
+    wide.addEventListener("change", sync);
+    sync();
   });
 
   /* ---------- Videos: pick a film from the reel to load it on the big screen ---------- */

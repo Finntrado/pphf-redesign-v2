@@ -22,12 +22,7 @@ hero:
     - ISO 9001:2015 certified
     - Fitch-graded NGO
   scrollHint: Scroll to meet them
-  stageCaption: A community health session
-  # The other photographs in the hero mosaic (all from PPHF programmes)
-  mosaic:
-    - { image: expanding-reach-1.webp, alt: "A PPHF clinic-on-wheels van at a programme site", caption: "Clinic on Wheels" }
-    - { image: nutrition-samarth.webp, alt: "Mothers and children at a SAMARTH nutrition session", caption: "Nutrition, SAMARTH" }
-    - { image: health-system-strengthening-1.webp, alt: "Health workers at a strengthened health facility", caption: "Health systems" }
+  stageCaption: A community health session, one of thousands PPHF has held since 2016
   outreach: See our outreach
 
 appeal:

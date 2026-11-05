@@ -35,21 +35,21 @@ headCaption: Catalysing change for wellbeing
       <div><p class="label">What we do</p><h2>{{ c.solutions.title }}</h2></div>
       <p>{{ c.solutions.intro }}</p>
     </div>
-    <ul class="ptiles" role="list">
+    <ol class="tindex tindex--compact" role="list">
       {%- for t in collections.themes %}
-      <li><a class="ptile" href="{{ t.url }}"><span class="ptile__img">{% photo t.data.image, "", "(max-width: 640px) 46vw, 300px" %}</span><span class="ptile__t">{{ t.data.title }}</span>{{ icon("arrow-up-right", "icon--sm") }}</a></li>
+      <li><a class="tindex__row" href="{{ t.url }}"><span class="tindex__n">{{ "0" + loop.index }}</span><span class="tindex__thumb">{% photo t.data.image, "", "96px" %}</span><span class="tindex__title">{{ t.data.title }}</span><span class="tindex__go">{{ icon("arrow-right") }}</span></a></li>
       {%- endfor %}
-    </ul>
+    </ol>
     <div class="grid-2 duo">
-      <div class="duo__card"><span class="duo__img">{% photo "x.webp", "AASTHA report release on the health and wellbeing of truck drivers", "(max-width: 900px) 92vw, 520px" %}</span><h3>{{ c.solutions.aastha.title }}</h3><p>{{ c.solutions.aastha.text }}</p><a class="go" href="/aastha/">About AASTHA {{ icon("arrow-right") }}</a></div>
-      <div class="duo__card"><span class="duo__img">{% photo "z.webp", "Two women smiling and lifting a baby", "(max-width: 900px) 92vw, 520px" %}</span><h3>{{ c.solutions.gender.title }}</h3><p>{{ c.solutions.gender.text }}</p></div>
+      <div><h3>{{ c.solutions.aastha.title }}</h3><p>{{ c.solutions.aastha.text }}</p><a class="go" href="/aastha/">About AASTHA {{ icon("arrow-right") }}</a></div>
+      <div><h3>{{ c.solutions.gender.title }}</h3><p>{{ c.solutions.gender.text }}</p></div>
     </div>
   </div>
 </section>
 
 <section class="sec">
-  <div class="wrap grid-2 apart">
-    <div class="apart__side">
+  <div class="wrap grid-2">
+    <div>
       <p class="label">Why PPHF</p>
       <h2>{{ c.apartTitle }}</h2>
       <p class="lead" style="margin-top:18px">{{ c.apartLead }}</p>
@@ -57,13 +57,12 @@ headCaption: Catalysing change for wellbeing
         <a class="btn" href="{{ site.onePager | wp }}" target="_blank" rel="noopener">PPHF Global one-pager {{ icon("download", "icon--sm") }}</a>
         <a class="btn btn--line" href="/dd-documents/">Compliance documents</a>
       </div>
-      <figure class="apart__img">{% photo "nutrition-samarth.webp", "Mothers and children at a SAMARTH nutrition session", "(max-width: 900px) 92vw, 520px" %}</figure>
     </div>
     <ul class="checks" role="list" style="margin-top:0">{% for a in c.apart %}<li class="reveal">{{ icon("check") }}<span>{{ a }}</span></li>{% endfor %}</ul>
   </div>
 </section>
 
-<section class="sec sec--sm sheet sheet--paper2">
+<section class="sec sheet sheet--paper2">
   <div class="wrap">
     <div class="sec-head sec-head--row">
       <div><p class="label">Governance</p><h2>{{ c.advisory.title }}</h2><p>{{ c.advisory.text }}</p></div>
@@ -73,7 +72,7 @@ headCaption: Catalysing change for wellbeing
   </div>
 </section>
 
-<section class="sec sec--sm">
+<section class="sec">
   <div class="wrap">
     <div class="sec-head sec-head--row"><div><p class="label">The people</p><h2>{{ c.teamTitle }}</h2></div><a class="btn btn--line" href="/team/#team">{{ c.teamMore }}</a></div>
     {% set people = aboutPeople.team %}{% set gid = "about-team" %}{% include "partials/person-grid.njk" %}

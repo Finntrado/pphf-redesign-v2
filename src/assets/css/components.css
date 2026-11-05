@@ -221,13 +221,14 @@
    Shared pieces used by inner pages (ledger, timeline, theme index, checklists)
    ========================================================================== */
 /* ---------- 3 Numbers (a ledger) ---------- */
-.ledger { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+.ledger { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1.5px solid var(--navy); }
 @media (min-width: 900px) { .ledger { grid-template-columns: repeat(4, 1fr); } }
-.ledger__row { position: relative; padding-top: 18px; }
-.ledger__row::before { content: ""; position: absolute; left: 0; top: 0; width: 36px; height: 3px; border-radius: 3px; background: var(--thread); }
+.ledger__row { position: relative; padding: 24px 18px 26px 0; border-bottom: 1px solid var(--line-strong); }
+@media (min-width: 900px) { .ledger__row + .ledger__row { padding-left: 22px; border-left: 1px solid var(--line); } }
+@media (max-width: 899.98px) { .ledger__row:nth-child(even) { padding-left: 18px; border-left: 1px solid var(--line); } }
 .ledger dt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .ledger dd { display: grid; gap: 8px; }
-.ledger__n { font: 300 clamp(3rem, 2rem + 4.4vw, 5.6rem)/.9 var(--serif); color: var(--navy); letter-spacing: -.045em; font-variant-numeric: lining-nums tabular-nums; }
+.ledger__n { font: 300 clamp(3.2rem, 2rem + 5vw, 6.2rem)/.9 var(--serif); color: var(--navy); letter-spacing: -.045em; font-variant-numeric: lining-nums tabular-nums; }
 .ledger__l { font-size: var(--fs-sm); color: var(--muted); font-weight: 500; }
 .ledger__note { position: absolute; top: -14px; right: 6px; rotate: -6deg; font-size: 1.1rem; }
 /* ---------- 5 Causes index ---------- */

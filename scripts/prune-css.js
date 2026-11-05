@@ -5,7 +5,7 @@
 // @font-face, @keyframes and other non-selector at-rules are kept whole.
 
 // Google's translator injects its own classes (skiptranslate, goog-*, VIpgJd-*) after load: keep rules for them.
-const SAFE = (c) => /^(is-|goog-|VIpgJd-)/.test(c) || ["js", "no-scroll", "fold-toggle", "no-motion", "skiptranslate", "translated-ltr", "lenis", "lenis-stopped", "lenis-smooth", "has-motion", "motion-failed", "w", "xhero__flyer", "was-on"].includes(c);
+const SAFE = (c) => /^(is-|goog-|VIpgJd-)/.test(c) || ["js", "no-scroll", "fold-toggle", "no-motion", "skiptranslate", "translated-ltr", "lenis", "lenis-stopped", "lenis-smooth", "has-motion", "motion-failed", "w"].includes(c);
 
 // Split a (minified) stylesheet into top-level blocks: [{ head, body }] where body is the text inside { }.
 function blocks(css) {

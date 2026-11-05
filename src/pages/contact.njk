@@ -5,16 +5,11 @@ copyKey: contact
 ---
 {% from "partials/icons.njk" import icon %}
 <section class="chero">
-  <div class="wrap wrap--wide chero__grid">
-    <div>
+  <div class="wrap wrap--wide">
     <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Contact</li></ol></nav>
     <p class="label">{{ c.label }}</p>
     <h1 class="chero__title">{{ c.big | safe }}</h1>
     <p class="lead">{{ c.lead }}</p>
-    </div>
-    <div class="chero__ph" aria-hidden="true">
-      {%- for im in ["g8a5473-scaled.webp", "maternal-child-adolescent-health-1.webp", "building-partnership-1.webp", "expanding-reach-1.webp"] %}<span class="chero__p chero__p--{{ loop.index }}">{% photo im, "", "(max-width: 900px) 46vw, 260px", "", ("eager" if loop.first else "lazy") %}</span>{% endfor %}
-    </div>
   </div>
 </section>
 
