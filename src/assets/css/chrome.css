@@ -98,7 +98,7 @@ body { top: 0 !important; }
 .night .crumbs, .night .crumbs a { color: var(--on-night-2); }
 
 /* ---------- Page head (inner pages) ---------- */
-.phead { position: relative; padding: clamp(28px, 5vw, 64px) 0 clamp(48px, 7vw, 96px); overflow: clip; }
+.phead { position: relative; padding: clamp(28px, 5vw, 64px) 0 clamp(28px, 4vw, 56px); overflow: clip; }
 .phead__grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; position: relative; z-index: 1; }
 @media (min-width: 900px) { .phead--media .phead__grid { grid-template-columns: 1.15fr .85fr; } }
 .phead h1 { margin-top: 14px; max-width: 14ch; font-size: clamp(2.8rem, 1.6rem + 5vw, 6.2rem); line-height: .95; letter-spacing: -.04em; }
@@ -110,28 +110,32 @@ body { top: 0 !important; }
 .phead__thread { position: absolute; z-index: 0; right: -4%; top: 6%; width: min(760px, 70vw); height: auto; opacity: .9; pointer-events: none; }
 @media (max-width: 899.98px) { .phead__thread { top: auto; bottom: -6%; right: -30%; width: 110vw; opacity: .5; } }
 
-/* A pinned print: a photograph set slightly askew, with a handwritten caption */
-.print { position: relative; margin: 0; background: #fff; padding: 10px 10px 0; border-radius: 6px; box-shadow: var(--shadow-print); rotate: var(--tilt, 2deg); transition: rotate .6s var(--ease), translate .6s var(--ease); }
-.print img { width: 100%; aspect-ratio: var(--ar, 4 / 3); object-fit: cover; border-radius: 3px; background: var(--paper-2); }
-.print figcaption { font-family: var(--hand); color: var(--ink-2); font-size: 1rem; line-height: 1.25; padding: 10px 4px 12px; }
-.print::after { content: ""; position: absolute; left: 50%; top: -9px; width: 64px; height: 20px; translate: -50% 0; rotate: -3deg; background: rgba(255, 214, 186, .75); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-.print--plain::after { display: none; }
-.print--portrait img { aspect-ratio: 1; object-fit: contain; background: var(--paper-2); }
-.print--doc img { object-fit: contain; background: #fff; }
+/* Images: rounded photographs with a caption chip. Page heads use an arch (a nod to the jharokha window)
+   with an offset orange outline behind it. (Class name `print` kept so content files don't change.) */
+.print { position: relative; margin: 0; display: block; }
+.print img { width: 100%; aspect-ratio: var(--ar, 4 / 3); object-fit: cover; border-radius: 24px; background: var(--paper-2); display: block; }
+.print figcaption { position: absolute; left: 16px; bottom: 16px; max-width: calc(100% - 32px); padding: 8px 14px; border-radius: var(--r-pill); background: rgba(255,255,255,.94); color: var(--ink-2); font: 500 var(--fs-xs)/1.3 var(--sans); box-shadow: 0 6px 18px -8px rgba(0,22,64,.35); }
+.print--portrait img { object-fit: contain; object-position: bottom; background: linear-gradient(180deg, var(--paper-2), var(--paper-3)); }
+.print--doc img { object-fit: contain; background: #fff; box-shadow: 0 1px 2px rgba(20,33,61,.08), 0 22px 40px -22px rgba(20,33,61,.45); border-radius: 8px; }
+.phead .print { justify-self: end; width: min(100%, 470px); }
+.phead .print:not(.print--doc) img { aspect-ratio: 4 / 5; border-radius: 999px 999px 28px 28px; }
+.phead .print:not(.print--doc)::before { content: ""; position: absolute; inset: 0; translate: 14px 14px; border: 2px solid var(--thread); border-radius: 999px 999px 28px 28px; z-index: -1; }
+@media (max-width: 899.98px) { .phead .print { justify-self: start; width: min(100%, 380px); } .phead .print:not(.print--doc) img { aspect-ratio: 1; } }
+a.print { text-decoration: none; }
 
 /* ---------- Closing call: the top half of one dark block that continues into the footer ---------- */
-.closer { margin: var(--sec-sm) var(--inset) 0; border-radius: var(--r-sheet) var(--r-sheet) 0 0; }
+.closer { margin-top: var(--sec-sm); }
 .closer__inner { display: grid; gap: 28px; padding-block: clamp(56px, 8vw, 104px) clamp(40px, 5vw, 64px); }
 @media (min-width: 900px) { .closer__inner { grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: end; } }
 .closer h2 { font-size: clamp(2.3rem, 1.4rem + 3.6vw, 4.6rem); max-width: 13ch; margin-top: 12px; }
 .closer h2 em { color: #FF9A5C; }
 .closer__side p { color: var(--on-night-2); font-size: var(--fs-lead); max-width: 30rem; }
 .closer__side .btn-row { margin-top: 24px; }
-main:has(> .closer) + .foot { margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; padding-top: 8px; }
+main:has(> .closer) + .foot { padding-top: 8px; }
 main:has(> .closer) + .foot .foot__top { border-top: 1px solid var(--line-night); padding-top: clamp(40px, 5vw, 64px); }
 
 /* ---------- Footer ---------- */
-.foot { margin-top: var(--inset); margin-bottom: var(--inset); padding: clamp(48px, 7vw, 96px) 0 28px; }
+.foot { padding: clamp(48px, 7vw, 96px) 0 28px; }
 .foot__top { display: grid; gap: 40px; padding-bottom: 48px; border-bottom: 1px solid var(--line-night); }
 @media (min-width: 900px) { .foot__top { grid-template-columns: 1.1fr 1.9fr; } }
 .foot__logo { display: inline-block; background: var(--paper); padding: 12px 16px; border-radius: 14px; }

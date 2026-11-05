@@ -42,8 +42,8 @@ strong, b { font-weight: 650; }
 .sec:not(.sheet) + .sec:not(.sheet) { padding-top: 0; }
 address { font-style: normal; }
 /* A sheet: a rounded panel of paper set in from the viewport edges */
-.sheet { margin-inline: var(--inset); border-radius: var(--r-sheet); position: relative; isolation: isolate; }
-.sheet + .sheet { margin-top: var(--inset); }
+/* Sections with a background run edge to edge (no inset, no rounding) */
+.sheet { position: relative; isolation: isolate; }
 .sheet--paper2 { background: var(--paper-2); }
 .sheet--card { background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
 .sheet--leaf { background: var(--leaf-soft); }

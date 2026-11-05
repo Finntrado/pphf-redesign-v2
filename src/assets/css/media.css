@@ -222,7 +222,7 @@
 .mcard__media { transition: box-shadow .5s var(--ease); }
 
 /* ---------- Videos: a screening room ---------- */
-.cinema { margin: 0 var(--inset); border-radius: var(--r-sheet); padding-block: clamp(28px, 4vw, 56px); }
+.cinema { padding-block: clamp(28px, 4vw, 56px); }
 .cinema__grid { display: grid; gap: 32px; }
 @media (min-width: 1000px) { .cinema__grid { grid-template-columns: 1fr 380px; gap: 40px; align-items: start; } }
 .video--big { border-radius: 20px; box-shadow: 0 40px 80px -40px rgba(0,0,0,.8); }

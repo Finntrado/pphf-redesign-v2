@@ -5,11 +5,17 @@ copyKey: capacity
 navSection: About
 ---
 <section class="sec sec--sm">
-  <div class="wrap grid-2 grid-2--center">
-    <figure class="print" style="--tilt: -2deg">{% photo c.photo, c.photoAlt, "(max-width: 900px) 92vw, 520px" %}<figcaption>{{ c.photoAlt }}</figcaption></figure>
-    <ol class="caps" role="list">
+  <div class="wrap">
+    <ol class="caprows" role="list">
       {%- for k in c.capacities %}
-      <li class="reveal" style="--d: {{ loop.index0 * 0.06 }}s"><span class="caps__n">{{ "0" + loop.index }}</span><div><h2 class="h3">{{ k.title }}</h2><p>{{ k.text }}</p></div></li>
+      <li class="caprow reveal">
+        <figure class="caprow__img">{% photo k.photo, "", "(max-width: 900px) 92vw, 560px" %}</figure>
+        <div class="caprow__body">
+          <span class="caprow__top"><span class="caprow__icon"><img src="{{ k.icon | img }}" alt="" width="32" height="32" loading="lazy"></span><span class="caprow__n">{{ "0" + loop.index }}</span></span>
+          <h2>{{ k.title }}</h2>
+          <p class="lead">{{ k.text }}</p>
+        </div>
+      </li>
       {%- endfor %}
     </ol>
   </div>

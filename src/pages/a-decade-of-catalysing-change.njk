@@ -39,29 +39,39 @@ crumbs: []
     </div>
   </div>
 </section>
-<section class="sec decade sheet night" id="timeline">
-  <div class="wrap"><div class="sec-head"><p class="label">2016 — 2025</p><h2>{{ c.timelineTitle }}</h2><p>{{ c.timelineSub }}</p></div></div>
-  <div class="tl" tabindex="0" aria-label="Timeline 2016 to 2025, scrollable" data-drag>
-    <ol class="tl__track" role="list">{% for t in decade.timeline %}<li class="tl__item"><span class="tl__year">{{ t.year }}</span><h3>{{ t.title }}</h3><p>{{ t.text }}</p></li>{% endfor %}</ol>
+<section class="decade sheet night" id="timeline" aria-labelledby="tl-h" data-decade>
+  <div class="wrap decade__grid">
+    <div class="decade__side">
+      <p class="label">2016 — 2025</p>
+      <h2 id="tl-h">{{ c.timelineTitle }}</h2>
+      <p class="decade__sub">{{ c.timelineSub }}</p>
+      <p class="decade__year" aria-hidden="true" data-decade-year>2016</p>
+    </div>
+    <ol class="decade__list" role="list">
+      {%- for t in decade.timeline %}<li class="decade__item" data-decade-item data-year="{{ t.year }}"><span class="decade__y">{{ t.year }}</span><h3>{{ t.title }}</h3><p>{{ t.text }}</p></li>{% endfor %}
+    </ol>
   </div>
-  <div class="wrap"><p class="note tl__hint">Drag the timeline →</p></div>
 </section>
 <section class="sec">
   <div class="wrap">
     <div class="sec-head"><p class="label">{{ c.milestonesSub }}</p><h2>{{ c.milestonesTitle }}</h2><p>{{ c.milestonesText }}</p></div>
-    <div class="pgrid pgrid--3 pgrid--stagger">{% for m in decade.milestones %}<div class="pcard reveal"><span class="pcard__img">{% photo m.image, m.title, "(max-width: 640px) 92vw, 360px" %}</span><span class="pcard__title">{{ m.title }}</span><span class="pcard__text">{{ m.text }}</span></div>{% endfor %}</div>
+    <ul class="mtiles" role="list">
+      {%- for m in decade.milestones %}
+      <li class="mtile mtile--{{ loop.index }} reveal" style="--d: {{ (loop.index0 % 3) * 0.06 }}s"><span class="mtile__img">{% photo m.image, "", "(max-width: 900px) 92vw, 50vw" %}</span><span class="mtile__body"><span class="mtile__n">{{ "0" + loop.index }}</span><span class="mtile__t">{{ m.title }}</span><span class="mtile__d">{{ m.text }}</span></span></li>
+      {%- endfor %}
+    </ul>
   </div>
 </section>
 <section class="sec sheet sheet--paper2">
   <div class="wrap">
     <div class="sec-head"><p class="label">Focus areas</p><h2>{{ c.focusTitle }}</h2><p>{{ c.focusText }}</p></div>
-    <ol class="tindex" role="list">{% for f in decade.focus %}<li><a class="tindex__row" href="{{ f.href }}"><span class="tindex__n">{{ "0" + loop.index }}</span><span class="tindex__thumb">{% photo f.image, "", "96px" %}</span><span class="tindex__title">{{ f.title }}</span><span class="tindex__text">{{ f.text }}</span><span class="tindex__go">{{ icon("arrow-right") }}</span></a></li>{% endfor %}</ol>
+    {% set causes = decade.focus %}{% include "partials/causes.njk" %}
   </div>
 </section>
 <section class="sec" id="strategy2036">
-  <div class="wrap grid-2 grid-2--wide-left">
+  <div class="wrap grid-2 grid-2--center">
     <div><p class="label">{{ c.nextSub }}</p><h2>{{ c.nextTitle }}</h2><div class="prose" style="margin-top:20px">{% for p in decade.next %}<p>{{ p }}</p>{% endfor %}</div></div>
-    <blockquote class="pull"><p>{{ c.nextQuote }}</p></blockquote>
+    <figure class="nextq"><span class="nextq__img">{% photo "strategy-2030-crop.webp", "Children from a partner community", "(max-width: 900px) 92vw, 520px" %}</span><blockquote><p>{{ c.nextQuote }}</p></blockquote></figure>
   </div>
 </section>
 {% include "partials/closer.njk" %}

@@ -34,16 +34,18 @@ description: People to People Health Foundation (PPHF) partners with communities
     </div>
 
     <div class="xhero__stage" data-xhero-stage>
-      <img class="xhero__img" src="/assets/img/photos/hero-community-1600.webp" srcset="/assets/img/photos/hero-community-900.webp 900w, /assets/img/photos/hero-community-1600.webp 1600w, /assets/img/photos/hero-community-2400.webp 2400w" sizes="100vw" width="2400" height="1600" alt="{{ h.hero.pillB.alt }}" loading="lazy" decoding="async">
-      <div class="xhero__shade" aria-hidden="true"></div>
-      <div class="xhero__facts">
-        <p class="label">{{ h.numbers.label }}</p>
-        <dl class="xhero__stats">
-          {%- for s in h.numbers.stats %}
-          <div data-xhero-stat><dt>{{ s.long }} {{ s.label | safe }}</dt><dd aria-hidden="true"><b>{{ s.value }}{{ s.suffix }}</b><span>{{ s.label | safe }}</span></dd></div>
-          {%- endfor %}
-        </dl>
-        <p class="xhero__caption"><span class="note">{{ h.hero.stageCaption | safe }}</span> <a class="go" href="/outreach/">{{ h.hero.outreach }} {{ icon("arrow-right") }}</a></p>
+      <div class="mosaic">
+        <figure class="mosaic__big" data-xhero-hole>
+          <img class="xhero__img" src="/assets/img/photos/hero-community-1600.webp" srcset="/assets/img/photos/hero-community-900.webp 900w, /assets/img/photos/hero-community-1600.webp 1600w, /assets/img/photos/hero-community-2400.webp 2400w" sizes="(max-width: 899px) 100vw, 50vw" width="2400" height="1600" alt="{{ h.hero.pillB.alt }}" loading="lazy" decoding="async">
+          <figcaption>{{ h.hero.stageCaption | safe }}</figcaption>
+        </figure>
+        {%- for s in h.numbers.stats %}
+        <div class="mosaic__stat mosaic__stat--{{ loop.index }}" data-xhero-tile><dl><dt class="visually-hidden">{{ s.long }} {{ s.label | safe }}</dt><dd aria-hidden="true"><b>{{ s.value }}{{ s.suffix }}</b><span>{{ s.label | safe }}</span></dd></dl></div>
+        {%- endfor %}
+        {%- for m in h.hero.mosaic %}
+        <figure class="mosaic__ph mosaic__ph--{{ loop.index }}" data-xhero-tile>{% photo m.image, m.alt, "(max-width: 899px) 50vw, 25vw" %}<figcaption>{{ m.caption }}</figcaption></figure>
+        {%- endfor %}
+        <a class="mosaic__more" href="/outreach/" data-xhero-tile><span class="label">{{ h.numbers.label }}</span><span class="mosaic__more-t">{{ h.hero.outreach }} {{ icon("arrow-right") }}</span></a>
       </div>
     </div>
   </div>
@@ -123,19 +125,7 @@ description: People to People Health Foundation (PPHF) partners with communities
       <div><p class="label">{{ h.themes.label }}</p><h2 id="causes-h">{{ h.themes.title | safe }}</h2></div>
       <p>{{ h.themes.intro }}</p>
     </div>
-    <ul class="panels" role="list" data-panels>
-      {%- for f in decade.focus %}
-      <li class="panel{% if loop.first %} is-open{% endif %}" data-panel>
-        <span class="panel__img">{% photo f.image, "", "(max-width: 899px) 86vw, 640px" %}</span>
-        <span class="panel__n" aria-hidden="true">{{ "0" + loop.index }}</span>
-        <h3 class="panel__title"><button type="button" class="panel__btn" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="panel-{{ loop.index }}" data-panel-btn>{{ f.title }}</button></h3>
-        <div class="panel__body" id="panel-{{ loop.index }}">
-          <p>{{ f.text }}</p>
-          <p class="panel__links"><a class="btn btn--paper btn--sm" href="{{ f.href }}">Explore {{ icon("arrow-right", "icon--sm") }}</a><a class="btn btn--give btn--sm" href="/donate/?for={{ ['ncd','nutrition','wach','idhw','infectious','environment'][loop.index0] }}">{{ icon("heart", "icon--sm") }} Give to this</a></p>
-        </div>
-      </li>
-      {%- endfor %}
-    </ul>
+    {% set causes = decade.focus %}{% include "partials/causes.njk" %}
   </div>
 </section>
 
@@ -150,7 +140,8 @@ description: People to People Health Foundation (PPHF) partners with communities
       <ol class="voices__list" role="list">
         {%- for t in testimonials %}
         <li class="voice{% if loop.first %} is-current{% endif %}" data-voice>
-          <figure>
+          {%- if t.photo %}<figure class="voice__ph">{% photo t.photo, "", "(max-width: 899px) 92vw, 40vw" %}<figcaption>{{ t.photoCaption }}</figcaption></figure>{% endif %}
+          <figure class="voice__text">
             <blockquote class="voice__q{% if t.quote.length > 300 %} voice__q--long{% endif %}" data-words>“{{ t.quote }}”</blockquote>
             <figcaption class="voice__by">
               <img src="{{ t.logo | img }}" alt="{{ t.org }}" loading="lazy" decoding="async" height="40">
@@ -178,11 +169,11 @@ description: People to People Health Foundation (PPHF) partners with communities
         <p class="bento__t">{{ h.trust.ledger[1].text }}</p>
         <p class="bento__sub"><b>90%</b> {{ h.trust.ledger[0].text }}</p>
       </div>
-      <a class="bento__cell bento__cell--stamp reveal" href="{{ h.trust.stamps[4].href | wp }}" target="_blank" rel="noopener" style="--d:.06s">
+      <a class="bento__cell bento__cell--stamp bento__cell--s1 reveal" href="{{ h.trust.stamps[4].href | wp }}" target="_blank" rel="noopener" style="--d:.06s">
         <span class="stamp stamp--5"><b>{{ h.trust.stamps[4].title }}</b><span>{{ h.trust.stamps[4].text }}</span></span>
         <span class="bento__link">Grading report {{ icon("arrow-up-right", "icon--sm") }}</span>
       </a>
-      <a class="bento__cell bento__cell--stamp reveal" href="{{ h.trust.stamps[3].href | wp }}" target="_blank" rel="noopener" style="--d:.12s">
+      <a class="bento__cell bento__cell--stamp bento__cell--s2 reveal" href="{{ h.trust.stamps[3].href | wp }}" target="_blank" rel="noopener" style="--d:.12s">
         <span class="stamp stamp--4"><b>{{ h.trust.stamps[3].title }}</b><span>{{ h.trust.stamps[3].text }}</span></span>
         <span class="bento__link">Certificate {{ icon("arrow-up-right", "icon--sm") }}</span>
       </a>
@@ -278,33 +269,37 @@ description: People to People Health Foundation (PPHF) partners with communities
   <div class="wrap">
     <div class="sec-head sec-head--row">
       <div><p class="label">{{ h.field.label }}</p><h2 id="field-h">{{ h.field.title | safe }}</h2></div>
-      <a class="go" href="/media/">The newsroom {{ icon("arrow-right") }}</a>
-    </div>
-    <div class="stories">
-      {%- for p in newsroom.news | take(3) %}
-      <article class="story{% if loop.first %} story--lead{% endif %}">
-        <div class="story__img">{% mediaImg p.image, ("(max-width: 860px) 92vw, 560px" if loop.first else "(max-width: 860px) 92vw, 300px") %}</div>
-        <div class="story__body">
-          <p class="story__meta">{{ p.kindLabel }} · <time datetime="{{ p.date | isoDate }}">{{ p.date | date }}</time></p>
-          <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
-          {%- if loop.first and p.excerpt %}<p class="muted">{{ p.excerpt | truncate(220, true, "…") }}</p>{% endif %}
-        </div>
-      </article>
-      {%- endfor %}
-    </div>
-    <div class="films">
-      {%- for id in home.videos | take(3) %}
-      {%- set v = videos | findBy("id", id) %}
-      <figure class="film">
-        <button class="video" type="button" data-yt="{{ id }}" aria-label="Play video: {{ v.title if v else 'PPHF film' }}">
-          <img src="/assets/img/yt/{{ id }}-640.webp" srcset="/assets/img/yt/{{ id }}-320.webp 320w, /assets/img/yt/{{ id }}-640.webp 640w" sizes="(max-width: 860px) 80vw, 340px" alt="" width="640" height="360" loading="lazy" decoding="async">
-          <span class="video__play">{{ icon("play") }}</span>
-        </button>
-        {% if v %}<figcaption>{{ v.title }}</figcaption>{% endif %}
-      </figure>
-      {%- endfor %}
+      <div class="field__ctrl">
+        <a class="go" href="/media/">The newsroom {{ icon("arrow-right") }}</a>
+        <button class="round-btn" type="button" data-rail-prev aria-controls="field-reel">{{ icon("arrow-left") }}<span class="visually-hidden">Scroll back</span></button>
+        <button class="round-btn" type="button" data-rail-next aria-controls="field-reel">{{ icon("arrow-right") }}<span class="visually-hidden">Scroll on</span></button>
+      </div>
     </div>
   </div>
+  {%- set stories = newsroom.news | take(6) %}
+  {%- set films = home.videos | take(3) %}
+  <ul class="reelx" role="list" id="field-reel" data-drag data-rail>
+    {%- for p in stories %}
+    <li>
+      <a class="rcard{% if loop.first %} rcard--lead{% endif %}" href="{{ p.url }}">
+        {% mediaImg p.image, "(max-width: 899px) 86vw, 560px" %}
+        <span class="rcard__body"><span class="rcard__meta"><span class="rcard__chip">{{ p.kindLabel }}</span><time datetime="{{ p.date | isoDate }}">{{ p.date | date }}</time></span><span class="rcard__t">{{ p.title }}</span></span>
+      </a>
+    </li>
+    {%- if loop.index in [2, 4, 6] %}
+    {%- set id = films[(loop.index / 2) - 1] %}{% set v = videos | findBy("id", id) %}
+    <li>
+      <div class="rcard rcard--film">
+        <button class="video" type="button" data-yt="{{ id }}" aria-label="Play video: {{ v.title if v else 'PPHF film' }}">
+          <img src="/assets/img/yt/{{ id }}-640.webp" srcset="/assets/img/yt/{{ id }}-320.webp 320w, /assets/img/yt/{{ id }}-640.webp 640w" sizes="(max-width: 899px) 86vw, 700px" alt="" width="640" height="360" loading="lazy" decoding="async">
+          <span class="video__play">{{ icon("play") }}</span>
+        </button>
+        <span class="rcard__body"><span class="rcard__meta"><span class="rcard__chip">Film</span></span><span class="rcard__t">{{ v.title if v else 'PPHF film' }}</span></span>
+      </div>
+    </li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
 </section>
 
 {#- ⑪ PPHF AT A GLANCE (for everyone who wants to know who we are) -#}

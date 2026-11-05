@@ -16,39 +16,41 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const mm = gsap.matchMedia();
 
-  /* ① Hero: the second photograph in the headline grows until it fills the screen;
-        then the impact figures arrive over it, one after another. */
+  /* ① Hero: the second photograph in the headline flies out of the words into the big slot of a
+        mosaic; the impact figures and more programme photographs land around it. */
   const hero = $("[data-xhero]");
   if (hero) {
     const pin = $(".xhero__pin", hero);
     const stage = $("[data-xhero-stage]", hero);
     const pill = $("[data-xhero-pill]", hero);
     const copy = $("[data-xhero-copy]", hero);
-    const label = $(".xhero__facts > .label", stage);
-    const stats = $$("[data-xhero-stat]", stage);
-    const caption = $(".xhero__caption", stage);
-    const setChrome = () => root.style.setProperty("--top-chrome", `${Math.round(hero.getBoundingClientRect().top + window.scrollY)}px`);
+    const hole = $("[data-xhero-hole]", hero);
+    const tiles = $$("[data-xhero-tile]", hero);
+    const flyer = document.createElement("figure");
+    flyer.className = "xhero__flyer"; flyer.setAttribute("aria-hidden", "true");
+    const fimg = $("img", hole).cloneNode(); fimg.loading = "eager"; fimg.alt = "";
+    flyer.append(fimg);
+    pin.append(flyer);
+    const setChrome = () => root.style.setProperty("--top-chrome", Math.round(hero.getBoundingClientRect().top + window.scrollY) + "px");
     setChrome();
-    const shade = $(".xhero__shade", stage);
-    // The stage starts exactly over the inline photograph (same image, same framing) and grows to fill the pinned frame.
-    const pillBox = () => {
-      const p = pill.getBoundingClientRect(), s = pin.getBoundingClientRect();
-      return { top: p.top - s.top, left: p.left - s.left, width: p.width, height: p.height, borderRadius: p.height / 2 };
+    const boxOf = (el) => {
+      const r = el.getBoundingClientRect(), s = pin.getBoundingClientRect();
+      return { top: r.top - s.top, left: r.left - s.left, width: r.width, height: r.height };
     };
-    gsap.set(stage, { right: "auto", bottom: "auto", clipPath: "none", opacity: 0, ...pillBox() });
+    const from = () => boxOf(pill);
+    const to = () => boxOf(hole);
+    gsap.set(flyer, { ...from(), borderRadius: from().height / 2, opacity: 0 });
     gsap.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: { trigger: hero, start: "top top", end: "+=240%", pin, scrub: 0.7, invalidateOnRefresh: true, onRefreshInit: setChrome },
+      scrollTrigger: { trigger: hero, start: "top top", end: "+=200%", pin, scrub: 0.7, invalidateOnRefresh: true, onRefreshInit: setChrome,
+        onUpdate: (self) => stage.classList.toggle("is-live", self.progress > 0.85) },
     })
-      .fromTo(stage, { opacity: 0, ...pillBox() }, { opacity: 1, duration: 0.02 }, 0)
-      .fromTo(stage, { top: () => pillBox().top, left: () => pillBox().left, width: () => pillBox().width, height: () => pillBox().height, borderRadius: () => pillBox().borderRadius },
-        { top: 0, left: 0, width: () => pin.clientWidth, height: () => pin.clientHeight, borderRadius: 0, ease: "power2.inOut", duration: 1 }, 0)
-      .fromTo(shade, { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.45)
-      .to(copy, { opacity: 0, scale: 0.92, filter: "blur(6px)", ease: "power1.in", duration: 0.5 }, 0.08)
-      .fromTo(label, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, 0.95)
-      .fromTo(stats, { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.22, duration: 0.3, ease: "power2.out" }, 1.05)
-      .fromTo(caption, { opacity: 0 }, { opacity: 1, duration: 0.2 }, ">-0.05")
-      .to({}, { duration: 0.35 });
+      .fromTo(flyer, { opacity: 0 }, { opacity: 1, duration: 0.01 }, 0)
+      .fromTo(flyer, { top: () => from().top, left: () => from().left, width: () => from().width, height: () => from().height, borderRadius: () => from().height / 2 },
+        { top: () => to().top, left: () => to().left, width: () => to().width, height: () => to().height, borderRadius: 22, ease: "power2.inOut", duration: 1 }, 0)
+      .to(copy, { opacity: 0, y: -40, filter: "blur(6px)", ease: "power1.in", duration: 0.45 }, 0.05)
+      .fromTo(tiles, { opacity: 0, scale: 0.86, y: 40 }, { opacity: 1, scale: 1, y: 0, stagger: { each: 0.08, from: "random" }, duration: 0.4, ease: "power2.out" }, 0.55)
+      .to({}, { duration: 0.3 });
   }
 
   /* ② Flood appeal: the water level rises through the section. */
@@ -127,16 +129,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
         words.forEach((other, j) => { if (j < i) other.forEach((w) => w.classList.add("is-lit")); });
       },
     });
-  }
-
-  /* ⑦ Decade: the big year turns over as each milestone reaches the middle of the screen. */
-  const decade = $("[data-decade]");
-  if (decade) {
-    const yearEl = $("[data-decade-year]", decade);
-    const items = $$("[data-decade-item]", decade);
-    const set = (it) => { items.forEach((x) => x.classList.toggle("is-on", x === it)); yearEl.textContent = it.dataset.year.replace("–", "–"); };
-    items.forEach((it) => ScrollTrigger.create({ trigger: it, start: "top 60%", end: "bottom 60%", onToggle: (self) => self.isActive && set(it) }));
-    set(items[0]);
   }
 
   /* ⑧ Partners: the drum turns slowly on its own, and faster while you scroll. */

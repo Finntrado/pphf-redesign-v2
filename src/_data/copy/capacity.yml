@@ -7,22 +7,27 @@ crumbs:
   href: /about/
 capacities:
 - title: Technical Support
+  photo: health-system-strengthening-1.webp
   text: Providing technical support on quality public health delivery
   icon: providing-technical-support.png
   tone: navy
 - title: Skill Building
+  photo: photo-2-1.webp
   text: Building the skills of health care providers and the capacity of the local health care system
   icon: building-the-skills.png
   tone: green
 - title: Community Mobilization
+  photo: g8a5473-scaled.webp
   text: Mobilizing community and expanding community support systems
   icon: mobilising-community.png
   tone: magenta
 - title: Knowledge Hub
+  photo: influencing-policy-1.webp
   text: Generating new knowledge for better programming and influencing policies and practices for scale-up
   icon: generating-new-knowledge.png
   tone: orange
 - title: Leveraging Partnerships
+  photo: building-partnership-1.webp
   text: Leveraging partnerships to impact the health and well-being of people
   icon: partnership.png
   tone: cream
